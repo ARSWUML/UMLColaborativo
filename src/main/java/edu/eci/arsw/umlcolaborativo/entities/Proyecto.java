@@ -37,6 +37,13 @@ public class Proyecto {
     public Proyecto(){
     }
     
+    /**
+     * @pos: Agrega diagramas al proyecto
+     * @param className
+     * @param nombre
+     * @param descrip
+     * @throws InstantiationException 
+     */
     public void agregarDiagrama(String className, String nombre, String descrip) throws InstantiationException{
         
         try {
@@ -49,7 +56,16 @@ public class Proyecto {
             Logger.getLogger(Proyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+    
         
     }
+    
+    /**
+     * @pos: Retorna un diagrama por su nombre
+     * @param nombre
+     * @return diagrama
+     */
+    public Diagrama consultarDiagrama(String nombre){
+            return diagramas.get(nombre); 
+        }
 }
