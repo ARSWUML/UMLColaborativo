@@ -7,11 +7,13 @@ package edu.eci.arsw.umlcolaborativo.services;
 
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Julian Devia
  */
+@Service
 public class ManejadorProyectos {
 
     /**
