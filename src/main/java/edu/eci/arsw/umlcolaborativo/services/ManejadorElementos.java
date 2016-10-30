@@ -37,7 +37,7 @@ public class ManejadorElementos {
      * @return el elemento solicitado
      */
     public Elemento consultarElemento(String nombre){
-        return null;
+        return elementos.get(nombre);
     }
     
 }
