@@ -57,7 +57,7 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path = "/{projectid}/{userid}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{userid}/{projectid}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectoUsuario(@PathVariable String projectid, @PathVariable String userid){
         Proyecto proyectoUsuario=manProyectos.consultarProyecto(userid, projectid);
         return new ResponseEntity<>(proyectoUsuario,HttpStatus.ACCEPTED);

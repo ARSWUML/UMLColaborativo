@@ -43,4 +43,8 @@ public class DiagramaClases extends DiagramaEstructural{
         }
     }
     
+    public Elemento consultarElemento(String nombre){
+        return elementos.get(nombre);
+    }
+    
 }
