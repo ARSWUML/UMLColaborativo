@@ -33,21 +33,28 @@ public class ManejadorProyectos {
     private Map<String,Map<String,Proyecto>> proyectos;
     
     /**
-     * 
+     * Consulta todos los proyectos del usuario seleccionado
+     * @param usuario el usuario de quin se conocer los proyectps
+     * @return todos los proyectos del usuario seleccionado por nombre
      */
     public Map<String,Proyecto> consultarProyectos(String usuario){
         return null;
     }
     
     /**
-     * 
+     * consulta el proyecto seleccionado del usuario dado
+     * @param usuario el usuario de quien se consultará el proyecto
+     * @param proyecto el nombre del proyecto que se quiere consultar
+     * @return el proyecto seleccionado del usuario dado
      */
     public Proyecto consultarProyecto(String usuario,String proyecto){
         return null;
     }
     
     /**
-     * 
+     * Arega e proyecto dado al usuario dado
+     * @param usuario el usuario al que se le agregará el proyecto
+     * @param proyecto el nuevo proyecto
      */
     public void agregarProyecto(String usuario,Proyecto proyecto){
         
