@@ -37,12 +37,12 @@ public class ElementsController {
     
     /**
      * @pos: Retorna un elemento consultado por su nombre
-     * @param elementoid
+     * @param elementid
      * @return 
      */
     @RequestMapping(path="/{elementid}" ,method = RequestMethod.GET)
-    public ResponseEntity<?> obtenerElementos(@PathVariable String elementoid){
-        Elemento elemento=manElementos.consultarElemento(elementoid);
+    public ResponseEntity<?> obtenerElementos(@PathVariable String elementid){
+        Elemento elemento=manElementos.consultarElemento(elementid);
         return new ResponseEntity<>(elemento,HttpStatus.ACCEPTED);           
     }
 }
