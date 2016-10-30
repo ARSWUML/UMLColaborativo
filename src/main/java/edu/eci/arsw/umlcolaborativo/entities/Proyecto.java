@@ -18,11 +18,11 @@ import java.util.logging.Logger;
  * @author amoto
  */
 public class Proyecto {
-    String nombre;
-    String descripcion;
-    Date fechaCreacion;
-    Date fechaUltimaModificacion;
-    Map<String,Diagrama> diagramas;
+    private String nombre;
+    private String descripcion;
+    private Date fechaCreacion;
+    private Date fechaUltimaModificacion;
+    private Map<String,Diagrama> diagramas;
     
     public Proyecto(String name, String description){
         nombre=name;
@@ -49,7 +49,7 @@ public class Proyecto {
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre, descrip);
             Diagrama newDiagrama = (Diagrama) object;
-            diagramas.put(nombre, newDiagrama);
+            getDiagramas().put(nombre, newDiagrama);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(Proyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +64,76 @@ public class Proyecto {
      * @return diagrama
      */
     public Diagrama consultarDiagrama(String nombre){
-            return diagramas.get(nombre); 
+            return getDiagramas().get(nombre); 
         }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the fechaCreacion
+     */
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    /**
+     * @param fechaCreacion the fechaCreacion to set
+     */
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * @return the fechaUltimaModificacion
+     */
+    public Date getFechaUltimaModificacion() {
+        return fechaUltimaModificacion;
+    }
+
+    /**
+     * @param fechaUltimaModificacion the fechaUltimaModificacion to set
+     */
+    public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
+        this.fechaUltimaModificacion = fechaUltimaModificacion;
+    }
+
+    /**
+     * @return the diagramas
+     */
+    public Map<String,Diagrama> getDiagramas() {
+        return diagramas;
+    }
+
+    /**
+     * @param diagramas the diagramas to set
+     */
+    public void setDiagramas(Map<String,Diagrama> diagramas) {
+        this.diagramas = diagramas;
+    }
 }

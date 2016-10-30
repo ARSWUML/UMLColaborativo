@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author ger9410
  */
 public class DiagramaClases extends DiagramaEstructural{
-    Map<String,Elemento> elementos;
+    private Map<String,Elemento> elementos;
     
     public DiagramaClases(String name, String descrip){
         nombre=name;
@@ -37,14 +37,60 @@ public class DiagramaClases extends DiagramaEstructural{
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre);
             Elemento newElemento = (Elemento) object; 
-            elementos.put(nombre, newElemento);
+            getElementos().put(nombre, newElemento);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(DiagramaClases.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public Elemento consultarElemento(String nombre){
-        return elementos.get(nombre);
+        return getElementos().get(nombre);
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public void setNombre(String n){
+        this.nombre=n;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    public void setDescripcion(String d){
+        this.descripcion=d;
+    }
+    
+    public Date getFechaCreacion(){
+        return fechaCreacion;
+    }
+    
+    public void setFechaCreacion(Date fC){
+        this.fechaCreacion=fC;
+    }
+    
+    public Date getFechaUltimaModificacion(){
+        return fechaUltimaModificacion;
+    }
+    
+    public void setFechaUltimaModificacion(Date fUM){
+        this.fechaUltimaModificacion=fUM;
+    }
+
+    /**
+     * @return the elementos
+     */
+    public Map<String,Elemento> getElementos() {
+        return elementos;
+    }
+
+    /**
+     * @param elementos the elementos to set
+     */
+    public void setElementos(Map<String,Elemento> elementos) {
+        this.elementos = elementos;
     }
     
 }

@@ -7,12 +7,14 @@ package edu.eci.arsw.umlcolaborativo.services;
 
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author amoto
  */
-public class ManejadorelEmentos {
+@Service
+public class ManejadorElementos {
 
     /**
      * @return the elementos
