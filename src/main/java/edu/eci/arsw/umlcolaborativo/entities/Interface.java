@@ -11,4 +11,8 @@ package edu.eci.arsw.umlcolaborativo.entities;
  */
 public class Interface extends Elemento{
     
+    public Interface(String nombre) {
+        super(nombre);
+    }
+    
 }

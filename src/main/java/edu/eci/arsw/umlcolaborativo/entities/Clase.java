@@ -11,4 +11,8 @@ package edu.eci.arsw.umlcolaborativo.entities;
  */
 public abstract class Clase extends Elemento{
     
+    public Clase(String nombre) {
+        super(nombre);
+    }
+    
 }
