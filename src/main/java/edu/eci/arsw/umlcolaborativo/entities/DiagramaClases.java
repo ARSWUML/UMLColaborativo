@@ -32,7 +32,7 @@ public class DiagramaClases extends DiagramaEstructural{
         elementos=new HashMap<>();
     }
  
-    public void agregarElemento(String className, String nombre){
+    public void agregarElemento(String className, String nombre) throws ProyectoExcepcion{
         try {
             Class<?> clase = Class.forName(className);
             Constructor<?> cons = clase.getConstructor(String.class);
@@ -40,7 +40,7 @@ public class DiagramaClases extends DiagramaEstructural{
             Elemento newElemento = (Elemento) object; 
             getElementos().put(nombre, newElemento);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(DiagramaClases.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ProyectoExcepcion(ex.getLocalizedMessage());
         }
     }
     /**

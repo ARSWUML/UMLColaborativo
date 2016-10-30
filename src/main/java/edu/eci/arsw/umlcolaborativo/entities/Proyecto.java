@@ -36,26 +36,23 @@ public class Proyecto {
     }
     
     /**
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      * @pos: Agrega diagramas al proyecto
      * @param className
      * @param nombre
      * @param descrip
      * @throws InstantiationException 
      */
-    public void agregarDiagrama(String className, String nombre, String descrip) throws InstantiationException{
-        
-        try {
+    public void agregarDiagrama(String className, String nombre, String descrip) throws ProyectoExcepcion{
+         try{
             Class<?> clase = Class.forName(className);
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre, descrip);
             Diagrama newDiagrama = (Diagrama) object;
             getDiagramas().put(nombre, newDiagrama);
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(Proyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    
-        
+         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            throw new ProyectoExcepcion(ex.getLocalizedMessage());
+        }       
     }
     
     /**
