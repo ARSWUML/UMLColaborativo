@@ -53,9 +53,9 @@ public class ProjectsController {
             Map<String,Proyecto> proyectosUsuario=manProyectos.consultarProyectosUsuario(userid);
             return new ResponseEntity<>(proyectosUsuario,HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+           return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
         }
-        return null;
+        
     }
     
     /**
@@ -71,9 +71,8 @@ public class ProjectsController {
             Proyecto proyectoUsuario=manProyectos.consultarProyectoUsuario(userid, projectid);
             return new ResponseEntity<>(proyectoUsuario,HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
         }
-        return null;
     }
     /**
      * @pre: Ninguna
@@ -88,9 +87,8 @@ public class ProjectsController {
             manProyectos.agregarProyecto(userid, project);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_MODIFIED);
         }
-        return null;
     }
     
 }
