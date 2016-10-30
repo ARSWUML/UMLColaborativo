@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
+import ch.qos.logback.core.CoreConstants;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
@@ -44,7 +45,7 @@ public class DiagramaClases extends DiagramaEstructural{
             }
             fechaUltimaModificacion=new Timestamp(new Date().getTime());
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            throw new ProyectoExcepcion(ex.getLocalizedMessage());
+            throw new ProyectoExcepcion(ex.getMessage());
         }
     }
     /**

@@ -9,17 +9,12 @@ import edu.eci.arsw.umlcolaborativo.entities.ClaseAbstracta;
 import edu.eci.arsw.umlcolaborativo.entities.Interface;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author Daniela Sepulveda
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class PruebasElementos {
+public class PruebasElementosTest {
      
     //Clase equivalencia 1, Deberia poder agregar atributos
     ///implementacion proximo sprint
@@ -42,7 +37,7 @@ public class PruebasElementos {
         ClaseAbstracta claseAbs=new ClaseAbstracta(intername);    
         infa.setNombre(intername1);
         claseAbs.setNombre(intername1);
-        assertTrue("Fallo! comparacion!", infa.getNombre().equals(intername1) && claseAbs.getNombre().equals(intername1));
+        assertTrue("Fallo cambiar nombre elementos!", infa.getNombre().equals(intername1) && claseAbs.getNombre().equals(intername1));
     }
     //Clase equivalencia 4, Deberia poder modificar el nombre, tipo del atributo
      ///implementacion proximo sprint

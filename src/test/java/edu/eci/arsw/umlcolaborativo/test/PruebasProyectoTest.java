@@ -6,17 +6,14 @@
 package edu.eci.arsw.umlcolaborativo.test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
 
 /**
  *
  * @author Daniela Sepulveda
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class PruebasProyecto {
+
+public class PruebasProyectoTest {
     
     //Clase equivalencia 1, Deberia poder agregar un proyecto
     @Test
