@@ -36,8 +36,12 @@ public class DiagramaClases extends DiagramaEstructural{
             Class<?> clase = Class.forName(className);
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre);
-            Elemento newElemento = (Elemento) object; 
-            getElementos().put(nombre, newElemento);
+            Elemento newElemento = (Elemento) object;
+            if(elementos.get(nombre)==null){
+                getElementos().put(nombre, newElemento);
+            }else{
+                throw new ProyectoExcepcion("El elemento con nombre "+nombre+" ya existe por favor cambiele el nombre");
+            }
             fechaUltimaModificacion=new Timestamp(new Date().getTime());
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new ProyectoExcepcion(ex.getLocalizedMessage());
@@ -46,10 +50,15 @@ public class DiagramaClases extends DiagramaEstructural{
     /**
      * Agregar elemento al diagrama
      * @param e
+     * @throws ProyectoExcepcion
      */
-    public void agregarElemento(Elemento e){
-        fechaUltimaModificacion=new Timestamp(new Date().getTime());
-        getElementos().put(e.getNombre(), e);
+    public void agregarElemento(Elemento e) throws ProyectoExcepcion{
+        if(elementos.get(e.getNombre())==null){
+            fechaUltimaModificacion=new Timestamp(new Date().getTime());
+            getElementos().put(e.getNombre(), e);
+        }else{
+             throw new ProyectoExcepcion("El elemento con nombre "+e.getNombre()+" ya existe por favor cambiele el nombre");
+        }
     }
     public Elemento consultarElemento(String nombre){
         return getElementos().get(nombre);

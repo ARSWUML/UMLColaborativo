@@ -36,12 +36,11 @@ public class Proyecto {
     }
     
     /**
-     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      * @pos: Agrega diagramas al proyecto
      * @param className
      * @param nombre
      * @param descrip
-     * @throws InstantiationException 
+     * @throws ProyectoExcepcion
      */
     public void agregarDiagrama(String className, String nombre, String descrip) throws ProyectoExcepcion{
          try{
@@ -49,7 +48,11 @@ public class Proyecto {
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre, descrip);
             Diagrama newDiagrama = (Diagrama) object;
-            getDiagramas().put(nombre, newDiagrama);
+            if(diagramas.get(newDiagrama.getTitulo())==null){
+                getDiagramas().put(nombre, newDiagrama);
+            }else{
+                throw new ProyectoExcepcion("El diagrama con titulo "+nombre+" ya existe por favor cambie el titulo");
+            }
          } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new ProyectoExcepcion(ex.getLocalizedMessage());
         }       
