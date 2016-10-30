@@ -6,8 +6,11 @@
 package edu.eci.arsw.umlcolaborativo.controller;
 
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
+import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorProyectos;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +37,7 @@ public class ProjectsController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectos(){
-        Map<String,Map<String,Proyecto>> proyectos= manProyectos.getProyectos();
+        Map<String,Map<String,Proyecto>> proyectos= manProyectos.consultarProyectos();
       return new ResponseEntity<>(proyectos,HttpStatus.ACCEPTED);
     }
     
@@ -46,8 +49,13 @@ public class ProjectsController {
      */
     @RequestMapping(path = "/{userid}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectosUsuario(@PathVariable String userid){
-        Map<String,Proyecto> proyectosUsuario=manProyectos.consultarProyectos(userid);
-        return new ResponseEntity<>(proyectosUsuario,HttpStatus.ACCEPTED);
+        try {
+            Map<String,Proyecto> proyectosUsuario=manProyectos.consultarProyectosUsuario(userid);
+            return new ResponseEntity<>(proyectosUsuario,HttpStatus.ACCEPTED);
+        } catch (ProyectoExcepcion ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     /**
@@ -59,8 +67,13 @@ public class ProjectsController {
      */
     @RequestMapping(path = "/{userid}/{projectid}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectoUsuario(@PathVariable String projectid, @PathVariable String userid){
-        Proyecto proyectoUsuario=manProyectos.consultarProyecto(userid, projectid);
-        return new ResponseEntity<>(proyectoUsuario,HttpStatus.ACCEPTED);
+        try {
+            Proyecto proyectoUsuario=manProyectos.consultarProyectoUsuario(userid, projectid);
+            return new ResponseEntity<>(proyectoUsuario,HttpStatus.ACCEPTED);
+        } catch (ProyectoExcepcion ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     /**
      * @pre: Ninguna
@@ -71,8 +84,13 @@ public class ProjectsController {
      */
     @RequestMapping( method = RequestMethod.PUT)
     public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @RequestBody String userid){
-        manProyectos.agregarProyecto(userid, project);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        try {
+            manProyectos.agregarProyecto(userid, project);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (ProyectoExcepcion ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }
