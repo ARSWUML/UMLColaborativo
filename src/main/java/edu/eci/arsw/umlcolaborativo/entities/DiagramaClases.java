@@ -7,11 +7,10 @@ package edu.eci.arsw.umlcolaborativo.entities;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -39,6 +38,7 @@ public class DiagramaClases extends DiagramaEstructural{
             Object object = cons.newInstance(nombre);
             Elemento newElemento = (Elemento) object; 
             getElementos().put(nombre, newElemento);
+            fechaUltimaModificacion=new Timestamp(new Date().getTime());
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new ProyectoExcepcion(ex.getLocalizedMessage());
         }
@@ -48,7 +48,8 @@ public class DiagramaClases extends DiagramaEstructural{
      * @param e
      */
     public void agregarElemento(Elemento e){
-            getElementos().put(e.getNombre(), e);
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
+        getElementos().put(e.getNombre(), e);
     }
     public Elemento consultarElemento(String nombre){
         return getElementos().get(nombre);
@@ -65,6 +66,7 @@ public class DiagramaClases extends DiagramaEstructural{
      * @param elementos the elementos to set
      */
     public void setElementos(Map<String,Elemento> elementos) {
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
         this.elementos = elementos;
     }
     

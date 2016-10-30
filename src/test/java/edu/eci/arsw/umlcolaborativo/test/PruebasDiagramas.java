@@ -6,12 +6,12 @@
 package edu.eci.arsw.umlcolaborativo.test;
 
 import edu.eci.arsw.umlcolaborativo.entities.ClaseAbstracta;
-import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Interface;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,20 +35,53 @@ public class PruebasDiagramas {
         Assert.assertTrue(infa.equals(a) && claseAbs.equals(b));
     }
     
-     //Clase equivalencia 2, Deberia poder consultar un diagrama dentro de un proyecto por su nombre
+    //Clase equivalencia 2, Deberia poder modificar titulo y descripcion del diagrama
     @Test
     public void CE2deberiaConsultarDiagrama() throws Exception {
-        
+        String nombre="Diagrama de clases OP";
+        String descri="diagrama uno especificar clases OP";
+        DiagramaClases dg=new DiagramaClases("Diagrama1","agregar descripcion");
+        dg.setTitulo(nombre);
+        dg.setDescripcion(descri);
+        Assert.assertTrue(dg.getTitulo().equals(nombre)&& dg.getDescripcion().equals(descri));
     }
-    //Clase equivalencia 3, Deberia poder eleminar un elemento al diagrama
+    //Clase equivalencia 3, Deberia poder actualizar la fecha de modificacion del diagrama
     @Test
-    public void CE3deberiaEliminarDiagrama() throws Exception {
-        
+    public void CE3deberiaModificarFechaModificacionDiagrama() throws Exception {
+        DiagramaClases dg=new DiagramaClases("Diagrama1","agregar descripcion");
+        Date FechaCreacion=dg.getFechaUltimaModificacion();
+        Interface infa= new Interface("A");
+        dg.agregarElemento(infa);
+        Date fechaModi=dg.getFechaUltimaModificacion();
+        ClaseAbstracta claseAbs=new ClaseAbstracta("AB");   
+        dg.agregarElemento(claseAbs);
+        Date fechamodif=dg.getFechaUltimaModificacion();
+        Assert.assertFalse("No se modifico!", FechaCreacion!=fechaModi && FechaCreacion!=fechamodif);
     }
     
-     //Clase equivalencia 4, Deberia poder consultar un proyecto por su nombre
+     //Clase equivalencia 4, Deberia poder consultar un elemento su nombre
     @Test
-    public void CE4deberiaConsultarProyecto() throws Exception {
+    public void CE4deberiaConsultarElemento() throws Exception {
+        DiagramaClases dg=new DiagramaClases("Diagrama1","agregar descripcion");
+        Interface infa= new Interface("A");
+        Elemento consul=dg.consultarElemento(infa.getNombre());
+        dg.agregarElemento(infa);
+        Elemento consu=dg.consultarElemento(infa.getNombre());
+        Assert.assertTrue("Fallo comparacion", consul==null && consu.equals(infa));
+    }
+    
+     //Clase equivalencia 5, Deberia poder agregar una lista de elementos al diagrama
+    @Test
+    public void CE5deberiaAgregarListaElementos() throws Exception {
+        DiagramaClases dg=new DiagramaClases("Diagrama1","agregar descripcion");
+        HashMap elementos=new HashMap<>();
+        Interface infa= new Interface("A");
+        Interface infa1= new Interface("B");
+        Interface infa2= new Interface("C");
+        Interface infa3= new Interface("D");
+        ClaseAbstracta claseAbs=new ClaseAbstracta("A"); 
+        ClaseAbstracta claseAbs1=new ClaseAbstracta("B"); 
+        ClaseAbstracta claseAbs2=new ClaseAbstracta("C");
         
     }
 }
