@@ -60,6 +60,7 @@ public abstract class Diagrama{
      * @param titulo
     */
     public void setTitulo(String titulo) {
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
         this.titulo = titulo;
     }
     /**
@@ -74,6 +75,7 @@ public abstract class Diagrama{
      * @param Descripcion
     */
     public void setDescripcion(String Descripcion) {
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
         this.Descripcion = Descripcion;
     }
     /**

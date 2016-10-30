@@ -7,11 +7,10 @@ package edu.eci.arsw.umlcolaborativo.entities;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -37,8 +36,13 @@ public class DiagramaClases extends DiagramaEstructural{
             Class<?> clase = Class.forName(className);
             Constructor<?> cons = clase.getConstructor(String.class);
             Object object = cons.newInstance(nombre);
-            Elemento newElemento = (Elemento) object; 
-            getElementos().put(nombre, newElemento);
+            Elemento newElemento = (Elemento) object;
+            if(elementos.get(nombre)==null){
+                getElementos().put(nombre, newElemento);
+            }else{
+                throw new ProyectoExcepcion("El elemento con nombre "+nombre+" ya existe por favor cambiele el nombre");
+            }
+            fechaUltimaModificacion=new Timestamp(new Date().getTime());
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new ProyectoExcepcion(ex.getLocalizedMessage());
         }
@@ -46,9 +50,15 @@ public class DiagramaClases extends DiagramaEstructural{
     /**
      * Agregar elemento al diagrama
      * @param e
+     * @throws ProyectoExcepcion
      */
-    public void agregarElemento(Elemento e){
+    public void agregarElemento(Elemento e) throws ProyectoExcepcion{
+        if(elementos.get(e.getNombre())==null){
+            fechaUltimaModificacion=new Timestamp(new Date().getTime());
             getElementos().put(e.getNombre(), e);
+        }else{
+             throw new ProyectoExcepcion("El elemento con nombre "+e.getNombre()+" ya existe por favor cambiele el nombre");
+        }
     }
     public Elemento consultarElemento(String nombre){
         return getElementos().get(nombre);
@@ -65,6 +75,7 @@ public class DiagramaClases extends DiagramaEstructural{
      * @param elementos the elementos to set
      */
     public void setElementos(Map<String,Elemento> elementos) {
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
         this.elementos = elementos;
     }
     
