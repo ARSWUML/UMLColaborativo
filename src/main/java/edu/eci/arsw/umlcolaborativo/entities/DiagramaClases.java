@@ -20,17 +20,18 @@ import java.util.logging.Logger;
 public class DiagramaClases extends DiagramaEstructural{
     private Map<String,Elemento> elementos;
     
-    public DiagramaClases(String name, String descrip){
-        nombre=name;
-        descripcion=descrip;
-        fechaCreacion=new Date();
-        fechaUltimaModificacion=new Date();
+    public DiagramaClases(){
         elementos=new HashMap<>();
     }
-    
-    public DiagramaClases(){
+    public DiagramaClases(String titulo,String descripcion,Date dateCreacion){
+        super(titulo,descripcion,dateCreacion);
+        elementos=new HashMap<>();
     }
-    
+    public DiagramaClases(String titulo,String descripcion){
+        super(titulo,descripcion);
+        elementos=new HashMap<>();
+    }
+ 
     public void agregarElemento(String className, String nombre){
         try {
             Class<?> clase = Class.forName(className);
@@ -42,43 +43,17 @@ public class DiagramaClases extends DiagramaEstructural{
             Logger.getLogger(DiagramaClases.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Agregar elemento al diagrama
+     * @param e
+     */
+    public void agregarElemento(Elemento e){
+            getElementos().put(e.getNombre(), e);
+    }
     public Elemento consultarElemento(String nombre){
         return getElementos().get(nombre);
     }
     
-    public String getNombre(){
-        return nombre;
-    }
-    
-    public void setNombre(String n){
-        this.nombre=n;
-    }
-    
-    public String getDescripcion(){
-        return descripcion;
-    }
-    
-    public void setDescripcion(String d){
-        this.descripcion=d;
-    }
-    
-    public Date getFechaCreacion(){
-        return fechaCreacion;
-    }
-    
-    public void setFechaCreacion(Date fC){
-        this.fechaCreacion=fC;
-    }
-    
-    public Date getFechaUltimaModificacion(){
-        return fechaUltimaModificacion;
-    }
-    
-    public void setFechaUltimaModificacion(Date fUM){
-        this.fechaUltimaModificacion=fUM;
-    }
-
     /**
      * @return the elementos
      */

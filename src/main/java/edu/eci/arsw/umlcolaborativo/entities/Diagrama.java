@@ -5,10 +5,103 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  *
  * @author ger9410
  */
-public interface Diagrama {
+public abstract class Diagrama{
     
+    protected String titulo;
+    protected String Descripcion;
+    protected Date fechaCreacion;
+    protected Date fechaUltimaModificacion;
+    
+     /**
+    * Crear diagrama 
+    */
+    public Diagrama(){
+    }
+   /**
+    * Crear diagrama con el titulo que lo identifica, la  descripcion fecha de creacion que sera la misma para fecha de modificacion
+    * @param titulo
+     * @param descripcion
+     * @param dateCreacion
+    */
+    
+   public Diagrama(String titulo,String descripcion,Date dateCreacion){
+       this.titulo=titulo;
+       this.Descripcion=descripcion;
+       this.fechaCreacion=dateCreacion;
+       this.fechaUltimaModificacion=dateCreacion;
+   }
+      /**
+    * Crear diagrama con el titulo que lo identifica, su descripcion. 
+    * @param titulo
+     * @param descripcion
+    */
+   public Diagrama(String titulo,String descripcion){
+      this.titulo=titulo;
+       this.Descripcion=descripcion;
+       this.fechaCreacion=new Timestamp(new Date().getTime());
+       this.fechaUltimaModificacion=new Timestamp(new Date().getTime());
+    }
+   /**
+    * Consultar el titulo 
+     * @return 
+    */
+    public String getTitulo() {
+        return titulo;
+    }
+    /**
+     * Modificar el titulo
+     * @param titulo
+    */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    /**
+    * Consultar la descripcion
+     * @return 
+    */
+    public String getDescripcion() {
+        return Descripcion;
+    }
+    /**
+     * Modificar la descripcion
+     * @param Descripcion
+    */
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+    /**
+    * Consultar fecha creacion
+     * @return 
+    */
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+    /**
+     * Modificar la fecha creacion
+     * @param fechaCreacion
+    */
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+     /**
+    * Consultar fecha ultima modificacion
+     * @return 
+    */
+    public Date getFechaUltimaModificacion() {
+        return fechaUltimaModificacion;
+    }
+    /**
+     * Modificar la fecha de ultima modificacion
+     * @param fechaUltimaModificacion
+    */
+    public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
+        this.fechaUltimaModificacion = fechaUltimaModificacion;
+    }
 }

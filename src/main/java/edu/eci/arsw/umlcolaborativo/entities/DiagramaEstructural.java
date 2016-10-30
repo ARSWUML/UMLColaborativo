@@ -11,9 +11,14 @@ import java.util.Date;
  *
  * @author ger9410
  */
-public abstract class DiagramaEstructural implements Diagrama{
-    protected String nombre;
-    protected String descripcion;
-    protected Date fechaCreacion;
-    protected Date fechaUltimaModificacion;
+public abstract class DiagramaEstructural extends Diagrama{
+ 
+    public DiagramaEstructural(String titulo,String descripcion,Date dateCreacion) {
+        super(titulo,descripcion,dateCreacion);
+    }
+     public DiagramaEstructural(String titulo,String descripcion) {
+        super(titulo,descripcion);
+    }
+     public DiagramaEstructural(){
+     }
 }
