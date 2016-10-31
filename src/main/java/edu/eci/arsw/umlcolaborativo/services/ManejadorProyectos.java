@@ -9,7 +9,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,25 +18,38 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ManejadorProyectos {
-    
-    @Autowired
+    /**
+     * @return the persistencia
+     */
+    public PersistenciaProyectos getPersistencia() {
+        return persistencia;
+    }
+
+    /**
+     * @param persistencia the persistencia to set
+     */
+    @Required
+    public void setPersistencia(PersistenciaProyectos persistencia) {
+        this.persistencia = persistencia;
+    }
+    @Autowired 
     private PersistenciaProyectos persistencia;
     
     /**
      * Crea un manejador de proyectos vacío
      */
     public ManejadorProyectos(){
-        
+        persistencia= new InMemoryProjects();
     }
     
     /**
      * Consulta todos los proyectos del usuario seleccionado
-     * @param usuario el usuario de quin se conocer los proyectps
+     * @param usuario el usuario de quien se quieren conocer los proyectps
      * @return todos los proyectos del usuario seleccionado por nombre
      * @throws ProyectoExcepcion si el usuario no existe
      */
     public Map<String,Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion{
-        return persistencia.consultarProyectosUsuario(usuario);
+        return getPersistencia().consultarProyectosUsuario(usuario);
     }
     
     /**
@@ -44,7 +57,7 @@ public class ManejadorProyectos {
      * @return todos los proyectos de cada usuario
      */
     public Map<String,Map<String,Proyecto>> consultarProyectos(){
-        return persistencia.consultarProyectos();
+        return getPersistencia().consultarProyectos();
     }
     
     /**
@@ -55,7 +68,7 @@ public class ManejadorProyectos {
      * @throws ProyectoExcepcion si el usuario no existe, o el usuario existe pero no colabora en el proyecto
      */
     public Proyecto consultarProyectoUsuario(String usuario,String proyecto) throws ProyectoExcepcion{
-        return persistencia.consultarProyectoUsuario(usuario, proyecto);
+        return getPersistencia().consultarProyectoUsuario(usuario, proyecto);
     }
     
     /**
@@ -65,7 +78,7 @@ public class ManejadorProyectos {
      * @throws ProyectoExcepcion si el usuario no existe o el proyecto no existe
      */
     public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
-        persistencia.agregarProyecto(usuario, proyecto);
+        getPersistencia().agregarProyecto(usuario, proyecto);
     }
     
     /**
@@ -75,7 +88,7 @@ public class ManejadorProyectos {
      * @throws ProyectoExcepcion si el usuario no existe o si no posee el proyecto
      */
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
-        persistencia.actualizarProyecto(usuario, proyecto);
+        getPersistencia().actualizarProyecto(usuario, proyecto);
     }
     
     /**
@@ -84,6 +97,7 @@ public class ManejadorProyectos {
      * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
     public void agregarUsuario(String usuario) throws ProyectoExcepcion{
-        persistencia.agregarUsuario(usuario);
+        System.out.println("Persistencia: "+getPersistencia());
+        getPersistencia().agregarUsuario(usuario);
     }
 }

@@ -22,6 +22,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InMemoryProjects implements PersistenciaProyectos {
+    private Map<String,List<String>> usuarios;
+    private Map<String,Proyecto> proyectos;
+    public InMemoryProjects(){
+        usuarios= new ConcurrentHashMap<>();
+        proyectos= new ConcurrentHashMap<>();
+    }
     /**
      * @return the usuarios
      */
@@ -48,14 +54,6 @@ public class InMemoryProjects implements PersistenciaProyectos {
      */
     public void setProyectos(Map<String,Proyecto> proyectos) {
         this.proyectos = proyectos;
-    }
-
-    private Map<String,List<String>> usuarios;
-    private Map<String,Proyecto> proyectos;
-    
-    public InMemoryProjects(){
-        usuarios= new ConcurrentHashMap<>();
-        proyectos= new ConcurrentHashMap<>();
     }
     
     @Override
@@ -91,7 +89,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
-        if(usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto);
+        if(usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto.getNombre());
         usuarios.get(usuario).add(proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
     }
@@ -99,14 +97,13 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
-        if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto);
-        usuarios.get(usuario).add(proyecto.getNombre());
+        if(!usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" aun no colabora en el proyecto "+proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
     }
     
     @Override
     public void agregarUsuario(String usuario) throws ProyectoExcepcion {
-        validarUsuario(usuario);
+        if(usuarios.containsKey(usuario)) throw new ProyectoExcepcion("El usuario "+usuario+" ya se encuentra registrado");
         usuarios.put(usuario, new ArrayList<>());
     }
     

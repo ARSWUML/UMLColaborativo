@@ -128,4 +128,9 @@ public class Proyecto {
         this.diagramas = diagramas;
         fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
+    @Override
+    public boolean equals(Object o){
+        Proyecto o2=(Proyecto) o;
+        return nombre.equals(o2.getNombre()) && descripcion.equals(o2.getDescripcion()) && diagramas.equals(o2.getDiagramas());
+    }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.umlcolaborativo.controller;
+package edu.eci.arsw.umlcolaborativo.controllers;
 
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/projects")
 public class ProjectsController {
     @Autowired
-    ManejadorProyectos manProyectos;
+    ManejadorProyectos manProyectos= new ManejadorProyectos();
     
     /**
      * @pre: Ninguna

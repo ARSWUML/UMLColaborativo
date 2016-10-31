@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.umlcolaborativo.controller;
+package edu.eci.arsw.umlcolaborativo.controllers;
 
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorElementos;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/elements")
 public class ElementsController {
     @Autowired
-    ManejadorElementos manElementos;
+    ManejadorElementos manElementos= new ManejadorElementos();
     /**
      * @pos: retorna la lista de elementos disponibles para usar
      * @return ResponseEntity<?>
