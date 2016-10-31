@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package edu.eci.arsw.umlcolaborativo.services;
-
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,21 +15,23 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ManejadorElementos {
-
+    
+    @Autowired
+    InMemoryElements elementosM;
+  
     /**
      * @return the elementos
      */
     public Map<String,Elemento> getElementos() {
-        return elementos;
+        return elementosM.getElementos();
     }
 
     /**
      * @param elementos the elementos to set
      */
     public void setElementos(Map<String,Elemento> elementos) {
-        this.elementos = elementos;
+         elementosM.setElementos(elementos);
     }
-    private Map<String,Elemento> elementos;
     
     /**
      * 
@@ -37,7 +39,9 @@ public class ManejadorElementos {
      * @return el elemento solicitado
      */
     public Elemento consultarElemento(String nombre){
-        return elementos.get(nombre);
+        return elementosM.consultarElemento(nombre);
     }
+    
+    
     
 }

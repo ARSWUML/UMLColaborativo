@@ -105,4 +105,19 @@ public class ProjectsController {
             return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
         }
     }
+    
+    /**
+ * Agrega un usuario 
+     * @param userid
+     * @return ResponseEntity<?>
+     */
+    @RequestMapping(path="/users", method=RequestMethod.PUT)
+    public ResponseEntity<?> agregarUsuario(@PathVariable String userid){
+        try{
+            manProyectos.agregarUsuario(userid);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }catch(ProyectoExcepcion ex){
+            return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
+        }
+    }
 }
