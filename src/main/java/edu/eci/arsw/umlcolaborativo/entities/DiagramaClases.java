@@ -32,22 +32,6 @@ public class DiagramaClases extends DiagramaEstructural{
         elementos=new HashMap<>();
     }
  
-    public void agregarElemento(String className, String nombre) throws ProyectoExcepcion{
-        try {
-            Class<?> clase = Class.forName(className);
-            Constructor<?> cons = clase.getConstructor(String.class);
-            Object object = cons.newInstance(nombre);
-            Elemento newElemento = (Elemento) object;
-            if(elementos.get(nombre)==null){
-                getElementos().put(nombre, newElemento);
-            }else{
-                throw new ProyectoExcepcion("El elemento con nombre "+nombre+" ya existe por favor cambiele el nombre");
-            }
-            fechaUltimaModificacion=new Timestamp(new Date().getTime());
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            throw new ProyectoExcepcion(ex.getMessage());
-        }
-    }
     /**
      * Agregar elemento al diagrama
      * @param e

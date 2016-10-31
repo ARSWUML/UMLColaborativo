@@ -7,6 +7,7 @@ package edu.eci.arsw.umlcolaborativo.entities;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +26,8 @@ public class Proyecto {
     public Proyecto(String name, String description){
         nombre=name;
         descripcion=description;
-        fechaCreacion=new Date();
-        fechaUltimaModificacion=new Date();
+        fechaCreacion=new Timestamp(new Date().getTime());
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
         diagramas= new HashMap<>();
     }
     
@@ -34,26 +35,17 @@ public class Proyecto {
     }
     
     /**
-     * @pos: Agrega diagramas al proyecto
-     * @param className
-     * @param nombre
-     * @param descrip
-     * @throws ProyectoExcepcion
+     * Agrega diagramas al proyecto
+     * @param d
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
-    public void agregarDiagrama(String className, String nombre, String descrip) throws ProyectoExcepcion{
-         try{
-            Class<?> clase = Class.forName(className);
-            Constructor<?> cons = clase.getConstructor(String.class);
-            Object object = cons.newInstance(nombre, descrip);
-            Diagrama newDiagrama = (Diagrama) object;
-            if(diagramas.get(newDiagrama.getTitulo())==null){
-                getDiagramas().put(nombre, newDiagrama);
-            }else{
-                throw new ProyectoExcepcion("El diagrama con titulo "+nombre+" ya existe por favor cambie el titulo");
-            }
-         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            throw new ProyectoExcepcion(ex.getLocalizedMessage());
-        }       
+    public void agregarDiagrama(Diagrama d) throws ProyectoExcepcion{
+        if(diagramas.get(d.getTitulo())==null){
+            diagramas.put(d.getTitulo(), d);
+            fechaUltimaModificacion=new Timestamp(new Date().getTime());
+        }else{
+            throw new ProyectoExcepcion("El diagrama con titulo "+d.getTitulo()+" ya existe por favor cambie el nombre");
+        }
     }
     
     /**
@@ -77,6 +69,7 @@ public class Proyecto {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 
     /**
@@ -91,6 +84,7 @@ public class Proyecto {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 
     /**
@@ -105,6 +99,7 @@ public class Proyecto {
      */
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 
     /**
@@ -119,6 +114,7 @@ public class Proyecto {
      */
     public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
         this.fechaUltimaModificacion = fechaUltimaModificacion;
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 
     /**
@@ -133,5 +129,6 @@ public class Proyecto {
      */
     public void setDiagramas(Map<String,Diagrama> diagramas) {
         this.diagramas = diagramas;
+        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 }
