@@ -78,8 +78,9 @@ public class ManejadorProyectos {
     }
     
     /**
-     * Agrega un usuario a lousuarios disponibles
+     * Agrega un usuario a los usuarios disponibles
      * @param usuario el nombre del usuario que se desea agregar
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
     public void agregarUsuario(String usuario) throws ProyectoExcepcion{
         persistencia.agregarUsuario(usuario);

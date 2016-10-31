@@ -58,6 +58,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
         proyectos= new ConcurrentHashMap<>();
     }
     
+    @Override
     public Map<String,Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion{
         validarUsuario(usuario);
         Map<String,Proyecto> proy= new HashMap<>();
@@ -67,6 +68,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
         return proy;
     }
     
+    @Override
     public Map<String,Map<String,Proyecto>> consultarProyectos(){
         Map<String,Map<String,Proyecto>> todos= new HashMap<>();
         for(String nombre : usuarios.keySet()){
@@ -79,12 +81,14 @@ public class InMemoryProjects implements PersistenciaProyectos {
         return todos;
     }
     
+    @Override
     public Proyecto consultarProyectoUsuario(String usuario,String proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
         if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" no colabora en el proyecto "+proyecto);
         return proyectos.get(proyecto);
     }
     
+    @Override
     public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
         if(usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto);
@@ -92,6 +96,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
         proyectos.put(proyecto.getNombre(), proyecto);
     }
     
+    @Override
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
         if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto);

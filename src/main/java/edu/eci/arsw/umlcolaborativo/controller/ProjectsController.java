@@ -8,7 +8,6 @@ package edu.eci.arsw.umlcolaborativo.controller;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorProyectos;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,8 +79,8 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping( method = RequestMethod.PUT)
-    public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @RequestBody String userid){
+    @RequestMapping(path="/users/{userid}" , method = RequestMethod.PUT)
+    public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @PathVariable String userid){
         try {
             manProyectos.agregarProyecto(userid, project);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
