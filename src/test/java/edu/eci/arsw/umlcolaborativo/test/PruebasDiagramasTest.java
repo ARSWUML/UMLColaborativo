@@ -103,11 +103,25 @@ public class PruebasDiagramasTest {
     public void CE6deberiaEliminarElemento() throws Exception {
 
     }
-    //Clase equivalencia 7, Deberia poder agregar elemento por el nombre de la clase al diagrama
+    //Clase equivalencia 7, Deberia poder agregar elemento al diagrama
 
     @Test
     public void CE7deberiaAgregarElementoDiagrama() throws Exception {
-       
+        Date fecha = new Timestamp(new Date().getTime());
+        DiagramaClases dg = new DiagramaClases("Diagrama 1", "diagrama uno", fecha);
+        Interface infa = new Interface("A");
+        ClaseAbstracta claseAbs = new ClaseAbstracta("AB");
+        Interface infa2 = new Interface("AC");
+        ClaseAbstracta claseAbs2 = new ClaseAbstracta("ABC");
+        dg.agregarElemento(infa);
+        dg.agregarElemento(claseAbs);
+        dg.agregarElemento(infa2);
+        dg.agregarElemento(claseAbs2);
+        Elemento a = dg.consultarElemento(infa.getNombre());
+        Elemento b = dg.consultarElemento(claseAbs.getNombre());
+        Elemento a1 = dg.consultarElemento(infa.getNombre());
+        Elemento b2 = dg.consultarElemento(claseAbs.getNombre());
+        Assert.assertTrue("No agrego los elementos",infa.equals(a) && claseAbs.equals(b) && infa2.equals(a1) && claseAbs2.equals(b2));
     }
     //Clase equivalencia 8, No deberia agregar elementos con el mismo nombre
     @Test
