@@ -17,7 +17,13 @@ public abstract class Elemento {
     * @param nombre
     */
     
-   public Elemento(String nombre){
+    /**
+     * Crear el elemento con el nombre especificado
+     * @param nombre
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
+    public Elemento(String nombre) throws ProyectoExcepcion{
+       if(nombre.equals("")) throw new ProyectoExcepcion("Favor colocar un nombre adecuado al elemento");
        this.nombre=nombre;
    }
    /**

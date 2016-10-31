@@ -11,7 +11,7 @@ package edu.eci.arsw.umlcolaborativo.entities;
  */
 public class Interface extends Elemento{
     
-    public Interface(String nombre) {
+    public Interface(String nombre) throws ProyectoExcepcion {
         super(nombre);
     }
     

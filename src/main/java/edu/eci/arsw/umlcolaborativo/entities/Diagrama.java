@@ -31,7 +31,17 @@ public abstract class Diagrama{
      * @param dateCreacion
     */
     
-   public Diagrama(String titulo,String descripcion,Date dateCreacion){
+    /**
+     * Crear diagrama con el titulo que lo identifica, la  descripcion fecha de creacion que sera la misma para fecha de modificacion
+     * @param titulo
+     * @param descripcion
+     * @param dateCreacion
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
+    public Diagrama(String titulo,String descripcion,Date dateCreacion) throws ProyectoExcepcion{
+       if(titulo.equals("")) throw new ProyectoExcepcion("Favor colocar un titulo apropiado al diagrama");
+       if(descripcion.equals("")) throw new ProyectoExcepcion("Favor colocar una descripcion apropiada al diagrama");
+       if(dateCreacion==null) throw new ProyectoExcepcion("Favor colocar una fecha de creacion al diagrama");
        this.titulo=titulo;
        this.descripcion=descripcion;
        this.fechaCreacion=dateCreacion;
@@ -42,7 +52,9 @@ public abstract class Diagrama{
     * @param titulo
      * @param descripcion
     */
-   public Diagrama(String titulo,String descripcion){
+   public Diagrama(String titulo,String descripcion) throws ProyectoExcepcion{
+       if(titulo.equals("")) throw new ProyectoExcepcion("Favor colocar un titulo apropiado al diagrama");
+       if(descripcion.equals("")) throw new ProyectoExcepcion("Favor colocar una descripcion apropiada al diagrama");
       this.titulo=titulo;
        this.descripcion=descripcion;
        this.fechaCreacion=new Timestamp(new Date().getTime());

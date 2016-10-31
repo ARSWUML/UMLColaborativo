@@ -23,11 +23,11 @@ public class DiagramaClases extends DiagramaEstructural{
     public DiagramaClases(){
         elementos=new HashMap<>();
     }
-    public DiagramaClases(String titulo,String descripcion,Date dateCreacion){
+    public DiagramaClases(String titulo,String descripcion,Date dateCreacion) throws ProyectoExcepcion{
         super(titulo,descripcion,dateCreacion);
         elementos=new HashMap<>();
     }
-    public DiagramaClases(String titulo,String descripcion){
+    public DiagramaClases(String titulo,String descripcion) throws ProyectoExcepcion{
         super(titulo,descripcion);
         elementos=new HashMap<>();
     }

@@ -21,7 +21,9 @@ public class Proyecto {
     private Date fechaUltimaModificacion;
     private Map<String,Diagrama> diagramas;
     
-    public Proyecto(String name, String description){
+    public Proyecto(String name, String description) throws ProyectoExcepcion{
+        if(name.equals("")) throw new ProyectoExcepcion("Por favor colocar un nombre al proyecto");
+        if(description.equals("")) throw new ProyectoExcepcion("Por favor agregar una descripcion al proyectos");
         nombre=name;
         descripcion=description;
         fechaCreacion=new Timestamp(new Date().getTime());

@@ -9,6 +9,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Clase;
 import edu.eci.arsw.umlcolaborativo.entities.ClaseAbstracta;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Interface;
+import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 public final class InMemoryElements implements PersistenciaElementos{
     private Map<String,Elemento> elementos;
     
-    public InMemoryElements(){
+    public InMemoryElements() throws ProyectoExcepcion{
         elementos=new HashMap<>();
         cargarElementos();
     }
@@ -55,7 +56,7 @@ public final class InMemoryElements implements PersistenciaElementos{
     }
     
     
-    public void cargarElementos(){
+    public void cargarElementos() throws ProyectoExcepcion{
         Elemento claseAsbtracta = new ClaseAbstracta("Abstract Class");
         Elemento interfaz = new Interface("Interface");
         Elemento clase = new Clase("Class");

@@ -13,10 +13,10 @@ import java.util.Date;
  */
 public abstract class DiagramaEstructural extends Diagrama{
  
-    public DiagramaEstructural(String titulo,String descripcion,Date dateCreacion) {
+    public DiagramaEstructural(String titulo,String descripcion,Date dateCreacion) throws ProyectoExcepcion {
         super(titulo,descripcion,dateCreacion);
     }
-     public DiagramaEstructural(String titulo,String descripcion) {
+     public DiagramaEstructural(String titulo,String descripcion) throws ProyectoExcepcion {
         super(titulo,descripcion);
     }
      public DiagramaEstructural(){
