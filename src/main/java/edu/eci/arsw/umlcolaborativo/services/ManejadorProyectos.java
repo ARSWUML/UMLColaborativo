@@ -44,7 +44,7 @@ public class ManejadorProyectos {
     
     /**
      * Consulta todos los proyectos del usuario seleccionado
-     * @param usuario el usuario de quin se conocer los proyectps
+     * @param usuario el usuario de quien se quieren conocer los proyectps
      * @return todos los proyectos del usuario seleccionado por nombre
      * @throws ProyectoExcepcion si el usuario no existe
      */
