@@ -8,6 +8,7 @@ package edu.eci.arsw.umlcolaborativo.test;
 import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
+import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,10 +59,11 @@ public class PruebasProyectoTest {
         Date FechaCreacion = at.getFechaUltimaModificacion();
         Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
         Diagrama dg2 = new DiagramaClases("Diagrama 2", "diagrama dos");
+        Thread.sleep(2000);
         at.setNombre(nombre);
-        Date fechaModi=at.getFechaUltimaModificacion();
         at.agregarDiagrama(dg);
-        Thread.sleep(1000);
+        Date fechaModi=at.getFechaUltimaModificacion();
+        Thread.sleep(2000);
         at.agregarDiagrama(dg2);
         Date fechamodif=at.getFechaUltimaModificacion();
         Assert.assertTrue("No cambio la fecha de modificacion del proyecto!", FechaCreacion.getTime()!=fechaModi.getTime() && FechaCreacion.getTime()!=fechamodif.getTime());
@@ -69,13 +71,51 @@ public class PruebasProyectoTest {
     
    //Clase equivalencia 4, Deberia poder consultar un diagrama su nombre
     @Test
-    public void CE4deberiaConsultarElemento() throws Exception {
+    public void CE4deberiaConsultarDiagrama() throws Exception {
         String descri = "Agregar descripcion proyecto OP";
         String nombre = "Diagrama OP";
         Proyecto at=new Proyecto("Project 1", descri);
         Diagrama dg = new DiagramaClases(nombre, "agregar descripcion");
         at.agregarDiagrama(dg);
         Diagrama consul=at.consultarDiagrama(nombre);
-        Assert.assertTrue("Fallo comparacion entre elementos", consul.equals(dg));
+        Assert.assertTrue("No consulto el diagrama", consul.equals(dg));
     }
+      //Clase equivalencia 5, Deberia poder agregar una lista de elementos al diagrama
+    @Test
+    public void CE5deberiaAgregarListaDiagramas() throws Exception {
+       Proyecto at=new Proyecto("Project 1", "a");
+        Map<String,Diagrama> dgs = new HashMap<>();
+        Diagrama dg0 = new DiagramaClases("A", "agregar descripcion");
+        Diagrama dg1 = new DiagramaClases("B", "agregar descripcion");
+        Diagrama dg2 = new DiagramaClases("C", "agregar descripcion");
+        Diagrama dg3 = new DiagramaClases("D", "agregar descripcion");
+        Diagrama dg4 = new DiagramaClases("E", "agregar descripcion");
+       dgs.put("A", dg0);
+       dgs.put("B", dg1);
+       dgs.put("C", dg2);
+       dgs.put("D", dg3);
+       dgs.put("E", dg4);
+       at.setDiagramas(dgs);
+       Assert.assertEquals("No agrego los diagramas al proyecto",dgs, at.getDiagramas());
+    }
+    //Clase equivalencia 6, No deberia agregar diagramas repetidos
+     
+    @Test
+    public void CE9NoDeberiaAgregarDiagramasRepetidos() throws Exception {
+        Proyecto at=new Proyecto("Project 1", "a");
+        Diagrama dg0 = new DiagramaClases("A", "agregar descripcion");
+        Diagrama dg1 = new DiagramaClases("B", "agregar descripcion");
+        Diagrama dg2 = new DiagramaClases("C", "agregar descripcion");
+        Diagrama dg3 = new DiagramaClases("A", "agregar descripcion");
+        try{
+              at.agregarDiagrama(dg0);
+              at.agregarDiagrama(dg1);
+              at.agregarDiagrama(dg2);
+              at.agregarDiagrama(dg3);
+            Assert.fail("Agrego diagrama diferente con mismo nombre");
+        }catch(ProyectoExcepcion e){
+            Assert.assertEquals("El diagrama con titulo "+dg3.getTitulo()+" ya existe por favor cambie el nombre",e.getMessage());
+        }
+    }
+    
 }
