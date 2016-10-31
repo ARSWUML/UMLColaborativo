@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/projects")
 public class ProjectsController {
     @Autowired
-    ManejadorProyectos manProyectos= new ManejadorProyectos();
+    ManejadorProyectos manProyectos;
     
     /**
      * @pre: Ninguna
@@ -79,7 +79,7 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path="/users/{userid}" , method = RequestMethod.PUT)
+    @RequestMapping(path="/users/{userid}" , method = RequestMethod.POST)
     public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @PathVariable String userid){
         try {
             manProyectos.agregarProyecto(userid, project);
