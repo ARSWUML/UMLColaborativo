@@ -7,6 +7,7 @@ package edu.eci.arsw.umlcolaborativo.services;
 
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +97,10 @@ public class InMemoryProjects implements PersistenciaProyectos {
         if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto);
         usuarios.get(usuario).add(proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
+    }
+    
+    public void agregarUsuario(String usuario) {
+        usuarios.put(usuario, new ArrayList<>());
     }
     
     /**

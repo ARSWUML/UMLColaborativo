@@ -53,4 +53,10 @@ public interface PersistenciaProyectos {
      * @throws ProyectoExcepcion si el usuario no existe o si no posee el proyecto
      */
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion;
+    
+    /**
+     * Agrega un usuario a lousuarios disponibles
+     * @param usuario el nombre del usuario que se desea agregar
+     */
+    public void agregarUsuario(String usuario);
 }

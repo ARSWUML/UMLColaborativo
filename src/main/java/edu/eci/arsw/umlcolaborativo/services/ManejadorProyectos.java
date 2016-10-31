@@ -76,4 +76,12 @@ public class ManejadorProyectos {
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         persistencia.actualizarProyecto(usuario, proyecto);
     }
+    
+    /**
+     * Agrega un usuario a lousuarios disponibles
+     * @param usuario el nombre del usuario que se desea agregar
+     */
+    public void agregarUsuario(String usuario){
+        persistencia.agregarUsuario(usuario);
+    }
 }
