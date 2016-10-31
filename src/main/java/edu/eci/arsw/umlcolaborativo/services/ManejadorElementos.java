@@ -17,8 +17,20 @@ import org.springframework.stereotype.Service;
 public class ManejadorElementos {
     
     @Autowired
-    PersistenciaElementos elementosM;
+    private PersistenciaElementos elementosM;
+
+    public PersistenciaElementos getElementosM() {
+        return elementosM;
+    }
+
+    public void setElementosM(PersistenciaElementos elementosM) {
+        this.elementosM = elementosM;
+    }
     public ManejadorElementos(){
+    }
+    
+    public ManejadorElementos(PersistenciaElementos persistencia){
+        this.elementosM=persistencia;
     }
     /**
      * @return the elementos

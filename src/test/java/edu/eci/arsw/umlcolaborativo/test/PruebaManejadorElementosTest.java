@@ -8,6 +8,7 @@ package edu.eci.arsw.umlcolaborativo.test;
 import edu.eci.arsw.umlcolaborativo.entities.ClaseAbstracta;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Interface;
+import edu.eci.arsw.umlcolaborativo.services.InMemoryElements;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorElementos;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class PruebaManejadorElementosTest {
     //Clase equivalencia 1, Deberia poder agregar elementos
     @Test
     public void CE1deberiaConsultarElementos() throws Exception {
-       ManejadorElementos mn=new ManejadorElementos();
+       ManejadorElementos mn=new ManejadorElementos(new InMemoryElements());
         String intername="A";
         String intername1="AAA";
         Interface infa= new Interface(intername);
@@ -38,7 +39,7 @@ public class PruebaManejadorElementosTest {
     //Clase equivalencia 2, Deberia porder consultar los elementos en el manejador
     @Test
     public void CE2deberiaConsultarElementos() throws Exception {
-        ManejadorElementos mn=new ManejadorElementos();
+        ManejadorElementos mn=new ManejadorElementos(new InMemoryElements());
         String intername="A";
         Interface infa= new Interface(intername);
         Map<String,Elemento> elementos = new HashMap<>();

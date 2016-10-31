@@ -10,6 +10,7 @@ import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorProyectos;
+import edu.eci.arsw.umlcolaborativo.services.InMemoryProjects;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -25,7 +26,7 @@ public class PruebaManejadorProyectoTest {
     @Test
     public void CE1deberiaAgregarConsultarProyectosUsuario() throws Exception {
         String usuario = "Juanito78";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         mn.agregarUsuario(usuario);
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
@@ -42,7 +43,7 @@ public class PruebaManejadorProyectoTest {
         Map<String, Map<String, Proyecto>> consul = new HashMap<>();
         String usuario = "Juanito78";
         String usuario2 = "Juana852";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         mn.agregarUsuario(usuario);
         mn.agregarUsuario(usuario2);
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
@@ -70,7 +71,7 @@ public class PruebaManejadorProyectoTest {
     @Test
     public void CE3NoDeberiaAgregarUsuarioRepetido() throws Exception {
         String usuario = "Juanito78";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         mn.agregarUsuario(usuario);
         try {
             mn.agregarUsuario(usuario);
@@ -84,7 +85,7 @@ public class PruebaManejadorProyectoTest {
     @Test
     public void CE4NoDeberiaAgregarProyectosRepetidos() throws Exception {
         String usuario = "Juanito78";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         mn.agregarUsuario(usuario);
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
@@ -104,7 +105,7 @@ public class PruebaManejadorProyectoTest {
     @Test
     public void CE5deberiaActualizarProyecto() throws Exception {
         String usuario = "Juanito78";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         mn.agregarUsuario(usuario);
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
@@ -119,7 +120,7 @@ public class PruebaManejadorProyectoTest {
     @Test
     public void CE6NoDeberiaActualizarProyectoInexistente() throws Exception {
         String usuario = "Juanito78";
-        ManejadorProyectos mn = new ManejadorProyectos();
+        ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         mn.agregarUsuario(usuario);
         try{

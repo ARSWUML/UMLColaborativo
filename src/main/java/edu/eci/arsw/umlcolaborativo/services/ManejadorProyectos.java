@@ -28,9 +28,8 @@ public class ManejadorProyectos {
     /**
      * @param persistencia the persistencia to set
      */
-    //@Required
     public void setPersistencia(PersistenciaProyectos persistencia) {
-        //this.persistencia = persistencia;
+        this.persistencia = persistencia;
     }
     @Autowired 
     private PersistenciaProyectos persistencia;
@@ -39,7 +38,10 @@ public class ManejadorProyectos {
      * Crea un manejador de proyectos vacío
      */
     public ManejadorProyectos(){
-        persistencia= new InMemoryProjects();
+        //persistencia= new InMemoryProjects();
+    }
+    public ManejadorProyectos(PersistenciaProyectos persistencia){
+        this.persistencia=persistencia;
     }
     
     /**
@@ -97,7 +99,6 @@ public class ManejadorProyectos {
      * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
     public void agregarUsuario(String usuario) throws ProyectoExcepcion{
-        System.out.println("Persistencia: "+getPersistencia());
         getPersistencia().agregarUsuario(usuario);
     }
 }
