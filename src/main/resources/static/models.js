@@ -1,7 +1,7 @@
 function Proyecto(nombre,descripcion){
     this.nombre=nombre;
     this.descripcion=descripcion;
-    ths.diagramas=[];
+    this.diagramas=[];
 };
 
 Proyecto.prototype.agregarDiagrama=function (diagrama){

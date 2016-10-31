@@ -9,7 +9,7 @@ package edu.eci.arsw.umlcolaborativo.entities;
  *
  * @author ger9410
  */
-public abstract class Clase extends Elemento{
+public class Clase extends Elemento{
     
     public Clase(String nombre) {
         super(nombre);
