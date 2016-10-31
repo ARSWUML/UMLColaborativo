@@ -5,21 +5,42 @@
         <!--Importar MUI CSS-->
         <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
         <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
+        <!--Importar Iconos font Awesome-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
         <!--Importar styles.css-->
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <!--Importar JQuery-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+        <!--Importar modelos js-->
+        <script src="models.js"></script>
+        <!--Importar js de login-->
+        <script src="login.js"></script>
     </head>
 
     <body>
         <div id="usr" class="mui--text-center mui-panel">
             <h1>Nombre</h1><br>
-            <form class="mui-form--inline">
-                <div id="nombre" class="mui-textfield">
-                    <input type="text" placeholder="Enter Username" id="uname" required oninvalid="setCustomValidity('Por favor ingrese un nombre de usuario')">
+            <div id="nombre" class="mui-textfield">
+                <input type="text" placeholder="Enter Username" id="uname" required oninvalid="setCustomValidity('Por favor ingrese un nombre de usuario')">
+            </div>
+            <button type="submit" class="mui-btn mui-btn--raised" onclick="setName()">
+                Login
+            </button>
+        </div>
+        <div id="proyectos" hidden="hidden">
+            <h1 id="usrnm"></h1>
+            <div class="mui-row">
+                <div class="mui-col-md-8">
+                    <h2>Proyectos en los que colabora</h2>
                 </div>
-                <button type="submit" class="mui-btn mui-btn--raised">Login</button>
-            </form>
+                <div class="mui-col-md-4">
+                    <button class="mui-btn mui-btn--primary">
+                        <i class="fa fa-plus-square"></i>
+                        Crear nuevo proyecto</button>
+                </div>
+            </div>
         </div>
     </body>
 
-</html>
 </html>
