@@ -1,6 +1,7 @@
 <html>
 
     <head>
+        <meta charset="utf-8">
         <title>UML Colaborativo</title>
         <!--Importar MUI CSS-->
         <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
@@ -32,13 +33,28 @@
             <h1 id="usrnm"></h1>
             <div class="mui-row">
                 <div class="mui-col-md-8">
-                    <h2>Proyectos en los que colabora</h2>
+                    <h2>Mis Proyectos</h2>
                 </div>
                 <div class="mui-col-md-4">
                     <button class="mui-btn mui-btn--primary">
                         <i class="fa fa-plus-square"></i>
                         Crear nuevo proyecto</button>
                 </div>
+            </div>
+            <div id="proyectosdiv">
+                <table id="proyectos" class="mui-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Fecha de Creación</th>
+                            <th>Fecha de Última Modificación</th>
+                            <th>Acceder</th>
+                            <th>Compartir</th>
+                        </tr>
+                    </thead>
+
+                </table>
             </div>
         </div>
     </body>
