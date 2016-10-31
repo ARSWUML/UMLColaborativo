@@ -49,8 +49,9 @@ public class ManejadorProyectos {
     public void setProyectos(Map<String,Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
-
+    //<Nombre del usuario,Lista de nombre de proyectos>
     private Map<String,List<String>> usuarios;
+    //<Nombre del proyecto,El proyecto>
     private Map<String,Proyecto> proyectos;
     
     
