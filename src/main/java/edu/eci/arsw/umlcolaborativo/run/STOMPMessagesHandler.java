@@ -6,7 +6,9 @@
 package edu.eci.arsw.umlcolaborativo.run;
 
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
+import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,21 @@ public class STOMPMessagesHandler {
     /**
      * Recibe un nuevo elemento de /app/newelement y lo publica en /topic/newelement
      * @param e
-     * @throws Exception 
      */
     @MessageMapping("/newelement")
-    public void getElement(Elemento e) throws Exception {
+    public void getElement(Elemento e){
         System.out.println("Nuevo elemento recibido en el servidor! :"+e.getNombre());
         msgt.convertAndSend("/topic/newelement", e);
+    }
+    
+    /**
+     * Recibe en /app/newproject.{usrId} el nuevo proyecto de un usuario y lo publica en /topic/newproject.{usrId}
+     * @param p proyecto a publicar
+     * @param usrId el nombre del usuario de quien es el nuevo proyecto
+     */
+    @MessageMapping("/newproject.{usrId}")
+    public void getProject(Proyecto p,@DestinationVariable String usrId) {
+        System.out.println("Nuevo proyecto recibido en el servidor! :"+p.getNombre());
+        msgt.convertAndSend("/topic/newproject."+usrId, p);
     }
 }
