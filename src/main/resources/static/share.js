@@ -1,10 +1,15 @@
-proyecto=null;
+/* global arrP */
+
+proyecto="";
 nombreUsuario="";
 
 function agregarUsuario(){
+    nombreUsuario=$("#nomU").val();
+    var NOMproyecto=$('input[name=proyecto]:checked').val();
+    proyecto=arrP[NOMproyecto];
     return $.ajax({
         url: "/projects/users/"+nombreUsuario,
-        type: 'PUT',
+        type: 'POST',
         data: JSON.stringify(proyecto),
         contentType: "application/json"
     });
@@ -12,6 +17,4 @@ function agregarUsuario(){
 
 function compartir(){
     $("#nU").show();
-    nombreUsuario=$("nomU").val();
-    proyecto=$('input[name=proyecto]:checked').val();
 };
