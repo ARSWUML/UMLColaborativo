@@ -105,14 +105,4 @@ public class ProjectsController {
             return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
         }
     }
-    
-    /**
-     * Retorna todos los usuarios en los que esten colaborando en uno o varios proyectos
-     * @return ResponseEntity<?>
-     */
-    @RequestMapping(path="/users", method=RequestMethod.GET)
-    public ResponseEntity<?> getUsuarios(){
-       Map<String,List<String>> usuarios=manProyectos.getUsuarios();
-       return new ResponseEntity<>(usuarios,HttpStatus.ACCEPTED);
-    }
 }
