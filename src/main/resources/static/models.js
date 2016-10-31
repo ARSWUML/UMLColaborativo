@@ -1,17 +1,21 @@
 function Proyecto(nombre,descripcion){
     this.nombre=nombre;
     this.descripcion=descripcion;
-    ths.diagramas=[];
+    this.fechaCreacion=new Date();
+    this.fechaUltimaModificacion= new Date();
+    this.diagramas={};
 };
 
 Proyecto.prototype.agregarDiagrama=function (diagrama){
-    this.diagramas.push(diagrama);
+    this.diagramas[diagrama.nombre]=diagrama;
 };
 
-function Diagrama(nombre,descripcion){
+function DiagramaClases(nombre,descripcion){
     this.nombre=nombre;
     this.descripcion=descripcion;
-    this.elementos=[];
+    this.fechaCreacion=new Date();
+    this.fechaUltimaModificacion= new Date();
+    this.elementos={};
 };
 
 $(document).ready(

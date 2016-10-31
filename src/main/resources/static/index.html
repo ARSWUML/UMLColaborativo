@@ -1,6 +1,7 @@
 <html>
 
     <head>
+        <meta charset="utf-8">
         <title>UML Colaborativo</title>
         <!--Importar MUI CSS-->
         <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
@@ -16,13 +17,18 @@
         <script src="models.js"></script>
         <!--Importar js de login-->
         <script src="login.js"></script>
+        <!--Importar js de proyectos-->
+        <script src="proyectos.js"></script>
+        <!--Importar sockjs y stomp-->
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     </head>
 
     <body>
         <div id="usr" class="mui--text-center mui-panel">
             <h1>Nombre</h1><br>
             <div id="nombre" class="mui-textfield">
-                <input type="text" placeholder="Enter Username" id="uname" required oninvalid="setCustomValidity('Por favor ingrese un nombre de usuario')">
+                <input type="text" placeholder="Ingrese nombre de usuario" id="uname" required oninvalid="setCustomValidity('Por favor ingrese un nombre de usuario')">
             </div>
             <button type="submit" class="mui-btn mui-btn--raised" onclick="setName()">
                 Login
@@ -32,13 +38,35 @@
             <h1 id="usrnm"></h1>
             <div class="mui-row">
                 <div class="mui-col-md-8">
-                    <h2>Proyectos en los que colabora</h2>
+                    <h2>Mis Proyectos</h2>
                 </div>
                 <div class="mui-col-md-4">
-                    <button class="mui-btn mui-btn--primary">
+                    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarProyecto()">
                         <i class="fa fa-plus-square"></i>
                         Crear nuevo proyecto</button>
+                    <div id="newP" hidden="hidden">
+                        <input type="text" placeholder="Ingrese nombre del proyecto" id="nomP" required oninvalid="setCustomValidity('Por favor ingrese un nombre de proyecto')">
+                        <input type="text" placeholder="Ingrese descripción del proyecto" id="descP" required oninvalid="setCustomValidity('Por favor ingrese una descripción del proyecto')">
+                        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger" onclick="agregarProyecto()">
+                            Crear
+                        </button>
+                    </div>
                 </div>
+            </div>
+            <div id="proyectosdiv">
+                <table id="proyectos" class="mui-table mui-table--bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Fecha de Creación</th>
+                            <th>Fecha de Última Modificación</th>
+                            <th>Acceder</th>
+                            <th>Compartir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista"></tbody>
+                </table>
             </div>
         </div>
     </body>

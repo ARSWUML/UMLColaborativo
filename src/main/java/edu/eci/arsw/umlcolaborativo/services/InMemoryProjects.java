@@ -99,7 +99,9 @@ public class InMemoryProjects implements PersistenciaProyectos {
         proyectos.put(proyecto.getNombre(), proyecto);
     }
     
-    public void agregarUsuario(String usuario) {
+    @Override
+    public void agregarUsuario(String usuario) throws ProyectoExcepcion {
+        validarUsuario(usuario);
         usuarios.put(usuario, new ArrayList<>());
     }
     
