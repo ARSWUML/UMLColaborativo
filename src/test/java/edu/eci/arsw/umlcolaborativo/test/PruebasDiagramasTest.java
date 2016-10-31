@@ -45,7 +45,7 @@ public class PruebasDiagramasTest {
         DiagramaClases dg = new DiagramaClases("Diagrama1", "agregar descripcion");
         dg.setTitulo(nombre);
         dg.setDescripcion(descri);
-        Assert.assertTrue("No modifico titulo, ni descripcion", dg.getTitulo().equals(nombre) && dg.getDescripcion().equals(descri));
+        Assert.assertTrue("No modifico titulo, ni descripcion diagrama", dg.getTitulo().equals(nombre) && dg.getDescripcion().equals(descri));
     }
 
     //Clase equivalencia 3, Deberia poder actualizar la fecha de modificacion del diagrama
@@ -60,7 +60,6 @@ public class PruebasDiagramasTest {
         ClaseAbstracta claseAbs = new ClaseAbstracta("AB");
         dg.agregarElemento(claseAbs);
         Date fechamodif = dg.getFechaUltimaModificacion();
-        System.out.println("FechaCreacion: "+FechaCreacion.getTime()+" Fecha1M: "+fechaModi.getTime()+" Fecha2M: "+fechamodif.getTime());
         Assert.assertTrue("No cambio la fecha de modificacion!", FechaCreacion.getTime()!=fechaModi.getTime() && FechaCreacion.getTime()!=fechamodif.getTime());
     }
 
@@ -72,7 +71,7 @@ public class PruebasDiagramasTest {
         Elemento consul = dg.consultarElemento(infa.getNombre());
         dg.agregarElemento(infa);
         Elemento consu = dg.consultarElemento(infa.getNombre());
-        Assert.assertTrue("Fallo comparacion entre elementos", consul == null && consu.equals(infa));
+        Assert.assertTrue("Fallo comparacion entre elementos", consu.equals(infa));
     }
 
     //Clase equivalencia 5, Deberia poder agregar una lista de elementos al diagrama
