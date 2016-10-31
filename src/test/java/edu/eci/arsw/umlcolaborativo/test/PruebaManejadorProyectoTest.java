@@ -81,7 +81,7 @@ public class PruebaManejadorProyectoTest {
             mn.agregarUsuario(usuario);
             Assert.fail("Agrego usuario repetido");
         } catch (ProyectoExcepcion e) {
-            Assert.assertEquals("Agrega usuarios repetidos y lanza la excepcion incorrecta", "El usuario " + usuario + " no se encuentra registrado", e.getMessage());
+            Assert.assertEquals("Agrega usuarios repetidos y lanza la excepcion incorrecta", "El usuario " + usuario + " ya se encuentra registrado", e.getMessage());
         }
     }
 
@@ -96,6 +96,7 @@ public class PruebaManejadorProyectoTest {
         Diagrama dg2 = new DiagramaClases("Diagrama 2", "diagrama dos");
         at.agregarDiagrama(dg);
         at.agregarDiagrama(dg2);
+        mn.agregarProyecto(usuario, at);
         try {
             mn.agregarProyecto(usuario, at);
             Assert.fail("Agrego Proyecto repetido");
@@ -113,7 +114,7 @@ public class PruebaManejadorProyectoTest {
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
         at.agregarDiagrama(dg);
-       mn.agregarProyecto(usuario, at);
+        mn.agregarProyecto(usuario, at);
         Proyecto at2 = new Proyecto("Project 1", "Agregar descripcion");
         at2.setDescripcion("Proyecto de mineria de datos");
          mn.actualizarProyecto(usuario, at2);

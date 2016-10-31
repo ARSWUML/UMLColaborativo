@@ -89,7 +89,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
-        if(usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto.getNombre());
+        if(usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto.getNombre());
         usuarios.get(usuario).add(proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
     }
@@ -97,7 +97,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
-        if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" aun no colabora en el proyecto "+proyecto.getNombre());
+        if(!usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" aun no colabora en el proyecto "+proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
     }
     

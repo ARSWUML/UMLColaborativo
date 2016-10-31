@@ -15,7 +15,7 @@ import java.util.Date;
 public abstract class Diagrama{
     
     protected String titulo;
-    protected String Descripcion;
+    protected String descripcion;
     protected Date fechaCreacion;
     protected Date fechaUltimaModificacion;
     
@@ -33,7 +33,7 @@ public abstract class Diagrama{
     
    public Diagrama(String titulo,String descripcion,Date dateCreacion){
        this.titulo=titulo;
-       this.Descripcion=descripcion;
+       this.descripcion=descripcion;
        this.fechaCreacion=dateCreacion;
        this.fechaUltimaModificacion=dateCreacion;
    }
@@ -44,7 +44,7 @@ public abstract class Diagrama{
     */
    public Diagrama(String titulo,String descripcion){
       this.titulo=titulo;
-       this.Descripcion=descripcion;
+       this.descripcion=descripcion;
        this.fechaCreacion=new Timestamp(new Date().getTime());
        this.fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
@@ -68,7 +68,7 @@ public abstract class Diagrama{
      * @return 
     */
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
     /**
      * Modificar la descripcion
@@ -76,7 +76,7 @@ public abstract class Diagrama{
     */
     public void setDescripcion(String Descripcion) {
         fechaUltimaModificacion=new Timestamp(new Date().getTime());
-        this.Descripcion = Descripcion;
+        this.descripcion = Descripcion;
     }
     /**
     * Consultar fecha creacion
@@ -105,5 +105,10 @@ public abstract class Diagrama{
     */
     public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
         this.fechaUltimaModificacion = fechaUltimaModificacion;
+    }
+    @Override
+    public boolean equals(Object o){
+        Diagrama o2=(Diagrama)o;
+        return o2.getTitulo().equals(titulo) && o2.getDescripcion().equals(descripcion);
     }
 }
