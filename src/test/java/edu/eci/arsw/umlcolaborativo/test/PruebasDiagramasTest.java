@@ -54,7 +54,7 @@ public class PruebasDiagramasTest {
         DiagramaClases dg = new DiagramaClases("Diagrama1", "agregar descripcion");
         Date FechaCreacion = dg.getFechaUltimaModificacion();
         Interface infa = new Interface("A");
-        Thread.sleep(1000);
+        Thread.sleep(500);
         dg.agregarElemento(infa);
         Date fechaModi = dg.getFechaUltimaModificacion();
         ClaseAbstracta claseAbs = new ClaseAbstracta("AB");
