@@ -9,6 +9,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class ManejadorProyectos {
     
     @Autowired
-    private PersistenciaProyectos persistencia=null;
+    private PersistenciaProyectos persistencia;
     
     /**
      * Crea un manejador de proyectos vacío

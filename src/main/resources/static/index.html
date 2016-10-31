@@ -52,22 +52,37 @@
                             Crear
                         </button>
                     </div>
+                    <div id="shareP">
+                        <button type="submit" class="mui-btn mui-btn--raised" onclick="compartir()"><i class="fa fa-share-alt"></i>
+                            Compartir
+                        </button>
+                        <div id="nU" hidden="hidden">
+                            <input type="text" placeholder="Nombre usuario" id="nomU">
+                            <button onclick="agregarUsuario()">Aceptar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="proyectosdiv">
-                <table id="proyectos" class="mui-table mui-table--bordered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Fecha de Creación</th>
-                            <th>Fecha de Última Modificación</th>
-                            <th>Acceder</th>
-                            <th>Compartir</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista"></tbody>
-                </table>
+                <form id="radio">
+                    <table id="proyectos" class="mui-table mui-table--bordered">
+
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Fecha de Creación</th>
+                                <th>Fecha de Última Modificación</th>
+                                <th>Acceder</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="lista"></tbody>
+
+                    </table>
+                </form>
+
             </div>
         </div>
     </body>
