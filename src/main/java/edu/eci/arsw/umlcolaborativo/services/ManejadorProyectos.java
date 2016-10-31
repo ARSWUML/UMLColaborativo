@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class ManejadorProyectos {
     
     @Autowired
-    private InMemoryProjects persistencia=null;
+    private PersistenciaProyectos persistencia=null;
     
     /**
      * Crea un manejador de proyectos vacío

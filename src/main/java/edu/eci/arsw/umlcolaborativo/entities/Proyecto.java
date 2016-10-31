@@ -5,14 +5,10 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -116,7 +112,6 @@ public class Proyecto {
      */
     public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
         this.fechaUltimaModificacion = fechaUltimaModificacion;
-        fechaUltimaModificacion=new Timestamp(new Date().getTime());
     }
 
     /**
