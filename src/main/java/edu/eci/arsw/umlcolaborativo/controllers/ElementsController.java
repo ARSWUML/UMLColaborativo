@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/elements")
 public class ElementsController {
     @Autowired
-    ManejadorElementos manElementos= new ManejadorElementos();
+    ManejadorElementos manElementos;
     /**
      * @pos: retorna la lista de elementos disponibles para usar
      * @return ResponseEntity<?>

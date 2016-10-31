@@ -17,8 +17,9 @@ import org.springframework.stereotype.Service;
 public class ManejadorElementos {
     
     @Autowired
-    InMemoryElements elementosM;
-  
+    PersistenciaElementos elementosM;
+    public ManejadorElementos(){
+    }
     /**
      * @return the elementos
      */

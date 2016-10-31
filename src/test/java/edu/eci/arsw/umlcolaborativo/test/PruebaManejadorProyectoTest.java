@@ -72,11 +72,6 @@ public class PruebaManejadorProyectoTest {
         String usuario = "Juanito78";
         ManejadorProyectos mn = new ManejadorProyectos();
         mn.agregarUsuario(usuario);
-        Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
-        Diagrama dg = new DiagramaClases("Diagrama 1", "diagrama uno");
-        Diagrama dg2 = new DiagramaClases("Diagrama 2", "diagrama dos");
-        at.agregarDiagrama(dg);
-        at.agregarDiagrama(dg2);
         try {
             mn.agregarUsuario(usuario);
             Assert.fail("Agrego usuario repetido");

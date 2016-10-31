@@ -28,9 +28,9 @@ public class ManejadorProyectos {
     /**
      * @param persistencia the persistencia to set
      */
-    @Required
+    //@Required
     public void setPersistencia(PersistenciaProyectos persistencia) {
-        this.persistencia = persistencia;
+        //this.persistencia = persistencia;
     }
     @Autowired 
     private PersistenciaProyectos persistencia;
