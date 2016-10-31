@@ -101,7 +101,7 @@ public class PruebasProyectoTest {
     //Clase equivalencia 6, No deberia agregar diagramas repetidos
      
     @Test
-    public void CE9NoDeberiaAgregarDiagramasRepetidos() throws Exception {
+    public void CE6NoDeberiaAgregarDiagramasRepetidos() throws Exception {
         Proyecto at=new Proyecto("Project 1", "a");
         Diagrama dg0 = new DiagramaClases("A", "agregar descripcion");
         Diagrama dg1 = new DiagramaClases("B", "agregar descripcion");
@@ -117,5 +117,10 @@ public class PruebasProyectoTest {
             Assert.assertEquals("El diagrama con titulo "+dg3.getTitulo()+" ya existe por favor cambie el nombre",e.getMessage());
         }
     }
-    
+    //Clase equivalencia 7, Deberia poder eliminar diagramas
+    ///implementacion proximo sprint
+    @Test
+    public void CE7deberiaEliminarDiagrama() throws Exception {
+        
+    }
 }

@@ -119,8 +119,8 @@ public class PruebasDiagramasTest {
         dg.agregarElemento(claseAbs2);
         Elemento a = dg.consultarElemento(infa.getNombre());
         Elemento b = dg.consultarElemento(claseAbs.getNombre());
-        Elemento a1 = dg.consultarElemento(infa.getNombre());
-        Elemento b2 = dg.consultarElemento(claseAbs.getNombre());
+        Elemento a1 = dg.consultarElemento(infa2.getNombre());
+        Elemento b2 = dg.consultarElemento(claseAbs2.getNombre());
         Assert.assertTrue("No agrego los elementos",infa.equals(a) && claseAbs.equals(b) && infa2.equals(a1) && claseAbs2.equals(b2));
     }
     //Clase equivalencia 8, No deberia agregar elementos con el mismo nombre
