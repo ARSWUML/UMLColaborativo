@@ -8,9 +8,8 @@ package edu.eci.arsw.umlcolaborativo.controller;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import edu.eci.arsw.umlcolaborativo.services.ManejadorProyectos;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +46,7 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path = "/{userid}", method = RequestMethod.GET)
+    @RequestMapping(path = "/users/{userid}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectosUsuario(@PathVariable String userid){
         try {
             Map<String,Proyecto> proyectosUsuario=manProyectos.consultarProyectosUsuario(userid);
@@ -65,7 +64,7 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path = "/{userid}/{projectid}", method = RequestMethod.GET)
+    @RequestMapping(path = "/users/{userid}/{projectid}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarProyectoUsuario(@PathVariable String projectid, @PathVariable String userid){
         try {
             Proyecto proyectoUsuario=manProyectos.consultarProyectoUsuario(userid, projectid);
@@ -91,4 +90,29 @@ public class ProjectsController {
         }
     }
     
+    /**
+     * Actualiza un proyecto de un usario dado
+     * @param userid
+     * @param project
+     * @return ResponseEntity<?>
+     */
+    @RequestMapping(path="/users/{userid}", method=RequestMethod.PUT)
+    public ResponseEntity<?> actualizarProyecto(@PathVariable String userid, @RequestBody Proyecto project){
+        try{
+            manProyectos.actualizarProyecto(userid, project);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }catch(ProyectoExcepcion ex){
+            return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
+        }
+    }
+    
+    /**
+     * Retorna todos los usuarios en los que esten colaborando en uno o varios proyectos
+     * @return ResponseEntity<?>
+     */
+    @RequestMapping(path="/users", method=RequestMethod.GET)
+    public ResponseEntity<?> getUsuarios(){
+       Map<String,List<String>> usuarios=manProyectos.getUsuarios();
+       return new ResponseEntity<>(usuarios,HttpStatus.ACCEPTED);
+    }
 }
