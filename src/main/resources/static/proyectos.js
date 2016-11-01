@@ -1,6 +1,6 @@
 
-var radioButtonIn='<input type="radio" name="proyecto" value="';
-var radioButtonFin='" checked> Seleccionar<br>';
+var radioButtonIn = '<input type="radio" name="proyecto" value="';
+var radioButtonFin = '" checked> Seleccionar<br>';
 var proyecto = null;
 var proyectos = 0;
 var arrP = [];
@@ -9,19 +9,18 @@ function formAgregarProyecto() {
     $("#newP").show();
 };
 
-function accederProyecto(){
-    sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
-    window.location.href='diagramas.html';
+function accederProyecto() {
     disconnect();
-    
+    sessionStorage.nameProject = $('input[name=proyecto]:checked').val();
+    window.location.href = 'diagramas.html';
 };
 
-function inicio(){
+function inicio() {
     $("#usrnm").html("Usuario: " + sessionStorage.name);
     disconnect();
     connect();
     getProyectos();
-    sessionStorage.nameProject="";
+    sessionStorage.nameProject = "";
 };
 
 function agregarProyecto() {
@@ -35,25 +34,25 @@ function agregarProyecto() {
 
 function agregarProyectoVista(proy) {
     proyectos++;
-    arrP[proy.nombre]=proy;
-    $("#lista").append("<tr><td>"+proy.nombre+"</td><td>"+proy.descripcion+"</td><td>"+proy.fechaCreacion.toLocaleString()+
-    "</td><td>"+proy.fechaUltimaModificacion.toLocaleString()+"</td><td>"+radioButtonIn+proy.nombre+radioButtonFin+"</td>"+"</tr>");
+    arrP[proy.nombre] = proy;
+    $("#lista").append("<tr><td>" + proy.nombre + "</td><td>" + proy.descripcion + "</td><td>" + proy.fechaCreacion.toLocaleString() +
+            "</td><td>" + proy.fechaUltimaModificacion.toLocaleString() + "</td><td>" + radioButtonIn + proy.nombre + radioButtonFin + "</td>" + "</tr>");
 };
 
-sendProject = function() {
+sendProject = function () {
     stompClient.send('/app/newproject.' + sessionStorage.name, {}, JSON.stringify(proyecto));
 };
 
 function connect() {
-    if (sessionStorage.connected!=true) {
+    if (sessionStorage.connected != true) {
         sessionStorage.connected = true;
         var socket = new SockJS('/stompendpoint');
-        
+
         stompClient = Stomp.over(socket);
         console.info(stompClient);
-        stompClient.connect({}, function(frame) {
+        stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newproject.' + sessionStorage.name, function(data) {
+            stompClient.subscribe('/topic/newproject.' + sessionStorage.name, function (data) {
                 console.log("llego");
                 var objeto = JSON.parse(data.body);
                 objeto.fechaCreacion = new Date(objeto.fechaCreacion);
@@ -65,42 +64,45 @@ function connect() {
 };
 
 function disconnect() {
-        sessionStorage.connected = false;
-        if (stompClient!=null) {
-            stompClient.disconnect();
-        }
-        console.log("Disconnected");
+    sessionStorage.connected = false;
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
+    console.log("Disconnected");
 };
 
-function getProyectos(){
-    return $.get("/projects/users/"+sessionStorage.name,function(data){
+function getProyectos() {
+    return $.get("/projects/users/" + sessionStorage.name, function (data) {
         console.log(data);
-        for(var element in data){
+        for (var element in data) {
             data[element].fechaCreacion = new Date(data[element].fechaCreacion);
             data[element].fechaUltimaModificacion = new Date(data[element].fechaUltimaModificacion);
             agregarProyectoVista(data[element]);
-        };
+        }
+        ;
     });
 };
 
-function postProyecto(proyecto){
+function postProyecto(proyecto) {
     console.log(JSON.stringify(proyecto));
-    console.log("/projects/users/"+sessionStorage.name);
+    console.log("/projects/users/" + sessionStorage.name);
     return $.ajax({
-        url: "/projects/users/"+sessionStorage.name,
+        url: "/projects/users/" + sessionStorage.name,
         type: 'POST',
         data: JSON.stringify(proyecto),
         contentType: "application/json"
     });
 };
-function validar(){
-    if(sessionStorage.name==null || sessionStorage.name.length==0){
-        window.location.href='index.html';
+
+function validar() {
+    if (sessionStorage.name == null || sessionStorage.name.length == 0) {
+        window.location.href = 'index.html';
     }
 };
+
 $(document).ready(
-    function() {
-        validar();
-        inicio();
-    }
+        function () {
+            validar();
+            inicio();
+        }
 );

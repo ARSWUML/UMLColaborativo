@@ -114,21 +114,22 @@ public class PruebaManejadorProyectoTest {
         mn.agregarProyecto(usuario, at);
         Proyecto at2 = new Proyecto("Project 1", "Agregar descripcion");
         at2.setDescripcion("Proyecto de mineria de datos");
-         mn.actualizarProyecto(usuario, at2);
-        Assert.assertEquals("No actulizo el proyecto",at2,mn.consultarProyectoUsuario(usuario, at.getNombre()));
+        mn.actualizarProyecto(usuario, at2);
+        Assert.assertEquals("No actulizo el proyecto", at2, mn.consultarProyectoUsuario(usuario, at.getNombre()));
     }
-     //Clase equivalencia 6, No deberia poder actulizar un proyecto que no existe
+    //Clase equivalencia 6, No deberia poder actulizar un proyecto que no existe
+
     @Test
     public void CE6NoDeberiaActualizarProyectoInexistente() throws Exception {
         String usuario = "Juanito78";
         ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");
         mn.agregarUsuario(usuario);
-        try{
-            mn.actualizarProyecto(usuario,at);
+        try {
+            mn.actualizarProyecto(usuario, at);
             Assert.fail("Modifico un proyecto inexistente");
-        }catch(ProyectoExcepcion e){
-            Assert.assertEquals("No modifico un proyecto inexistente","El usuario "+usuario+" aun no colabora en el proyecto "+at.getNombre(), e.getMessage());
+        } catch (ProyectoExcepcion e) {
+            Assert.assertEquals("No modifico un proyecto inexistente", "El usuario " + usuario + " aun no colabora en el proyecto " + at.getNombre(), e.getMessage());
         }
     }
 }

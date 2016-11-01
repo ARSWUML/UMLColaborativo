@@ -4,14 +4,46 @@
         <title>UMLColaborativo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
+        <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="lienzoDiagramas.js"></script>
     </head>
     <body>
-        <div id="menuElementos">
-            
+        <div id="izquierda">
+            <div id="infousuario">
+
+            </div>
+            <div id="elementos">
+                <center><h1> Elementos </h1></center>
+
+                <button id="guardar" class="mui-btn mui-btn--raised mui-btn--primary" onclick="">
+                    <i class="fa fa-floppy-o"></i>
+                    Guardar
+                </button>
+
+            </div>
+        </div>
+
+        <div id="canvas">
+            <center><h1 id="tituloDiagrama"> Título del diagrama</h1></center>
+            <canvas id="lienzo"> </canvas>
+        </div>
+        
+        <div id="derecha">
+            <div id="colaboladores">
+
+            </div>
+            <div id="chat">
+
+
+            </div>
         </div>
     </body>
 </html>

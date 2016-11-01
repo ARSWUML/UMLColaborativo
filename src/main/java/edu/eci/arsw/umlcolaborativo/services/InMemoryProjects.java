@@ -29,63 +29,64 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InMemoryProjects implements PersistenciaProyectos {
-    
-    private Map<String,List<String>> usuarios;
-    private Map<String,Proyecto> proyectos;
-    
-    public InMemoryProjects() throws ProyectoExcepcion{
-        usuarios= new ConcurrentHashMap<>();
-        proyectos= new ConcurrentHashMap<>();
+
+    private Map<String, List<String>> usuarios;
+    private Map<String, Proyecto> proyectos;
+
+    public InMemoryProjects() throws ProyectoExcepcion {
+        usuarios = new ConcurrentHashMap<>();
+        proyectos = new ConcurrentHashMap<>();
         cargarProyectos();
     }
+
     /**
      * @return the usuarios
      */
-    public Map<String,List<String>> getUsuarios() {
+    public Map<String, List<String>> getUsuarios() {
         return usuarios;
     }
 
     /**
      * @param usuarios the usuarios to set
      */
-    public void setUsuarios(Map<String,List<String>> usuarios) {
+    public void setUsuarios(Map<String, List<String>> usuarios) {
         this.usuarios = usuarios;
     }
 
     /**
      * @return the proyectos
      */
-    public Map<String,Proyecto> getProyectos() {
+    public Map<String, Proyecto> getProyectos() {
         return proyectos;
     }
 
     /**
      * @param proyectos the proyectos to set
      */
-    public void setProyectos(Map<String,Proyecto> proyectos) {
+    public void setProyectos(Map<String, Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
-    
+
     @Override
-    public void vaciar(){
+    public void vaciar() {
         usuarios.clear();
         proyectos.clear();
     }
-    
+
     @Override
-    public Map<String,Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion{
+    public Map<String, Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion {
         validarUsuario(usuario);
-        Map<String,Proyecto> proy= new HashMap<>();
-        for(String name:usuarios.get(usuario)){
+        Map<String, Proyecto> proy = new HashMap<>();
+        for (String name : usuarios.get(usuario)) {
             proy.put(name, proyectos.get(name));
         }
         return proy;
     }
-    
+
     @Override
-    public Map<String,Map<String,Proyecto>> consultarProyectos(){
-        Map<String,Map<String,Proyecto>> todos= new HashMap<>();
-        for(String nombre : usuarios.keySet()){
+    public Map<String, Map<String, Proyecto>> consultarProyectos() {
+        Map<String, Map<String, Proyecto>> todos = new HashMap<>();
+        for (String nombre : usuarios.keySet()) {
             try {
                 todos.put(nombre, consultarProyectosUsuario(nombre));
             } catch (ProyectoExcepcion ex) {
@@ -94,65 +95,76 @@ public class InMemoryProjects implements PersistenciaProyectos {
         }
         return todos;
     }
-    
+
     @Override
-    public Proyecto consultarProyectoUsuario(String usuario,String proyecto) throws ProyectoExcepcion{
+    public Proyecto consultarProyectoUsuario(String usuario, String proyecto) throws ProyectoExcepcion {
         validarUsuario(usuario);
-        if(!usuarios.get(usuario).contains(proyecto)) throw new ProyectoExcepcion("El usuario "+usuario+" no colabora en el proyecto "+proyecto);
+        if (!usuarios.get(usuario).contains(proyecto)) {
+            throw new ProyectoExcepcion("El usuario " + usuario + " no colabora en el proyecto " + proyecto);
+        }
         return proyectos.get(proyecto);
     }
-    
+
     @Override
-    public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
+    public void agregarProyecto(String usuario, Proyecto proyecto) throws ProyectoExcepcion {
         validarUsuario(usuario);
-        System.out.println("user: "+usuario);
-        if(usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto.getNombre());
+        System.out.println("user: " + usuario);
+        if (usuarios.get(usuario).contains(proyecto.getNombre())) {
+            throw new ProyectoExcepcion("El usuario " + usuario + " ya colabora en el proyecto " + proyecto.getNombre());
+        }
         usuarios.get(usuario).add(proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
     }
-    
+
     @Override
-    public void actualizarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
+    public void actualizarProyecto(String usuario, Proyecto proyecto) throws ProyectoExcepcion {
         validarUsuario(usuario);
-        if(!usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" aun no colabora en el proyecto "+proyecto.getNombre());
+        if (!usuarios.get(usuario).contains(proyecto.getNombre())) {
+            throw new ProyectoExcepcion("El usuario " + usuario + " aun no colabora en el proyecto " + proyecto.getNombre());
+        }
         proyectos.put(proyecto.getNombre(), proyecto);
     }
-    
+
     @Override
     public void agregarUsuario(String usuario) throws ProyectoExcepcion {
-        if(usuarios.containsKey(usuario)) throw new ProyectoExcepcion("El usuario "+usuario+" ya se encuentra registrado");
+        if (usuarios.containsKey(usuario)) {
+            throw new ProyectoExcepcion("El usuario " + usuario + " ya se encuentra registrado");
+        }
         usuarios.put(usuario, new ArrayList<>());
     }
-    
+
     /**
      * Se encarga de validar que el nombre de usuario sea valido
+     *
      * @param usuario el usuario a consultar
      * @throws ProyectoExcepcion si el nombre de usuario no existe
      */
-    private void validarUsuario(String usuario) throws ProyectoExcepcion{
-       if(!usuarios.containsKey(usuario)) throw new ProyectoExcepcion("El usuario "+usuario+" no se encuentra registrado");
+    private void validarUsuario(String usuario) throws ProyectoExcepcion {
+        if (!usuarios.containsKey(usuario)) {
+            throw new ProyectoExcepcion("El usuario " + usuario + " no se encuentra registrado");
+        }
     }
-    
-    public void cargarProyectos() throws ProyectoExcepcion{
+
+    public void cargarProyectos() throws ProyectoExcepcion {
         List<String> nomProyectos1 = new ArrayList<>();
         List<String> nomProyectos2 = new ArrayList<>();
         List<String> nomProyectos3 = new ArrayList<>();
         //Proyectos
-        Proyecto p0= new Proyecto("Vacio","proyecto sin elementos");
-        Proyecto p1 = new Proyecto("Proyecto 1","primer proyecto");
-        Proyecto p2 = new Proyecto("Proyecto 2","segundo proyecto");
-        Proyecto p3 = new Proyecto("Proyecto 3","tercer proyecto");
-        Proyecto p4 = new Proyecto("Proyecto 4","cuarto proyecto");
+        Proyecto p0 = new Proyecto("Vacio", "proyecto sin elementos");
+        Proyecto p1 = new Proyecto("Proyecto 1", "primer proyecto");
+        Proyecto p2 = new Proyecto("Proyecto 2", "segundo proyecto");
+        Proyecto p3 = new Proyecto("Proyecto 3", "tercer proyecto");
+        Proyecto p4 = new Proyecto("Proyecto 4", "cuarto proyecto");
         //Crear Diagramas
-        DiagramaClases d1 = new DiagramaClases("Diagrama 1","primer diagrama");
-        DiagramaClases d2 = new DiagramaClases("Diagrama 2","segundo diagrama");
-        DiagramaClases d3 = new DiagramaClases("Diagrama 3","tercer diagrama");
-        DiagramaClases d4 = new DiagramaClases("Diagrama 4","cuarto diagrama");
-        DiagramaClases d5 = new DiagramaClases("Diagrama 5","quinto diagrama");
-        DiagramaClases d6 = new DiagramaClases("Diagrama 6","sexto diagrama");
-        DiagramaClases d7 = new DiagramaClases("Diagrama 7","septimo diagrama");
-        DiagramaClases d8 = new DiagramaClases("Diagrama 8","octavo diagrama");
-        DiagramaClases d9= new DiagramaClases("Diagrama Vacio","Diagrama sin elementos");
+        DiagramaClases d1 = new DiagramaClases("Diagrama 1", "primer diagrama");
+        DiagramaClases d2 = new DiagramaClases("Diagrama 2", "segundo diagrama");
+        DiagramaClases d3 = new DiagramaClases("Diagrama 3", "tercer diagrama");
+        DiagramaClases d4 = new DiagramaClases("Diagrama 4", "cuarto diagrama");
+        DiagramaClases d5 = new DiagramaClases("Diagrama 5", "quinto diagrama");
+        DiagramaClases d6 = new DiagramaClases("Diagrama 6", "sexto diagrama");
+        DiagramaClases d7 = new DiagramaClases("Diagrama 7", "septimo diagrama");
+        DiagramaClases d8 = new DiagramaClases("Diagrama 8", "octavo diagrama");
+        DiagramaClases d9 = new DiagramaClases("Diagrama Vacio", "Diagrama sin elementos");
         //Crear elementos
         Elemento e1 = new Clase("Clase1");
         Elemento e2 = new Clase("Clase2");
@@ -198,10 +210,10 @@ public class InMemoryProjects implements PersistenciaProyectos {
         p4.agregarDiagrama(d8);
         p0.agregarDiagrama(d9);
         //Agregando proyectos
-        proyectos.put(p1.getNombre(),p1);
-        proyectos.put(p2.getNombre(),p2);
-        proyectos.put(p3.getNombre(),p3);
-        proyectos.put(p4.getNombre(),p4);
+        proyectos.put(p1.getNombre(), p1);
+        proyectos.put(p2.getNombre(), p2);
+        proyectos.put(p3.getNombre(), p3);
+        proyectos.put(p4.getNombre(), p4);
         proyectos.put(p0.getNombre(), p0);
         //Agregando usuarios y sus proyectos
         nomProyectos1.add(p2.getNombre());
@@ -211,9 +223,14 @@ public class InMemoryProjects implements PersistenciaProyectos {
         nomProyectos2.add(p3.getNombre());
         nomProyectos3.add(p1.getNombre());
         nomProyectos3.add(p0.getNombre());
-        usuarios.put("German Lopez",nomProyectos1);
+        usuarios.put("German Lopez", nomProyectos1);
         usuarios.put("Daniela Sepulveda", nomProyectos2);
-        usuarios.put("Julian Devia",nomProyectos3);
+        usuarios.put("Julian Devia", nomProyectos3);
+        agregarUsuario("1");
+        agregarUsuario("2");
+        agregarUsuario("3");
+        agregarUsuario("4");
+        agregarUsuario("5");
     }
-    
+
 }
