@@ -35,56 +35,7 @@
                 Login
             </button>
         </div>
-        <div id="proyectos" hidden="hidden">
-            <h1 id="usrnm"></h1>
-            <div class="mui-row">
-                <div class="mui-col-md-8">
-                    <h2>Mis Proyectos</h2>
-                </div>
-                <div class="mui-col-md-4">
-                    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarProyecto()">
-                        <i class="fa fa-plus-square"></i>
-                        Crear nuevo proyecto</button>
-                    <div id="newP" hidden="hidden">
-                        <input type="text" placeholder="Ingrese nombre del proyecto" id="nomP" required oninvalid="setCustomValidity('Por favor ingrese un nombre de proyecto')">
-                        <input type="text" placeholder="Ingrese descripción del proyecto" id="descP" required oninvalid="setCustomValidity('Por favor ingrese una descripción del proyecto')">
-                        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger" onclick="agregarProyecto()">
-                            Crear
-                        </button>
-                    </div>
-                    <div id="shareP">
-                        <button type="submit" class="mui-btn mui-btn--raised" onclick="compartir()"><i class="fa fa-share-alt"></i>
-                            Compartir
-                        </button>
-                        <div id="nU" hidden="hidden">
-                            <input type="text" placeholder="Nombre usuario" id="nomU">
-                            <button onclick="agregarUsuario()">Aceptar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="proyectosdiv">
-                <form id="radio">
-                    <table id="proyectos" class="mui-table mui-table--bordered">
 
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Fecha de Creación</th>
-                                <th>Fecha de Última Modificación</th>
-                                <th>Acceder</th>
-                                <th>Seleccionar</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="lista"></tbody>
-
-                    </table>
-                </form>
-
-            </div>
-        </div>
     </body>
 
 </html>

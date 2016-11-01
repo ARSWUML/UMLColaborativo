@@ -6,6 +6,8 @@ var formFin= '</form>';
 var proyecto = null;
 var proyectos=0;
 var arrP={};
+var connected=null;
+var stompClient = null;
 function formAgregarProyecto(){
     $("#newP").show();
 };
@@ -29,3 +31,34 @@ function agregarProyectoVista(proy){
 sendProject = function () {
     stompClient.send('/app/newproject.'+name, {}, JSON.stringify(proyecto));
 };
+
+function connect() {
+    connected=true;
+    var socket = new SockJS('/stompendpoint');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/newproject.'+sessionStorage.name, function (data) {
+            console.log("llego");
+            var objeto = JSON.parse(data.body);
+            objeto.fechaCreacion= new Date(objeto.fechaCreacion);
+            objeto.fechaUltimaModificacion= new Date(objeto.fechaUltimaModificacion);
+            agregarProyectoVista(objeto);
+        });
+    });
+};
+
+function disconnect() {
+    connected=false;
+    if (stompClient != null) {
+        sessionStorage.stompClient.disconnect();
+    }
+    console.log("Disconnected");
+};
+$(document).ready(
+        function () {
+            $("#usrnm").html("Usuario: "+sessionStorage.name);
+            connect();
+
+        }
+);
