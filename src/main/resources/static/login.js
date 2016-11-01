@@ -1,5 +1,5 @@
 function setName(){
-    sessionStorage.name=$("#uname").val();
+    sessionStorage.name=$("#username").val();
     window.location.href='proyectos.html';
 };
 
