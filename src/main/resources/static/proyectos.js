@@ -9,6 +9,13 @@ function formAgregarProyecto() {
     $("#newP").show();
 };
 
+function accederProyecto(){
+    sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
+    window.location.href='diagramas.html';
+    disconnect();
+    
+};
+
 function inicio(){
     $("#usrnm").html("Usuario: " + sessionStorage.name);
     disconnect();
@@ -40,7 +47,9 @@ function connect() {
     if (sessionStorage.connected!=true) {
         sessionStorage.connected = true;
         var socket = new SockJS('/stompendpoint');
+        
         stompClient = Stomp.over(socket);
+        console.info(stompClient);
         stompClient.connect({}, function(frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newproject.' + sessionStorage.name, function(data) {

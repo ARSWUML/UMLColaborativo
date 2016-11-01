@@ -1,16 +1,9 @@
-/* global proyecto, nameProject, proyectos */
+
 var arrD={};
 var diagramas=0;
 var botonAccederInD = '<button type="submit" class="mui-btn mui-btn--raised" value="';
 var botonAccederFinD = '" onclick="accederDiagrama()"><i class="fa fa-rocket"></i>Acceder</button>';
 
-function accederProyecto(){
-    console.log("Accedio a diagramas!!!!");
-    sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
-    window.location.href='diagramas.html';
-    getDiagramas();
-    initD();
-};
 
 function initD(){
     disconnect();
@@ -21,8 +14,9 @@ function formAgregarDiagrama(){
     $("#newD").show();
 };
 
-function agregarDiagramas(){
+function agregarDiagrama(){
     $("#newD").hide();
+    console.log($("#nomD").val());
     diagrama=new DiagramaClases($("#nomD").val(),$("#descD").val());
     sendDiagrama();
 };
@@ -30,7 +24,7 @@ function agregarDiagramas(){
 function agregarDiagramaVista(diag){
     diagramas++;
     arrD[diag.nombre]=diag;
-    $("#listaD").append("<tr><td>"+diag.nombre+"</td><td>"+diag.descripcion+"</td><td>"+diag.fechaCreacion.toLocaleString()+
+    $("#listaD").append("<tr><td>"+diag.titulo+"</td><td>"+diag.descripcion+"</td><td>"+diag.fechaCreacion.toLocaleString()+
     "</td><td>"+diag.fechaUltimaModificacion.toLocaleString()+"</td><td>"+botonAccederInD+diag.nombre+botonAccederFinD+"</td></tr>");
 };
 
@@ -47,7 +41,7 @@ function connectD() {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newdiagram.' + sessionStorage.nameProject, function(data) {
+                stompClient.subscribe('/topic/newdiagram.' + sessionStorage.nameProject, function(data) {
                 console.log("llego");
                 var objeto = JSON.parse(data.body);
                 objeto.fechaCreacion = new Date(objeto.fechaCreacion);
@@ -59,15 +53,17 @@ function connectD() {
 };
 
 function disconnect() {
-    connected=false;
-    if (stompClient != null) {
-        sessionStorage.stompClient.disconnect();
+    sessionStorage.connected=false;
+    if (stompClient!=null) {
+        stompClient.disconnect();
     }
     console.log("Disconnected");
 };
 
 $(document).ready(
         function () {
+            initD();
+            $("#usrnmD").html("Usuario: "+sessionStorage.name);
             $("#proNme").html("Proyecto: "+sessionStorage.nameProject);
         }
 );
