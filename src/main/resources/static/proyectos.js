@@ -23,7 +23,7 @@ function agregarProyecto() {
     console.log($("#descP").val());
     $("#newP").hide();
     proyecto = new Proyecto($("#nomP").val(), $("#descP").val());
-    //postProyecto(proyecto);
+    postProyecto(proyecto);
     sendProject();
 };
 
@@ -77,8 +77,13 @@ function getProyectos(){
 
 function postProyecto(proyecto){
     console.log(JSON.stringify(proyecto));
-    console.log("plain? "+jQuery.isPlainObject(JSON.stringify(proyecto)));
-    return $.post("/projects/users/"+sessionStorage.name,proyecto);
+    console.log("/projects/users/"+sessionStorage.name);
+    return $.ajax({
+        url: "/projects/users/"+sessionStorage.name,
+        type: 'POST',
+        data: JSON.stringify(proyecto),
+        contentType: "application/json"
+    });
 }
 $(document).ready(
     function() {
