@@ -3,38 +3,30 @@
     <head>
         <meta charset="utf-8">
         <title>UML Colaborativo</title>
-        <!--Importar MUI CSS-->
-        <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
-        <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
-        <!--Importar Iconos font Awesome-->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
-        <!--Importar styles.css-->
         <link rel="stylesheet" type="text/css" href="styles.css">
-        <!--Importar JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-        <!--Importar modelos js-->
-        <script src="models.js"></script>
-        <!--Importar js de login-->
+       
         <script src="login.js"></script>
-        <!--Importar js de proyectos-->
-        <script src="proyectos.js"></script>
-        <!--Importar sockjs y stomp-->
-        <script src="share.js"></script>
-        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
     </head>
 
-    <body>
-        <div id="usr" class="mui--text-center mui-panel">
-            <h1>Nombre</h1><br>
-            <div id="nombre" class="mui-textfield">
-                <input type="text" placeholder="Ingrese nombre de usuario" id="uname" required oninvalid="setCustomValidity('Por favor ingrese un nombre de usuario')">
-            </div>
-            <button type="submit" class="mui-btn mui-btn--raised" onclick="setName()">
-                Login
-            </button>
+    <body class="fondo">
+        
+        <div id="login">
+            <h1 id="header">UMLColaborativo <img src="Imagenes/uml-logo.png" alt="UML logo" style="width:100px;height:80px;"></h1>
+            <form>
+                <input type="text" placeholder="Usuario" id="username">
+                </input>
+                <br/>
+                <input id="passwd" type="password" placeholder="Contraseña"> 
+                </input>
+                <br/>
+                <input type="button" value="Ingresar" id="button" onclick="setName()">
+                
+                </input>
+            </form>
         </div>
+
 
     </body>
 
