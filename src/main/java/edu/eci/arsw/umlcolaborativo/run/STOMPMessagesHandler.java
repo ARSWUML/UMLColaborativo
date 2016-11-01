@@ -6,6 +6,7 @@
 package edu.eci.arsw.umlcolaborativo.run;
 
 import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
+import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class STOMPMessagesHandler {
      * @param proyid 
      */
     @MessageMapping("/newdiagram.{proyid}")
-    public void getDiagram(Diagrama d,@DestinationVariable String proyid){
+    public void getDiagram(DiagramaClases d,@DestinationVariable String proyid){
         System.out.println("Nuevo diagrama recibido en el servidor! :"+d.getTitulo());
         msgt.convertAndSend("/topic/newdiagram."+proyid,d);
     }

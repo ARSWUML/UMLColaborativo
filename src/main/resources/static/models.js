@@ -1,3 +1,4 @@
+var stompClient;
 function Proyecto(nombre,descripcion){
     this.nombre=nombre;
     this.descripcion=descripcion;
@@ -11,7 +12,7 @@ Proyecto.prototype.agregarDiagrama=function (diagrama){
 };
 
 function DiagramaClases(nombre,descripcion){
-    this.nombre=nombre;
+    this.titulo=nombre;
     this.descripcion=descripcion;
     this.fechaCreacion=new Date();
     this.fechaUltimaModificacion= new Date();

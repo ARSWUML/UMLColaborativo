@@ -4,10 +4,17 @@ var radioButtonFin='" checked> Seleccionar<br>';
 var proyecto = null;
 var proyectos = 0;
 var arrP = [];
-var stompClient = null;
+
 
 function formAgregarProyecto() {
     $("#newP").show();
+};
+
+function accederProyecto(){
+    sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
+    window.location.href='diagramas.html';
+    disconnect();
+    
 };
 
 function inicio(){
@@ -41,7 +48,9 @@ function connect() {
     if (sessionStorage.connected!=true) {
         sessionStorage.connected = true;
         var socket = new SockJS('/stompendpoint');
+        
         stompClient = Stomp.over(socket);
+        console.info(stompClient);
         stompClient.connect({}, function(frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newproject.' + sessionStorage.name, function(data) {
@@ -57,8 +66,10 @@ function connect() {
 
 function disconnect() {
         sessionStorage.connected = false;
-        if (stompClient != null) {
-            sessionStorage.stompClient.disconnect();
+        
+        console.log(!stompClient);
+        if (stompClient!=null) {
+            stompClient.disconnect();
         }
         console.log("Disconnected");
 };
@@ -66,7 +77,7 @@ function disconnect() {
 function getProyectos(){
     return $.get("/projects/users/"+sessionStorage.name,function(data){
         console.log(data);
-        for(element in data.){
+        for(element in data){
             data[element].fechaCreacion = new Date(data[element].fechaCreacion);
             data[element].fechaUltimaModificacion = new Date(data[element].fechaUltimaModificacion);
             agregarProyectoVista(data[element]);
