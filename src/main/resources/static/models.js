@@ -1,4 +1,5 @@
 var stompClient;
+
 function Proyecto(nombre,descripcion){
     this.nombre=nombre;
     this.descripcion=descripcion;

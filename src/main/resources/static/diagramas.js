@@ -1,8 +1,9 @@
 
-var arrD={};
+var arrD=[];
 var diagramas=0;
 var radioButtonInD='<input type="radio" name="diagrama" value="';
 var radioButtonFinD='" checked> Seleccionar<br>';
+var proyecto=null;
 
 function initD(){
     disconnect();
@@ -23,8 +24,8 @@ function accederDiagrama(){
 
 function agregarDiagrama(){
     $("#newD").hide();
-    console.log($("#nomD").val());
     diagrama=new DiagramaClases($("#nomD").val(),$("#descD").val());
+    getProyecto().then(actualizarProyecto);
     sendDiagrama();
 };
 
@@ -50,6 +51,28 @@ function getDiagramas(){
 sendDiagrama = function () {
     stompClient.send('/app/newdiagram.'+sessionStorage.nameProject, {}, JSON.stringify(diagrama));
 };
+
+function getProyecto(){
+    return $.get("/projects/users/"+sessionStorage.name+"/"+sessionStorage.nameProject).then(function(proyectoG){
+        proyecto=new Proyecto(proyectoG.nombre,proyectoG.descripcion);
+        proyecto.fechaCreacion = new Date(proyectoG.fechaCreacion);
+        proyecto.fechaUltimaModificacion = new Date(proyectoG.fechaUltimaModificacion);
+    });
+};
+
+
+actualizarProyecto = function(){
+    console.log(diagrama.titulo);
+    proyecto.agregarDiagrama(diagrama);
+    return $.ajax({
+        url: "/projects/users/"+sessionStorage.name,
+        type: 'PUT',
+        data: JSON.stringify(proyecto),
+        contentType: "application/json"
+    });
+};
+
+
 
 
 function connectD() {
