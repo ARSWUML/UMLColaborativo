@@ -12,6 +12,10 @@ function validar(){
     
     
 }
+
+function hideMessage(){
+    $("#mensaje").hide();
+}
 function comprobar(passw){
     return $.get("/seguridad/"+username+"/"+passw, function(data){
             if(data){
@@ -25,6 +29,6 @@ function comprobar(passw){
 }
 $(document).ready(
         function () {
-            $("#mensaje").hide();
+            hideMessage();
         }
 );
