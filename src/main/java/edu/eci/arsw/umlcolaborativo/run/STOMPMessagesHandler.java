@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.umlcolaborativo.run;
 
+import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,16 @@ public class STOMPMessagesHandler {
     public void getProject(Proyecto p,@DestinationVariable String usrId) {
         System.out.println("Nuevo proyecto recibido en el servidor! :"+p.getNombre());
         msgt.convertAndSend("/topic/newproject."+usrId, p);
+    }
+    
+    /**
+     * Recibe en /app/newdiagram.{proyid} el nuevo diagrama de un proyecto y lo publica en /topic/newdiagram.{proyid}
+     * @param d
+     * @param proyid 
+     */
+    @MessageMapping("/newdiagram.{proyid}")
+    public void getDiagram(Diagrama d,@DestinationVariable String proyid){
+        System.out.println("Nuevo diagrama recibido en el servidor! :"+d.getTitulo());
+        msgt.convertAndSend("/topic/newdiagram."+proyid,d);
     }
 }

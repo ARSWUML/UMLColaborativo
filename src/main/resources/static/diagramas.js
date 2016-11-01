@@ -8,7 +8,8 @@ function accederProyecto(){
     console.log("Accedio a diagramas!!!!");
     sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
     window.location.href='diagramas.html';
-    //initD();
+    getDiagramas();
+    initD();
 };
 
 function initD(){
@@ -32,6 +33,7 @@ function agregarDiagramaVista(diag){
     $("#listaD").append("<tr><td>"+diag.nombre+"</td><td>"+diag.descripcion+"</td><td>"+diag.fechaCreacion.toLocaleString()+
     "</td><td>"+diag.fechaUltimaModificacion.toLocaleString()+"</td><td>"+botonAccederInD+diag.nombre+botonAccederFinD+"</td></tr>");
 };
+
 
 sendDiagrama = function () {
     stompClient.send('/app/newdiagram.'+sessionStorage.nameProject, {}, JSON.stringify(diagrama));
@@ -67,6 +69,5 @@ function disconnect() {
 $(document).ready(
         function () {
             $("#proNme").html("Proyecto: "+sessionStorage.nameProject);
-
         }
 );
