@@ -1,0 +1,72 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>UML Colaborativo</title>
+        <!--Importar MUI CSS-->
+        <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
+        <!--Importar Iconos font Awesome-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
+        <!--Importar styles.css-->
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <!--Importar JQuery-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+        <!--Importar modelos js-->
+        <script src="models.js"></script>
+        <!--Importar js de login-->
+        <script src="login.js"></script>
+        <!--Importar js de proyectos-->
+        <script src="proyectos.js"></script>
+        <!--Importar sockjs y stomp-->
+        <script src="share.js"></script>
+        <!--Importar js de diagramas-->
+        <script src="diagramas.js"></script>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    </head>
+
+    <body>
+        <div id="diagramas">
+            <h1 id="usrnm"></h1>
+            <h2 id="proNme"></h2>
+            <div class="mui-row">
+                <div class="mui-col-md-8">
+                    <h2>Mis Diagramas</h2>
+                </div>
+                <div class="mui-col-md-4">
+                    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarDiagrama()">
+                        <i class="fa fa-plus-square"></i>
+                        Crear nuevo diagrama</button>
+                    <div id="newD" hidden="hidden">
+                        <input type="text" placeholder="Ingrese nombre del diagrama" id="nomD" required oninvalid="setCustomValidity('Por favor ingrese un nombre al diagrama')">
+                        <input type="text" placeholder="Ingrese descripción del diagrama" id="descD" required oninvalid="setCustomValidity('Por favor ingrese una descripción al diagrama')">
+                        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger" onclick="agregarDiagrama()">
+                            Crear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="diagramasdiv">
+                    <table id="proyectos" class="mui-table mui-table--bordered">
+
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Fecha de Creación</th>
+                                <th>Fecha de Última Modificación</th>
+                                <th>Acceder</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="listaD"></tbody>
+
+                    </table>
+
+            </div>
+        </div>
+    </body>
+
+</html>

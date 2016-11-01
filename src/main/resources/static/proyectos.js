@@ -1,4 +1,5 @@
-var botonAcceder='<button type="submit" class="mui-btn mui-btn--raised" onclick=""><i class="fa fa-rocket"></i>Acceder</button>';
+var botonAccederIn= '<button type="submit" class="mui-btn mui-btn--raised" value="';
+var botonAccederFin='" onclick="accederProyecto()"><i class="fa fa-rocket"></i>Acceder</button>';
 var radioButtonIn='<input type="radio" name="proyecto" value="';
 var radioButtonFin='" checked> Seleccionar<br>';
 var formIn='<form id="radio">';
@@ -24,7 +25,7 @@ function agregarProyectoVista(proy){
     proyectos++;
     arrP[proy.nombre]=proy;
     $("#lista").append("<tr><td>"+proy.nombre+"</td><td>"+proy.descripcion+"</td><td>"+proy.fechaCreacion.toLocaleString()+
-    "</td><td>"+proy.fechaUltimaModificacion.toLocaleString()+"</td><td>"+botonAcceder+"</td><td>"+radioButtonIn+proy.nombre+radioButtonFin+"</td>"+"</tr>");
+    "</td><td>"+proy.fechaUltimaModificacion.toLocaleString()+"</td><td>"+botonAccederIn+proy.nombre+botonAccederFin+"</td><td>"+radioButtonIn+proy.nombre+radioButtonFin+"</td>"+"</tr>");
     console.log("</td><td>"+radioButtonIn+proy.nombre+radioButtonFin+"</td>");
 };
 
