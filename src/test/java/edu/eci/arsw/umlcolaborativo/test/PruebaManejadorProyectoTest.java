@@ -44,6 +44,7 @@ public class PruebaManejadorProyectoTest {
         String usuario = "Juanito78";
         String usuario2 = "Juana852";
         ManejadorProyectos mn = new ManejadorProyectos(new InMemoryProjects());
+        mn.vaciar();
         mn.agregarUsuario(usuario);
         mn.agregarUsuario(usuario2);
         Proyecto at = new Proyecto("Project 1", "Agregar descripcion");

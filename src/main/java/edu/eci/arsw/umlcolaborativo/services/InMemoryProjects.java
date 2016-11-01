@@ -67,6 +67,12 @@ public class InMemoryProjects implements PersistenciaProyectos {
     }
     
     @Override
+    public void vaciar(){
+        usuarios.clear();
+        proyectos.clear();
+    }
+    
+    @Override
     public Map<String,Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion{
         validarUsuario(usuario);
         Map<String,Proyecto> proy= new HashMap<>();

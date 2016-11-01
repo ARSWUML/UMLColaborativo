@@ -60,4 +60,9 @@ public interface PersistenciaProyectos {
      * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
     public void agregarUsuario(String usuario) throws ProyectoExcepcion;
+    
+    /**
+     * Vacia los atributos
+     */
+    public void vaciar();
 }
