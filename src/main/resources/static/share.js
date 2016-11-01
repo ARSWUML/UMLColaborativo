@@ -13,6 +13,7 @@ function agregarUsuario(){
         data: JSON.stringify(proyecto),
         contentType: "application/json"
     });
+    console.log("Compartio el proyecto");
 };
 
 function compartir(){

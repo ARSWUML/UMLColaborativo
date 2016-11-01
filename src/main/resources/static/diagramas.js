@@ -8,6 +8,12 @@ function accederProyecto(){
     console.log("Accedio a diagramas!!!!");
     sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
     window.location.href='diagramas.html';
+    //initD();
+};
+
+function initD(){
+    disconnect();
+    connectD();
 };
 
 function formAgregarDiagrama(){
@@ -16,7 +22,7 @@ function formAgregarDiagrama(){
 
 function agregarDiagramas(){
     $("#newD").hide();
-    diagrama=new Diagrama($("#nomD").val(),$("#descD").val());
+    diagrama=new DiagramaClases($("#nomD").val(),$("#descD").val());
     sendDiagrama();
 };
 
@@ -28,23 +34,26 @@ function agregarDiagramaVista(diag){
 };
 
 sendDiagrama = function () {
-    stompClient.send('/app/newdiagram.'+nameProject, {}, JSON.stringify(diagrama));
+    stompClient.send('/app/newdiagram.'+sessionStorage.nameProject, {}, JSON.stringify(diagrama));
 };
 
-function connect() {
-    connected=true;
-    var socket = new SockJS('/stompendpoint');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/newdiagram.'+sessionStorage.nameProject, function (data) {
-            console.log("llego");
-            var objeto = JSON.parse(data.body);
-            objeto.fechaCreacion= new Date(objeto.fechaCreacion);
-            objeto.fechaUltimaModificacion= new Date(objeto.fechaUltimaModificacion);
-            agregarDiagramaVista(objeto);
+
+function connectD() {
+    if (sessionStorage.connected!=true) {
+        sessionStorage.connected = true;
+        var socket = new SockJS('/stompendpoint');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/newdiagram.' + sessionStorage.nameProject, function(data) {
+                console.log("llego");
+                var objeto = JSON.parse(data.body);
+                objeto.fechaCreacion = new Date(objeto.fechaCreacion);
+                objeto.fechaUltimaModificacion = new Date(objeto.fechaUltimaModificacion);
+                agregarDiagramaVista(objeto);
+            });
         });
-    });
+    }
 };
 
 function disconnect() {
@@ -57,8 +66,7 @@ function disconnect() {
 
 $(document).ready(
         function () {
-            $("#proNme").html("Proyecto: "+sessionStorage.name);
-            connect();
+            $("#proNme").html("Proyecto: "+sessionStorage.nameProject);
 
         }
 );

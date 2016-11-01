@@ -15,7 +15,8 @@ function inicio(){
     disconnect();
     connect();
     getProyectos();
-}
+};
+
 function agregarProyecto() {
     console.log($("#nomP").val());
     console.log($("#descP").val());
