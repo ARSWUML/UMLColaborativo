@@ -26,6 +26,5 @@ function comprobar(passw){
 $(document).ready(
         function () {
             $("#mensaje").hide();
-
         }
 );
