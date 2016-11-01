@@ -1,11 +1,12 @@
-/* global proyecto, nameProject */
+/* global proyecto, nameProject, proyectos */
 var arrD={};
 var diagramas=0;
 var botonAccederInD = '<button type="submit" class="mui-btn mui-btn--raised" value="';
 var botonAccederFinD = '" onclick="accederDiagrama()"><i class="fa fa-rocket"></i>Acceder</button>';
 
 function accederProyecto(){
-    sessionStorage.nameProject = $("#proNme").val();
+    console.log("Accedio a diagramas!!!!");
+    sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
     window.location.href='diagramas.html';
 };
 
