@@ -5,7 +5,6 @@
   font-family: 'Open Sans', 'sans-serif';
   font-size: 30px;
 }
-
 /* div surrounding login form */
 #login {
   background-color: #eee;
@@ -72,4 +71,26 @@ input[type="button"]:active {
   -webkit-transform: translate(0,5px);
   -moz-transform: translate(0,5px);
   transform: translate(0,5px);
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    font-size: 20px;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
 }

@@ -5,11 +5,16 @@
         <title>UML Colaborativo</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="login.js"></script>
+        <script src="sha1.js"></script>
+
     </head>
 
     <body class="fondo">
-        
+
         <div id="login">
             <h1 id="header">UMLColaborativo <img src="Imagenes/uml-logo.png" alt="UML logo" style="width:100px;height:80px;"></h1>
             <form>
@@ -19,9 +24,17 @@
                 <input id="passwd" type="password" placeholder="Contraseña"> 
                 </input>
                 <br/>
-                <input type="button" value="Ingresar" id="button" onclick="setName()">
-                
+                <input type="button" value="Ingresar" id="button" onclick="validar()">
+
                 </input>
+                <div id="mensaje">
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Por favor, intentelo de nuevo.</strong>
+                        <br/>
+                        Los datos ingresados son incorrectos.
+                    </div>
+                </div>
             </form>
         </div>
 

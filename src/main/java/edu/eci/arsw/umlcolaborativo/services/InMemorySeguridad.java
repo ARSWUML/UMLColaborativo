@@ -25,7 +25,7 @@ public class InMemorySeguridad implements PersistenciaSeguridad{
     
     @Override
     public boolean consultarUsuario(String name, String passw) {
-        return usuarios.get(name).equals(passw);
+        return usuarios.containsKey(name) && usuarios.get(name).equals(passw);
     }
 
     @Override
