@@ -21,6 +21,7 @@ function inicio(){
     disconnect();
     connect();
     getProyectos();
+    sessionStorage.nameProject="";
 };
 
 function agregarProyecto() {
@@ -74,13 +75,13 @@ function disconnect() {
 function getProyectos(){
     return $.get("/projects/users/"+sessionStorage.name,function(data){
         console.log(data);
-        for(element in data){
+        for(var element in data){
             data[element].fechaCreacion = new Date(data[element].fechaCreacion);
             data[element].fechaUltimaModificacion = new Date(data[element].fechaUltimaModificacion);
             agregarProyectoVista(data[element]);
         };
     });
-}
+};
 
 function postProyecto(proyecto){
     console.log(JSON.stringify(proyecto));
@@ -91,9 +92,15 @@ function postProyecto(proyecto){
         data: JSON.stringify(proyecto),
         contentType: "application/json"
     });
-}
+};
+function validar(){
+    if(sessionStorage.name==null || sessionStorage.name.length==0){
+        window.location.href='index.html';
+    }
+};
 $(document).ready(
     function() {
+        validar();
         inicio();
     }
 );

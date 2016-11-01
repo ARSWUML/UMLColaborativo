@@ -20,6 +20,8 @@
         <!--Importar sockjs y stomp-->
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <!--Importar bootstrap-->
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     </head>
 
     <body>
@@ -45,14 +47,27 @@
                             <i class="fa fa-share-alt"></i>
                             Compartir
                         </button>
-                        <div id="nU" hidden="hidden">
-                            <input type="text" placeholder="Nombre usuario" id="nomU">
-                            <button onclick="agregarUsuario()">Aceptar</button>
-                        </div>
                         <button type="submit" class="mui-btn mui-btn--raised" onclick="accederProyecto()">
                             <i class="fa fa-rocket"></i>
                             Acceder
                         </button>
+                        <div id="errMes" hidden="hidden">
+                            <div class="alert alert-danger">
+                                <button id="y" onclick="hideError()" type="button" class="btn btn-link">x</button>
+                                <b id="mesje"></b>
+                            </div>
+                        </div>
+                        <div id="succMes" hidden="hidden">
+                            <div class="alert alert-success">
+                                <button id="x" onclick="hideSuccess()" type="button" class="btn btn-link">x</button>
+                                <b id="mesjs"></b>
+                            </div>
+                        </div>
+                        <div id="nU" hidden="hidden">
+                            <input type="text" placeholder="Nombre usuario a compartir" id="nomU">
+                            <button onclick="agregarUsuario()" class="mui-btn mui-btn--raised mui-btn--danger">Aceptar</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

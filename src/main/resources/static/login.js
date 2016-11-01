@@ -30,5 +30,6 @@ function comprobar(passw){
 $(document).ready(
         function () {
             hideMessage();
+            sessionStorage.name="";
         }
 );
