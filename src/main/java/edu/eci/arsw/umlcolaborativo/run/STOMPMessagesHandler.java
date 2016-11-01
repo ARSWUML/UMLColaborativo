@@ -51,7 +51,7 @@ public class STOMPMessagesHandler {
      * @param proyid 
      */
     @MessageMapping("/newdiagram.{proyid}")
-    public void getDiagram(DiagramaClases d,@DestinationVariable String proyid){
+    public void getDiagram(Diagrama d,@DestinationVariable String proyid){
         System.out.println("Nuevo diagrama recibido en el servidor! :"+d.getTitulo());
         msgt.convertAndSend("/topic/newdiagram."+proyid,d);
     }

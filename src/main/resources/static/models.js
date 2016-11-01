@@ -20,6 +20,25 @@ function DiagramaClases(nombre,descripcion){
     this.elementos={};
 };
 
+DiagramaClases.prototype.agregarElemento = function(elemento){
+    this.elementos[elemento.nombre]=elemento;
+};
+
+function Clase(nombre){
+    this.type="clase";
+    this.nombre=nombre;
+};
+
+function ClaseAbstracta(nombre){
+    this.type="claseAbstracta";
+    this.nombre=nombre;
+};
+
+function Interface(nombre){
+   this.type="interface";
+   this.nombre=nombre;
+};
+
 $(document).ready(
         function () {
         }

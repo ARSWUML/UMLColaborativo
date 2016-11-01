@@ -10,10 +10,9 @@ function formAgregarProyecto() {
 };
 
 function accederProyecto(){
+    disconnect();
     sessionStorage.nameProject=$('input[name=proyecto]:checked').val();
     window.location.href='diagramas.html';
-    disconnect();
-    
 };
 
 function inicio(){

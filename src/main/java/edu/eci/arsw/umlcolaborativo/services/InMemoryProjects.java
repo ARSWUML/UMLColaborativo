@@ -214,6 +214,11 @@ public class InMemoryProjects implements PersistenciaProyectos {
         usuarios.put("German Lopez",nomProyectos1);
         usuarios.put("Daniela Sepulveda", nomProyectos2);
         usuarios.put("Julian Devia",nomProyectos3);
+        agregarUsuario("1");
+        agregarUsuario("2");
+        agregarUsuario("3");
+        agregarUsuario("4");
+        agregarUsuario("5");
     }
     
 }

@@ -5,10 +5,19 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 /**
  *
  * @author ger9410
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Clase.class, name = "clase"),
+    @JsonSubTypes.Type(value = ClaseAbstracta.class, name = "claseAbstracta"),
+    @JsonSubTypes.Type(value = Interface.class, name = "interface")  
+})
 public abstract class Elemento {
     
    protected String nombre;
