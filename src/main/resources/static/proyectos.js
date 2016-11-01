@@ -4,7 +4,6 @@ var radioButtonFin='" checked> Seleccionar<br>';
 var proyecto = null;
 var proyectos = 0;
 var arrP = [];
-var stompClient = null;
 
 function formAgregarProyecto() {
     $("#newP").show();
@@ -57,8 +56,8 @@ function connect() {
 
 function disconnect() {
         sessionStorage.connected = false;
-        if (stompClient != null) {
-            sessionStorage.stompClient.disconnect();
+        if (stompClient!=null) {
+            stompClient.disconnect();
         }
         console.log("Disconnected");
 };

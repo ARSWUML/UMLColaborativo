@@ -105,6 +105,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void agregarProyecto(String usuario,Proyecto proyecto) throws ProyectoExcepcion{
         validarUsuario(usuario);
+        System.out.println("user: "+usuario);
         if(usuarios.get(usuario).contains(proyecto.getNombre())) throw new ProyectoExcepcion("El usuario "+usuario+" ya colabora en el proyecto "+proyecto.getNombre());
         usuarios.get(usuario).add(proyecto.getNombre());
         proyectos.put(proyecto.getNombre(), proyecto);
@@ -133,10 +134,11 @@ public class InMemoryProjects implements PersistenciaProyectos {
     }
     
     public void cargarProyectos() throws ProyectoExcepcion{
-        List<String> nomProyectos1 = new LinkedList<>();
-        List<String> nomProyectos2 = new LinkedList<>();
-        List<String> nomProyectos3 = new LinkedList<>();
+        List<String> nomProyectos1 = new ArrayList<>();
+        List<String> nomProyectos2 = new ArrayList<>();
+        List<String> nomProyectos3 = new ArrayList<>();
         //Proyectos
+        Proyecto p0= new Proyecto("Vacio","proyecto sin elementos");
         Proyecto p1 = new Proyecto("Proyecto 1","primer proyecto");
         Proyecto p2 = new Proyecto("Proyecto 2","segundo proyecto");
         Proyecto p3 = new Proyecto("Proyecto 3","tercer proyecto");
@@ -150,6 +152,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
         DiagramaClases d6 = new DiagramaClases("Diagrama 6","sexto diagrama");
         DiagramaClases d7 = new DiagramaClases("Diagrama 7","septimo diagrama");
         DiagramaClases d8 = new DiagramaClases("Diagrama 8","octavo diagrama");
+        DiagramaClases d9= new DiagramaClases("Diagrama Vacio","Diagrama sin elementos");
         //Crear elementos
         Elemento e1 = new Clase("Clase1");
         Elemento e2 = new Clase("Clase2");
@@ -193,11 +196,13 @@ public class InMemoryProjects implements PersistenciaProyectos {
         p4.agregarDiagrama(d6);
         p4.agregarDiagrama(d7);
         p4.agregarDiagrama(d8);
+        p0.agregarDiagrama(d9);
         //Agregando proyectos
         proyectos.put(p1.getNombre(),p1);
         proyectos.put(p2.getNombre(),p2);
         proyectos.put(p3.getNombre(),p3);
         proyectos.put(p4.getNombre(),p4);
+        proyectos.put(p0.getNombre(), p0);
         //Agregando usuarios y sus proyectos
         nomProyectos1.add(p2.getNombre());
         nomProyectos1.add(p3.getNombre());
@@ -205,6 +210,7 @@ public class InMemoryProjects implements PersistenciaProyectos {
         nomProyectos2.add(p4.getNombre());
         nomProyectos2.add(p3.getNombre());
         nomProyectos3.add(p1.getNombre());
+        nomProyectos3.add(p0.getNombre());
         usuarios.put("German Lopez",nomProyectos1);
         usuarios.put("Daniela Sepulveda", nomProyectos2);
         usuarios.put("Julian Devia",nomProyectos3);

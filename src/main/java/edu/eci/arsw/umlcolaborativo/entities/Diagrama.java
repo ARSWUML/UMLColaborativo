@@ -5,6 +5,10 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -12,6 +16,10 @@ import java.util.Date;
  *
  * @author ger9410
  */
+@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = DiagramaClases.class, name = "clases")
+})
 public abstract class Diagrama{
     
     protected String titulo;

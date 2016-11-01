@@ -25,20 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/projects")
 public class ProjectsController {
+
     @Autowired
     ManejadorProyectos manProyectos;
-    
+
     /**
      * @pre: Ninguna
      * @post: Retorna todos los proyectos
-     * @return ResponseEntity<?> 
+     * @return ResponseEntity<?>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> consultarProyectos(){
-        Map<String,Map<String,Proyecto>> proyectos= manProyectos.consultarProyectos();
-      return new ResponseEntity<>(proyectos,HttpStatus.ACCEPTED);
+    public ResponseEntity<?> consultarProyectos() {
+        Map<String, Map<String, Proyecto>> proyectos = manProyectos.consultarProyectos();
+        return new ResponseEntity<>(proyectos, HttpStatus.ACCEPTED);
     }
-    
+
     /**
      * @pre: Usuario existente, proyectos existentes
      * @post: Retorna los proyectos en los que un usuario esta colaborando
@@ -46,16 +47,16 @@ public class ProjectsController {
      * @return ResponseEntity<?>
      */
     @RequestMapping(path = "/users/{userid}", method = RequestMethod.GET)
-    public ResponseEntity<?> consultarProyectosUsuario(@PathVariable String userid){
+    public ResponseEntity<?> consultarProyectosUsuario(@PathVariable String userid) {
         try {
-            Map<String,Proyecto> proyectosUsuario=manProyectos.consultarProyectosUsuario(userid);
-            return new ResponseEntity<>(proyectosUsuario,HttpStatus.ACCEPTED);
+            Map<String, Proyecto> proyectosUsuario = manProyectos.consultarProyectosUsuario(userid);
+            return new ResponseEntity<>(proyectosUsuario, HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-           return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }
-        
+
     }
-    
+
     /**
      * @pre: Usuario existente, proyecto existente
      * @post: Retorna un proyecto en el cual un usuario esta colaborando
@@ -64,14 +65,15 @@ public class ProjectsController {
      * @return ResponseEntity<?>
      */
     @RequestMapping(path = "/users/{userid}/{projectid}", method = RequestMethod.GET)
-    public ResponseEntity<?> consultarProyectoUsuario(@PathVariable String projectid, @PathVariable String userid){
+    public ResponseEntity<?> consultarProyectoUsuario(@PathVariable String projectid, @PathVariable String userid) {
         try {
-            Proyecto proyectoUsuario=manProyectos.consultarProyectoUsuario(userid, projectid);
-            return new ResponseEntity<>(proyectoUsuario,HttpStatus.ACCEPTED);
+            Proyecto proyectoUsuario = manProyectos.consultarProyectoUsuario(userid, projectid);
+            return new ResponseEntity<>(proyectoUsuario, HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
     /**
      * @pre: Ninguna
      * @pos: Agrega un proyecto con su usuario respectivo
@@ -79,43 +81,45 @@ public class ProjectsController {
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path="/users/{userid}" , method = RequestMethod.POST)
-    public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @PathVariable String userid){
+    @RequestMapping(path = "/users/{userid}", method = RequestMethod.POST)
+    public ResponseEntity<?> agregarProyecto(@RequestBody Proyecto project, @PathVariable String userid) {
         try {
             manProyectos.agregarProyecto(userid, project);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (ProyectoExcepcion ex) {
-            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
         }
     }
-    
+
     /**
      * Actualiza un proyecto de un usario dado
+     *
      * @param userid
      * @param project
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path="/users/{userid}", method=RequestMethod.PUT)
-    public ResponseEntity<?> actualizarProyecto(@PathVariable String userid, @RequestBody Proyecto project){
-        try{
+    @RequestMapping(path = "/users/{userid}", method = RequestMethod.PUT)
+    public ResponseEntity<?> actualizarProyecto(@PathVariable String userid, @RequestBody Proyecto project) {
+        try {
             manProyectos.actualizarProyecto(userid, project);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        }catch(ProyectoExcepcion ex){
+        } catch (ProyectoExcepcion ex) {
             return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
         }
     }
-    
+
     /**
- * Agrega un usuario 
+     * Agrega un usuario
+     *
      * @param userid
      * @return ResponseEntity<?>
      */
-    @RequestMapping(path="/users", method=RequestMethod.PUT)
-    public ResponseEntity<?> agregarUsuario(@PathVariable String userid){
-        try{
+    @RequestMapping(path = "/users", method = RequestMethod.PUT)
+    public ResponseEntity<?> agregarUsuario(@PathVariable String userid) {
+        try {
             manProyectos.agregarUsuario(userid);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        }catch(ProyectoExcepcion ex){
+        } catch (ProyectoExcepcion ex) {
             return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.NOT_MODIFIED);
         }
     }
