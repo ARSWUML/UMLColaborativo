@@ -8,57 +8,47 @@
         <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
         <!--Importar Iconos font Awesome-->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
+        <!--Importar styles.css-->
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <!--Importar JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         <!--Importar modelos js-->
         <script src="models.js"></script>
+        <!--Importar js de login-->
+        <script src="login.js"></script>
         <!--Importar js de proyectos-->
         <script src="proyectos.js"></script>
-        <!--Importar share.js-->
-        <script src="share.js"></script>
         <!--Importar sockjs y stomp-->
+        <script src="share.js"></script>
+        <!--Importar js de diagramas-->
         <script src="diagramas.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     </head>
 
     <body>
-        <div id="proyectos">
+        <div id="diagramas">
             <h1 id="usrnm"></h1>
+            <h2 id="proNme"></h2>
             <div class="mui-row">
                 <div class="mui-col-md-8">
-                    <h2>Mis Proyectos</h2>
+                    <h2>Mis Diagramas</h2>
                 </div>
                 <div class="mui-col-md-4">
-                    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarProyecto()">
+                    <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarDiagrama()">
                         <i class="fa fa-plus-square"></i>
-                        Crear nuevo proyecto</button>
-                    <div id="newP" hidden="hidden">
-                        <input type="text" placeholder="Ingrese nombre del proyecto" id="nomP" required oninvalid="setCustomValidity('Por favor ingrese un nombre de proyecto')">
-                        <input type="text" placeholder="Ingrese descripción del proyecto" id="descP" required oninvalid="setCustomValidity('Por favor ingrese una descripción del proyecto')">
-                        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger" onclick="agregarProyecto()">
+                        Crear nuevo diagrama</button>
+                    <div id="newD" hidden="hidden">
+                        <input type="text" placeholder="Ingrese nombre del diagrama" id="nomD" required oninvalid="setCustomValidity('Por favor ingrese un nombre al diagrama')">
+                        <input type="text" placeholder="Ingrese descripción del diagrama" id="descD" required oninvalid="setCustomValidity('Por favor ingrese una descripción al diagrama')">
+                        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger" onclick="agregarDiagrama()">
                             Crear
-                        </button>
-                    </div>
-                    <div id="shareP">
-                        <button type="submit" class="mui-btn mui-btn--raised" onclick="compartir()">
-                            <i class="fa fa-share-alt"></i>
-                            Compartir
-                        </button>
-                        <div id="nU" hidden="hidden">
-                            <input type="text" placeholder="Nombre usuario" id="nomU">
-                            <button onclick="agregarUsuario()">Aceptar</button>
-                        </div>
-                        <button type="submit" class="mui-btn mui-btn--raised" onclick="accederProyecto()">
-                            <i class="fa fa-rocket"></i>
-                            Acceder
                         </button>
                     </div>
                 </div>
             </div>
-            <div id="proyectosdiv">
-                <form id="radio">
+            <div id="diagramasdiv">
                     <table id="proyectos" class="mui-table mui-table--bordered">
 
                         <thead>
@@ -67,14 +57,13 @@
                                 <th>Descripcion</th>
                                 <th>Fecha de Creación</th>
                                 <th>Fecha de Última Modificación</th>
-                                <th>Seleccionar</th>
+                                <th>Acceder</th>
                             </tr>
                         </thead>
 
-                        <tbody id="lista"></tbody>
+                        <tbody id="listaD"></tbody>
 
                     </table>
-                </form>
 
             </div>
         </div>
