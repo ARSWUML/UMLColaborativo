@@ -1,17 +1,24 @@
 
 var arrD={};
 var diagramas=0;
-var botonAccederInD = '<button type="submit" class="mui-btn mui-btn--raised" value="';
-var botonAccederFinD = '" onclick="accederDiagrama()"><i class="fa fa-rocket"></i>Acceder</button>';
-
+var radioButtonInD='<input type="radio" name="diagrama" value="';
+var radioButtonFinD='" checked> Seleccionar<br>';
 
 function initD(){
     disconnect();
     connectD();
+    getDiagramas();
 };
 
 function formAgregarDiagrama(){
     $("#newD").show();
+};
+
+function accederDiagrama(){
+    disconnect();
+    sessionStorage.nameDiagram=$('input[name=diagrama]:checked').val();
+    console.log(sessionStorage.nameDiagram);
+    window.location.href='lienzosDiagramas.html';
 };
 
 function agregarDiagrama(){
@@ -25,8 +32,19 @@ function agregarDiagramaVista(diag){
     diagramas++;
     arrD[diag.nombre]=diag;
     $("#listaD").append("<tr><td>"+diag.titulo+"</td><td>"+diag.descripcion+"</td><td>"+diag.fechaCreacion.toLocaleString()+
-    "</td><td>"+diag.fechaUltimaModificacion.toLocaleString()+"</td><td>"+botonAccederInD+diag.nombre+botonAccederFinD+"</td></tr>");
+    "</td><td>"+diag.fechaUltimaModificacion.toLocaleString()+"</td><td>"+radioButtonInD+diag.titulo+radioButtonFinD+"</td></tr>");
 };
+
+function getDiagramas(){
+    return $.get("/projects/users/"+sessionStorage.name+"/"+sessionStorage.nameProject,function(data){
+        console.log(data);
+        for(var element in data.diagramas){
+            data.diagramas[element].fechaCreacion = new Date(data.diagramas[element].fechaCreacion);
+            data.diagramas[element].fechaUltimaModificacion = new Date(data.diagramas[element].fechaUltimaModificacion);
+            agregarDiagramaVista(data.diagramas[element]);
+        };
+    });
+}
 
 
 sendDiagrama = function () {

@@ -5,9 +5,6 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
-import ch.qos.logback.core.CoreConstants;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
