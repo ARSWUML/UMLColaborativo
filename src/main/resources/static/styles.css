@@ -100,3 +100,41 @@ input[type="button"]:active {
     filter: alpha(opacity=20);
     opacity: .2;
 }
+hr{     
+    color: brown;     
+    width:80%;     
+    border: solid; 
+} 
+#izquierda{
+    float: left;
+    width:25%; 
+    border:1px solid #000000;
+}
+#derecha{
+    float: right;
+    width:15%;
+    border:1px solid #000000;
+}
+#lienzo{
+    border:1px solid #000000;
+    padding: 0px;
+    margin: auto;
+    display: block;
+    width: 60%;
+    height: 90%;
+    float: left;
+}
+#elementos{
+    
+    
+}
+#infousuario{
+    
+}
+#colaboladores{
+    
+}
+#chat{
+    
+    
+}
