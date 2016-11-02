@@ -101,22 +101,21 @@ input[type="button"]:active {
     filter: alpha(opacity=20);
     opacity: .2;
 }
-hr{     
-    color: brown;     
-    width:80%;     
-    border: solid; 
-} 
+hr{
+    color: brown;
+    width:80%;
+    border: solid;
+}
 /* diagrams */
 #lienzo{
     border:2px solid #000000;
     padding: 0px;
     margin: auto;
     display: block;
-    width: 100%;
-    height: 100%;
+    
 }
 #contenedor {
-    
+
 }
 #cabecera {
     background:url(Imagenes/cabecera.jpg);
@@ -128,12 +127,12 @@ hr{
   width: 18%;
 }
 #menu #elementos{
-  
-  
+
+
 }
 #menu #infousuario{
-  
-  
+
+
 }
 #contenido {
   float: left;
@@ -143,12 +142,12 @@ hr{
   float: left;
   width: 80%;
 }
- 
+
 #pie {
   clear: both;
 }
 .draggable {
-  border-radius: 30px;  
+  border-radius: 30px;
   background: burlywood;
   width: 100px;
   height: 50px;
