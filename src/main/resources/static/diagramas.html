@@ -8,6 +8,8 @@
         <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
         <!--Importar Iconos font Awesome-->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
+        <!--Importar bootstrapcdn -->
+         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
         <!--Importar JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
@@ -41,6 +43,12 @@
                     <button type="submit" class="mui-btn mui-btn--raised" onclick="accederDiagrama()"><i class="fa fa-rocket"></i>
                         Acceder
                     </button>
+                    <div id="errMesD" hidden="hidden">
+                        <div class="alert alert-danger">
+                            <button id="yD" onclick="hideErrorD()" type="button" class="btn btn-link">x</button>
+                            <b id="mesjeD"></b>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="diagramasdiv">
