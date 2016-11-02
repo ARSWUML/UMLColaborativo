@@ -25,19 +25,25 @@ DiagramaClases.prototype.agregarElemento = function (elemento) {
     this.elementos[elemento.nombre] = elemento;
 };
 
-function Clase(nombre) {
+function Clase(nombre,x,y) {
     this.type = "clase";
     this.nombre = nombre;
+    this.x=x;
+    this.y=y;
 };
 
-function ClaseAbstracta(nombre) {
+function ClaseAbstracta(nombre,x,y) {
     this.type = "claseAbstracta";
     this.nombre = nombre;
+    this.x=x;
+    this.y=y;
 };
 
-function Interface(nombre) {
+function Interface(nombre,x,y) {
     this.type = "interface";
     this.nombre = nombre;
+    this.x=x;
+    this.y=y;
 };
 
 $(document).ready(

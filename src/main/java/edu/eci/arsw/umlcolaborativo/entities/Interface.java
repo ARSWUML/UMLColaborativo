@@ -19,4 +19,8 @@ public class Interface extends Elemento{
         super();
     }
     
+    public Interface(String nombre, int x, int y) throws ProyectoExcepcion{
+        super(nombre,x,y);
+    }
+    
 }

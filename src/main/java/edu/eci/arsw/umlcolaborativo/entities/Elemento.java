@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class Elemento {
     
    protected String nombre;
+   protected int x;
+   protected int y;
    /**
     * Crear el elemento con el nombre especificado
     * @param nombre
@@ -35,6 +37,20 @@ public abstract class Elemento {
        if(nombre.equals("")) throw new ProyectoExcepcion("Favor colocar un nombre adecuado al elemento");
        this.nombre=nombre;
    }
+    
+    /**
+     * Crear el elemento con coordenadas y un nombre especifico
+     * @param nombre
+     * @param x
+     * @param y
+     * @throws ProyectoExcepcion 
+     */
+    public Elemento(String nombre, int x, int y) throws ProyectoExcepcion{
+        if(nombre.equals("")) throw new ProyectoExcepcion("Favor colocar un nombre adecuado al elemento");
+        this.nombre=nombre;
+        this.x=x;
+        this.y=y;
+    }
     
     /**
      * Crea un elemento

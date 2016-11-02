@@ -19,4 +19,8 @@ public class ClaseAbstracta extends Clase{
         super();
     }
     
+    public ClaseAbstracta(String nombre, int x, int y) throws ProyectoExcepcion{
+        super(nombre,x,y);
+    }
+    
 }
