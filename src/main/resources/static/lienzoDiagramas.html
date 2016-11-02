@@ -13,36 +13,43 @@
         <script src="//cdn.muicss.com/mui-0.9.3/js/mui.min.js"></script>
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         <script src="lienzoDiagramas.js"></script>
     </head>
     <body>
-        <div id="izquierda">
-            <div id="infousuario">
+        <div id="contenedor">
+            <div id="cabecera">
+            </div>
+
+            <div id="menu">
+                <div id="infousuario">
+
+
+                </div>
+                <div id="elementos">
+                    <center><h1> Elementos </h1></center>
+                    <center>
+                        <ul id="conceptos">
+
+                        </ul>
+
+                        <button id="guardar" class="mui-btn mui-btn--raised mui-btn--primary" onclick="">
+                            <i class="fa fa-floppy-o"></i>
+                            Guardar
+                        </button>
+                    </center>
+                </div>
 
             </div>
-            <div id="elementos">
-                <center><h1> Elementos </h1></center>
 
-                <button id="guardar" class="mui-btn mui-btn--raised mui-btn--primary" onclick="">
-                    <i class="fa fa-floppy-o"></i>
-                    Guardar
-                </button>
-
+            <div id="contenido">
+                <div id="principal">
+                    <center><h1 id="tituloDiagrama"> Título del diagrama</h1></center>
+                    <canvas id="lienzo"> </canvas>
+                </div>
             </div>
-        </div>
 
-        <div id="canvas">
-            <center><h1 id="tituloDiagrama"> Título del diagrama</h1></center>
-            <canvas id="lienzo"> </canvas>
-        </div>
-        
-        <div id="derecha">
-            <div id="colaboladores">
-
-            </div>
-            <div id="chat">
-
-
+            <div id="pie">
             </div>
         </div>
     </body>

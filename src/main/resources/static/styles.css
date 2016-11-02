@@ -72,6 +72,7 @@ input[type="button"]:active {
   -moz-transform: translate(0,5px);
   transform: translate(0,5px);
 }
+/* Message alert */
 .alert-danger {
     color: #a94442;
     background-color: #f2dede;
@@ -105,36 +106,55 @@ hr{
     width:80%;     
     border: solid; 
 } 
-#izquierda{
-    float: left;
-    width:25%; 
-    border:1px solid #000000;
-}
-#derecha{
-    float: right;
-    width:15%;
-    border:1px solid #000000;
-}
+/* diagrams */
 #lienzo{
-    border:1px solid #000000;
+    border:2px solid #000000;
     padding: 0px;
     margin: auto;
     display: block;
-    width: 60%;
-    height: 90%;
-    float: left;
+    width: 100%;
+    height: 100%;
 }
-#elementos{
-    
+#contenedor {
     
 }
-#infousuario{
-    
+#cabecera {
+    background:url(Imagenes/cabecera.jpg);
+    width: 100%;
+    height: 12%;
 }
-#colaboladores{
-    
+#menu {
+  float: left;
+  width: 18%;
 }
-#chat{
-    
-    
+#menu #elementos{
+  
+  
+}
+#menu #infousuario{
+  
+  
+}
+#contenido {
+  float: left;
+  width: 80%;
+}
+#contenido #principal {
+  float: left;
+  width: 80%;
+}
+ 
+#pie {
+  clear: both;
+}
+.draggable {
+  border-radius: 30px;  
+  background: burlywood;
+  width: 100px;
+  height: 50px;
+  padding: 0.5em;
+  float: left;
+  margin: 10px 10px 10px 0;
+  text-align: center;
+  display: inline-block;
 }
