@@ -15,4 +15,8 @@ public class Interface extends Elemento{
         super(nombre);
     }
     
+    public Interface(){
+        super();
+    }
+    
 }

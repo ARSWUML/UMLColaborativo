@@ -29,7 +29,7 @@ function agregarProyecto() {
     $("#newP").hide();
     proyecto = new Proyecto($("#nomP").val(), $("#descP").val());
     postProyecto(proyecto);
-    sendProject();
+   
 };
 
 function agregarProyectoVista(proy) {
@@ -103,6 +103,7 @@ function nuevoProyectoPost(){
     $("#nU").hide();
     $("#mesjs").html("Se ha creado el proyecto " + proyecto.nombre);
     $("#succMes").show();
+    sendProject();
 }
 
 function validar() {
