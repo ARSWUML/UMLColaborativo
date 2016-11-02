@@ -21,14 +21,26 @@ function accederDiagrama() {
     disconnect();
     sessionStorage.nameDiagram = $('input[name=diagrama]:checked').val();
     console.log(sessionStorage.nameDiagram);
-    window.location.href = 'lienzosDiagramas.html';
+    window.location.href = 'lienzoDiagramas.html';
 };
 
 function agregarDiagrama() {
     $("#newD").hide();
+    if($("#nomD").val() == null || $("#nomD").val().length == 0){
+        $("#mesjeD").html("Ingrese un titulo al diagrama");
+        $("#errMesD").show();
+    }else if($("#descD").val() == null || $("#descD").val().length == 0){
+        $("#mesjeD").html("Agregue una descripcion  al diagrama");
+        $("#errMesD").show();
+    }else{
     diagrama = new DiagramaClases($("#nomD").val(), $("#descD").val());
     getProyecto().then(actualizarProyecto);
     sendDiagrama();
+    }
+};
+
+function hideErrorD() {
+    $("#errMesD").hide();
 };
 
 function agregarDiagramaVista(diag) {
@@ -103,10 +115,21 @@ function disconnect() {
 
 function validar() {
     if (sessionStorage.name == null || sessionStorage.name.length == 0) {
-        window.location.href = 'index.html';
+        signOut();
     } else if (sessionStorage.nameProject == null || sessionStorage.nameProject.length == 0) {
-        window.location.href = 'proyectos.html';
+        volver();
     }
+}
+
+function volver(){
+    sessionStorage.nameDiagram="";
+    window.location.href = 'proyectos.html';
+}
+
+function signOut(){
+    sessionStorage.nameDiagram="";
+    sessionStorage.nameProject="";
+    window.location.href = 'index.html';
 }
 
 $(document).ready(

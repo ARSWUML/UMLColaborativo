@@ -35,6 +35,13 @@ public abstract class Elemento {
        if(nombre.equals("")) throw new ProyectoExcepcion("Favor colocar un nombre adecuado al elemento");
        this.nombre=nombre;
    }
+    
+    /**
+     * Crea un elemento
+     */
+    public Elemento(){
+    }
+    
    /**
     * Consultar nombre elemento
      * @return nombre

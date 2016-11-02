@@ -15,4 +15,8 @@ public class ClaseAbstracta extends Clase{
         super(nombre);
     }
     
+    public ClaseAbstracta(){
+        super();
+    }
+    
 }
