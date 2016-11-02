@@ -21,7 +21,7 @@ function accederDiagrama() {
     disconnect();
     sessionStorage.nameDiagram = $('input[name=diagrama]:checked').val();
     console.log(sessionStorage.nameDiagram);
-    window.location.href = 'lienzosDiagramas.html';
+    window.location.href = 'lienzoDiagramas.html';
 };
 
 function agregarDiagrama() {

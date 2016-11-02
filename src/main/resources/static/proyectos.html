@@ -13,10 +13,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
         <!--Importar modelos js-->
         <script src="models.js"></script>
-        <!--Importar js de proyectos-->
-        <script src="proyectos.js"></script>
         <!--Importar share.js-->
         <script src="share.js"></script>
+        <!--Importar js de proyectos-->
+        <script src="proyectos.js"></script>
         <!--Importar sockjs y stomp-->
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -51,6 +51,10 @@
                             <i class="fa fa-rocket"></i>
                             Acceder
                         </button>
+                        <div id="nU" hidden="hidden">
+                            <input type="text" placeholder="Nombre usuario a compartir" id="nomU">
+                            <button onclick="agregarUsuario()" class="mui-btn mui-btn--raised mui-btn--danger">Aceptar</button>
+                        </div>
                         <div id="errMes" hidden="hidden">
                             <div class="alert alert-danger">
                                 <button id="y" onclick="hideError()" type="button" class="btn btn-link">x</button>
@@ -63,11 +67,6 @@
                                 <b id="mesjs"></b>
                             </div>
                         </div>
-                        <div id="nU" hidden="hidden">
-                            <input type="text" placeholder="Nombre usuario a compartir" id="nomU">
-                            <button onclick="agregarUsuario()" class="mui-btn mui-btn--raised mui-btn--danger">Aceptar</button>
-                        </div>
-                        
                     </div>
                 </div>
             </div>

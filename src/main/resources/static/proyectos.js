@@ -78,8 +78,10 @@ function getProyectos() {
             data[element].fechaCreacion = new Date(data[element].fechaCreacion);
             data[element].fechaUltimaModificacion = new Date(data[element].fechaUltimaModificacion);
             agregarProyectoVista(data[element]);
-        }
-        ;
+        };
+    }).fail(function (response) {
+        $("#mesje").html(response.responseText);
+        $("#errMes").show();
     });
 };
 
@@ -91,8 +93,17 @@ function postProyecto(proyecto) {
         type: 'POST',
         data: JSON.stringify(proyecto),
         contentType: "application/json"
-    });
+    }).fail(function (response) {
+        $("#mesje").html(response.responseText);
+        $("#errMes").show();
+    }).then(nuevoProyectoPost);
 };
+
+function nuevoProyectoPost(){
+    $("#nU").hide();
+    $("#mesjs").html("Se ha creado el proyecto " + proyecto.nombre);
+    $("#succMes").show();
+}
 
 function validar() {
     if (sessionStorage.name == null || sessionStorage.name.length == 0) {
