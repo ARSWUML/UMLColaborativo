@@ -21,14 +21,26 @@ function accederDiagrama() {
     disconnect();
     sessionStorage.nameDiagram = $('input[name=diagrama]:checked').val();
     console.log(sessionStorage.nameDiagram);
-    window.location.href = 'lienzosDiagramas.html';
+    window.location.href = 'lienzoDiagramas.html';
 };
 
 function agregarDiagrama() {
     $("#newD").hide();
+    if($("#nomD").val() == null || $("#nomD").val().length == 0){
+        $("#mesjeD").html("Ingrese un titulo al diagrama");
+        $("#errMesD").show();
+    }else if($("#descD").val() == null || $("#descD").val().length == 0){
+        $("#mesjeD").html("Agregue una descripcion  al diagrama");
+        $("#errMesD").show();
+    }else{
     diagrama = new DiagramaClases($("#nomD").val(), $("#descD").val());
     getProyecto().then(actualizarProyecto);
     sendDiagrama();
+    }
+};
+
+function hideErrorD() {
+    $("#errMesD").hide();
 };
 
 function agregarDiagramaVista(diag) {
