@@ -9,7 +9,7 @@
         <!--Importar Iconos font Awesome-->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
         <!--Importar bootstrapcdn -->
-         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
         <!--Importar JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
@@ -23,7 +23,17 @@
 
     <body>
         <div id="diagramas">
-            <h1 id="usrnmD"></h1>
+            <div class="mui-col-md-8">
+                <h1 id="usrnmD"></h1>
+            </div>
+            <div class="mui-col-md-4">
+                <button id="volver" onclick="volver()" class="mui-btn mui-btn--raised">
+                    <i class="fa fa-backward"></i>
+                    volver</button>
+                <button id="logout" onclick="signOut()" class="mui-btn mui-btn--raised">
+                    <i class="fa fa-fast-backward"></i>
+                    cerrar sesión</button>
+            </div>
             <h2 id="proNme"></h2>
             <div class="mui-row">
                 <div class="mui-col-md-8">
@@ -33,6 +43,10 @@
                     <button class="mui-btn mui-btn--raised mui-btn--primary" onclick="formAgregarDiagrama()">
                         <i class="fa fa-plus-square"></i>
                         Crear nuevo diagrama</button>
+                    <button type="submit" class="mui-btn mui-btn--raised" onclick="accederDiagrama()">
+                        <i class="fa fa-rocket"></i>
+                        Acceder
+                    </button>
                     <div id="newD" hidden="hidden">
                         <input type="text" placeholder="Ingrese nombre del diagrama" id="nomD" required oninvalid="setCustomValidity('Por favor ingrese un nombre al diagrama')">
                         <input type="text" placeholder="Ingrese descripción del diagrama" id="descD" required oninvalid="setCustomValidity('Por favor ingrese una descripción al diagrama')">
@@ -40,9 +54,7 @@
                             Crear
                         </button>
                     </div>
-                    <button type="submit" class="mui-btn mui-btn--raised" onclick="accederDiagrama()"><i class="fa fa-rocket"></i>
-                        Acceder
-                    </button>
+
                     <div id="errMesD" hidden="hidden">
                         <div class="alert alert-danger">
                             <button id="yD" onclick="hideErrorD()" type="button" class="btn btn-link">x</button>
@@ -52,21 +64,21 @@
                 </div>
             </div>
             <div id="diagramasdiv">
-                    <table id="proyectos" class="mui-table mui-table--bordered">
+                <table id="proyectos" class="mui-table mui-table--bordered">
 
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Fecha de Creación</th>
-                                <th>Fecha de Última Modificación</th>
-                                <th>Acceder</th>
-                            </tr>
-                        </thead>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Fecha de Creación</th>
+                            <th>Fecha de Última Modificación</th>
+                            <th>Acceder</th>
+                        </tr>
+                    </thead>
 
-                        <tbody id="listaD"></tbody>
+                    <tbody id="listaD"></tbody>
 
-                    </table>
+                </table>
 
             </div>
         </div>

@@ -107,9 +107,14 @@ function nuevoProyectoPost(){
 
 function validar() {
     if (sessionStorage.name == null || sessionStorage.name.length == 0) {
-        window.location.href = 'index.html';
+        volver();
     }
 };
+
+function volver(){
+    sessionStorage.nameProject="";
+    window.location.href = 'index.html';
+}
 
 $(document).ready(
         function () {

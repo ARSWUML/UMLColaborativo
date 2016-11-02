@@ -115,10 +115,21 @@ function disconnect() {
 
 function validar() {
     if (sessionStorage.name == null || sessionStorage.name.length == 0) {
-        window.location.href = 'index.html';
+        signOut();
     } else if (sessionStorage.nameProject == null || sessionStorage.nameProject.length == 0) {
-        window.location.href = 'proyectos.html';
+        volver();
     }
+}
+
+function volver(){
+    sessionStorage.nameDiagram="";
+    window.location.href = 'proyectos.html';
+}
+
+function signOut(){
+    sessionStorage.nameDiagram="";
+    sessionStorage.nameProject="";
+    window.location.href = 'index.html';
 }
 
 $(document).ready(
