@@ -15,4 +15,8 @@ public class Clase extends Elemento{
         super(nombre);
     }
     
+    public Clase(){
+        super();
+    }
+    
 }
