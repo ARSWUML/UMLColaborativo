@@ -1,6 +1,6 @@
 /*Variables*/
 stompClient = null;
-isConnect=false;
+isConnect = false;
 elementos = [];
 /**/
 
@@ -13,17 +13,21 @@ function disconnect() {
         stompClient.disconnect();
     }
     console.log("Disconnected");
-};
+}
+;
 
 function connect() {
     if (sessionStorage.connected != true) {
         sessionStorage.connected = true;
         var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
-        
-    }
-};
 
+    }
+}
+;
+agregarElementoDiagrama = function () {
+
+};
 /**
  * Actualiza el listado de los elementos
  */
@@ -36,7 +40,7 @@ actualizarElementos = function () {
  */
 obtenerElementos = function () {
     elementos = [];
-    return $.get("/elements",function (retorno) {
+    return $.get("/elements", function (retorno) {
         for (var i in retorno) {
             elementos[i] = retorno[i];
         }
@@ -52,8 +56,8 @@ actualizarVistaElementos = function () {
         $("li").draggable({helper: 'clone'});
     }
 };
-inicio=function(){
-    $("#infousuario").html("<center>Usuario:"+sessionStorage.name+"</center><center>Nombre del proyecto:"+sessionStorage.nameProject+"</center>");
+inicio = function () {
+    $("#infousuario").html("<center>Usuario:" + sessionStorage.name + "</center><center>Nombre del proyecto:" + sessionStorage.nameProject + "</center>");
     $("#tituloDiagrama").html(sessionStorage.nameDiagram);
 };
 $(document).ready(
@@ -61,13 +65,15 @@ $(document).ready(
             inicio();
             actualizarElementos();
             $("#lienzo").droppable({
-              drop: function (event, ui) {
-                    var idElementoSoltado=ui.draggable.attr("id");
-              //agregarPlatoOrdenActual(new Plato(platos[idElementoSoltado].nombre,platos[idElementoSoltado].precio));
-              }
-          });
-            
-           
+                accept: "li",
+                drop: function (event, ui) {
+                    var context = $(this)[0].getContext("2d");
+                    context.font = "16px helvetica";
+                    context.fillText($(ui.draggable).clone().text(), ui.position.left - event.target.offsetLeft, ui.position.top - event.target.offsetTop);
+                }
+            });
+
+
         }
 );
 
