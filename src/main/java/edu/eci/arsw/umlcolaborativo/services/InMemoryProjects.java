@@ -108,7 +108,6 @@ public class InMemoryProjects implements PersistenciaProyectos {
     @Override
     public void agregarProyecto(String usuario, Proyecto proyecto) throws ProyectoExcepcion {
         validarUsuario(usuario);
-        System.out.println("user: " + usuario);
         if (usuarios.get(usuario).contains(proyecto.getNombre())) {
             throw new ProyectoExcepcion("El usuario " + usuario + " ya colabora en el proyecto " + proyecto.getNombre());
         }

@@ -73,7 +73,6 @@ function disconnect() {
 
 function getProyectos() {
     return $.get("/projects/users/" + sessionStorage.name, function (data) {
-        console.log(data);
         for (var element in data) {
             data[element].fechaCreacion = new Date(data[element].fechaCreacion);
             data[element].fechaUltimaModificacion = new Date(data[element].fechaUltimaModificacion);

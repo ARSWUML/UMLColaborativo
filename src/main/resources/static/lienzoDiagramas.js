@@ -2,8 +2,9 @@
 stompClient = null;
 isConnect = false;
 elementos = [];
-elementosUsados=[];
-/**/
+elementosUsados = [];
+proyecto = null;
+diagrama = null;
 
 /**
  * Stomp
@@ -22,13 +23,77 @@ function connect() {
         sessionStorage.connected = true;
         var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            stompClient.subscribe('/topic/newelement.' + sessionStorage.nameProject + "." + sessionStorage.nameDiagram, function (data) {
+                var objeto = JSON.parse(data.body);
+                var tmp=objeto.nombre.split(" ");
+                var texto=tmp[0];
+                for (var i=1;i<tmp.length-1;i++){
+                    texto+=" "+tmp[i];
+                }
+                diagrama.agregarElemento(objeto);
+                if (typeof elementosUsados[texto] == "undefined") {
+                    elementosUsados[texto] = [];
+                 
+                }
+                elementosUsados[texto].push(objeto);
+                agregarElementoDiagrama(objeto.x, objeto.y, objeto.nombre);
+            });
+        });
 
     }
 }
 ;
-agregarElementoDiagrama = function () {
+
+sendElemento = function (objeto) {
+    stompClient.send('/app/newelement.' + sessionStorage.nameProject + "." + sessionStorage.nameDiagram, {}, JSON.stringify(objeto));
+};
+
+guardarDiagrama = function () {
+    proyecto.diagramas[sessionStorage.nameDiagram] = diagrama;
+    return $.ajax({
+        url: "/projects/users/" + sessionStorage.name,
+        type: 'PUT',
+        data: JSON.stringify(proyecto),
+        contentType: "application/json"
+    }).then(showMessage());
+};
+
+function hideMessage() {
+    $("#mensaje").hide();
+}
+function showMessage() {
+    $("#mensaje").show();
+}
+agregarElementoDiagrama = function (coX, coY, texto) {
+    $('#lienzo').drawRect({
+        fillStyle: '#afb4b7',
+        x: coX, y: coY,
+        width: 100,
+        height: 50
+    });
+    $('#lienzo').drawText({
+        fillStyle: '#fff',
+        strokeStyle: '#000',
+        x: coX, y: coY,
+        fontSize: 12,
+        fontFamily: 'Verdana, sans-serif',
+        text: texto
+    });
 
 };
+function getProyecto() {
+    return $.get("/projects/users/" + sessionStorage.name + "/" + sessionStorage.nameProject).then(function (proyectoG) {
+        proyecto = proyectoG;
+        proyecto.fechaCreacion = new Date(proyectoG.fechaCreacion);
+        proyecto.fechaUltimaModificacion = new Date(proyectoG.fechaUltimaModificacion);
+        diagrama = new DiagramaClases(proyecto.diagramas[sessionStorage.nameDiagram].titulo, proyecto.diagramas[sessionStorage.nameDiagram].descripcion);
+        for (var u in proyecto.diagramas[sessionStorage.nameDiagram].elementos) {
+            diagrama.agregarElemento(new Clase(u, proyecto.diagramas[sessionStorage.nameDiagram].elementos[u].x, proyecto.diagramas[sessionStorage.nameDiagram].elementos[u].y));
+        }
+    });
+}
+;
 /**
  * Actualiza el listado de los elementos
  */
@@ -58,48 +123,37 @@ actualizarVistaElementos = function () {
     }
 };
 inicio = function () {
-    $("#infousuario").html("<center>Usuario:" + sessionStorage.name + "</center><center>Nombre del proyecto:" + sessionStorage.nameProject + "</center>");
+    $("#infousuario").html("<h2><strong>Usuario:</strong>" + sessionStorage.name + "<br><strong>Proyecto:</strong>" + sessionStorage.nameProject + "</h2>");
     $("#tituloDiagrama").html(sessionStorage.nameDiagram);
-    var w = window.innerWidth*.6;
-    var h = window.innerHeight*.8;
-    $("#canvasdiv").html('<canvas id="lienzo" width="'+w+'px" height="'+h+'px"></canvas>');
+    var w = window.innerWidth * .6;
+    var h = window.innerHeight * .8;
+    $("#canvasdiv").html('<canvas id="lienzo" width="' + w + 'px" height="' + h + 'px"></canvas>');
 };
 
-function canvasDroppable(){
+function canvasDroppable() {
     $("#lienzo").droppable({
         accept: "li",
         drop: function (event, ui) {
-            var texto=$(ui.draggable).clone().text();
-            console.log(elementosUsados[texto]);
-            if(typeof elementosUsados[texto] == "undefined"){
-                elementosUsados[texto]=[];
+            var texto = $(ui.draggable).clone().text();
+            if (typeof elementosUsados[texto] == "undefined") {
+                elementosUsados[texto] = [];
             }
-            elementosUsados[texto].push(texto+elementosUsados[texto].length);
-            texto+=elementosUsados[texto].length;
-            $('#lienzo').drawRect({
-                fillStyle: '#afb4b7',
-                x: event.clientX-event.target.offsetLeft, y: event.clientY-event.target.offsetTop,
-                width: 100,
-                height: 50
-            });
-            $('#lienzo').drawText({
-                fillStyle: '#fff',
-                strokeStyle: '#000',
-                x: event.clientX-event.target.offsetLeft, y: event.clientY-event.target.offsetTop,
-                fontSize: 12,
-                fontFamily: 'Verdana, sans-serif',
-                text: texto
-            });
-            /*var context = $(this)[0].getContext("2d");
-            context.font = "16px helvetica";
-            context.fillText($(ui.draggable).clone().text(), ui.position.left - event.target.offsetLeft, ui.position.top - event.target.offsetTop);*/
+            var x = event.clientX - event.target.offsetLeft;
+            var y = event.clientY - event.target.offsetTop;
+            var cl = new Clase(texto+" " + elementosUsados[texto].length, x, y);
+            sendElemento(cl);
+
         }
     });
 }
+
 $(document).ready(
         function () {
+            connect();
+            hideMessage();
             inicio();
             actualizarElementos();
+            getProyecto();
             canvasDroppable();
         }
 );

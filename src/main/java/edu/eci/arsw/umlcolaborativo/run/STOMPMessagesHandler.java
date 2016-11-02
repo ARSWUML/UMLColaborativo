@@ -27,11 +27,13 @@ public class STOMPMessagesHandler {
     /**
      * Recibe un nuevo elemento de /app/newelement y lo publica en /topic/newelement
      * @param e
+     * @param proyecto
+     * @param diagrama
      */
-    @MessageMapping("/newelement")
-    public void getElement(Elemento e){
+    @MessageMapping("/newelement.{proyecto}.{diagrama}")
+    public void getElement(Elemento e, @DestinationVariable String proyecto, @DestinationVariable String diagrama){
         System.out.println("Nuevo elemento recibido en el servidor! :"+e.getNombre());
-        msgt.convertAndSend("/topic/newelement", e);
+        msgt.convertAndSend("/topic/newelement."+proyecto+"."+diagrama, e);
     }
     
     /**

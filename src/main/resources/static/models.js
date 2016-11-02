@@ -9,7 +9,7 @@ function Proyecto(nombre, descripcion) {
 };
 
 Proyecto.prototype.agregarDiagrama = function (diagrama) {
-    this.diagramas[diagrama.nombre] = diagrama;
+    this.diagramas[diagrama.titulo] = diagrama;
 };
 
 function DiagramaClases(nombre, descripcion) {

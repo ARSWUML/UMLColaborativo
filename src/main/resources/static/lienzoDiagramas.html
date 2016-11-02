@@ -3,6 +3,7 @@
         <title>UMLColaborativo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" type=" text/css">
         <link href="//cdn.muicss.com/mui-0.9.3/css/mui.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="styles.css">
@@ -13,29 +14,37 @@
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+        <script src="models.js"></script>
         <script src="jcanvas.min.js"></script>
         <script src="lienzoDiagramas.js"></script>
     </head>
     <body>
         <div id="contenedor">
-            <div id="cabecera"></div>
+            <center><div id="cabecera" ><img src="Imagenes/cabecera.jpg"/> </div></center>
 
             <div id="menu">
                 <div id="infousuario"></div>
                 <div id="elementos">
+
+                    <center>
+                        <button id="guardar" class="mui-btn mui-btn--raised mui-btn--primary" onclick="guardarDiagrama()">
+                            <i class="fa fa-floppy-o"></i>
+                            Guardar
+                        </button>
+                        <div id="mensaje">
+                            <div class="alert alert-success">
+                                <button id="x" onclick="hideMessage()" type="button" class="btn btn-link">x</button>
+                                Su diagrama ha sido guardado exitosamente
+                            </div>
+                        </div>
+                    </center>
                     <center>
                         <h1>
                             Elementos
                         </h1>
                     </center>
-                    <center>
-                        <ul id="conceptos"></ul>
+                    <ul id="conceptos"></ul>
 
-                        <button id="guardar" class="mui-btn mui-btn--raised mui-btn--primary" onclick="">
-                            <i class="fa fa-floppy-o"></i>
-                            Guardar
-                        </button>
-                    </center>
                 </div>
 
             </div>
@@ -46,12 +55,11 @@
                         <h1 id="tituloDiagrama">
                             Título del diagrama</h1>
                     </center>
-                    <div id="canvasdiv"></div>
-                    <!--canvas id="lienzo" width="600px" height="400px"></canvas-->
+                    <div id="canvasdiv">
+
+                    </div>
                 </div>
             </div>
-
-            <div id="pie"></div>
         </div>
     </body>
 </html>
