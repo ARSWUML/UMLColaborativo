@@ -27,6 +27,17 @@ import org.springframework.stereotype.Service;
  */
 //@Service
 public class InMemoryProjectsRedis implements PersistenciaProyectos{
+    
+    public InMemoryProjectsRedis(){
+         Jedis jedis = JedisUtil.getPool().getResource();
+         Gson gson = new Gson();
+         Map<String, Proyecto> proyectos = new HashMap<>();
+         Map<String, List<String>> usuarios = new HashMap<>();
+         usuarios.put("1", new ArrayList<>());
+         jedis.hset("Usuarios", "todosU", gson.toJson(usuarios));
+         jedis.hset("Proyectos", "todosP", gson.toJson(proyectos));
+         jedis.close();
+    }
 
     @Override
     public Map<String, Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion {
