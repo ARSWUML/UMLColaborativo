@@ -7,7 +7,6 @@ package edu.eci.arsw.umlcolaborativo.services;
 
 import edu.eci.arsw.umlcolaborativo.entities.Clase;
 import edu.eci.arsw.umlcolaborativo.entities.ClaseAbstracta;
-import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Interface;
@@ -15,13 +14,15 @@ import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  *
