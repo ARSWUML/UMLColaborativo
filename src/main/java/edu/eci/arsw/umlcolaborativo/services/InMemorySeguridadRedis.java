@@ -5,40 +5,51 @@
  */
 package edu.eci.arsw.umlcolaborativo.services;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import edu.eci.arsw.umlcolaborativo.util.JedisUtil;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 /**
  *
- * @author Daniela Sepulveda
+ * @author ger9410
  */
-//@Service
-public class InMemorySeguridad implements PersistenciaSeguridad{
+@Service
+public class InMemorySeguridadRedis implements PersistenciaSeguridad{
     
-    private Map<String, String> usuarios;
+    Gson gson;
+    JsonParser jsonParser;
+    JsonElement json;
     
-    public InMemorySeguridad(){
-        usuarios=new HashMap<>();
-        agregarUsuarios();
+    public InMemorySeguridadRedis(){
+        jsonParser = new JsonParser();
+        gson = new Gson();
+        cargarSeguridad();
     }
     
     @Override
     public boolean consultarUsuario(String name, String passw) {
+        Jedis jedis = JedisUtil.getPool().getResource();
+        String cadenaSegura = jedis.hget("Seguridad", "todosS");
+        json = jsonParser.parse(cadenaSegura);
+        Map<String,String> usuarios = (Map<String,String>) gson.fromJson(json,new TypeToken<Map<String,String>>() {}.getType());
+        jedis.close();
         return usuarios.containsKey(name) && usuarios.get(name).equals(passw);
     }
 
     @Override
     public boolean registrarUsuario(String name, String passw) {
-       //Implementacion proximo script
-       return false;
+        return false;
     }
-      
-    /**
-     * Poblar los usuarios
-     */
     
-    private void agregarUsuarios(){
+    public void cargarSeguridad(){
+        Jedis jedis = JedisUtil.getPool().getResource();
+        Map<String,String> usuarios = new HashMap<>();
         //Daniela
         usuarios.put("Daniela Sepulveda", "007b5cacc3da4dd637b0e8b03185311dcb3f8d21");
         //German
@@ -55,5 +66,8 @@ public class InMemorySeguridad implements PersistenciaSeguridad{
         usuarios.put("4","1b6453892473a467d07372d45eb05abc2031647a");
         //5
         usuarios.put("5","ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4");
+        jedis.hset("Seguridad", "todosS", gson.toJson(usuarios));
+        jedis.close();
     }
+    
 }
