@@ -9,9 +9,15 @@ import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
 import edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion;
 import java.util.Map;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import edu.eci.arsw.umlcolaborativo.entities.Clase;
+import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
+import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
+import edu.eci.arsw.umlcolaborativo.entities.Elemento;
+import edu.eci.arsw.umlcolaborativo.util.InterfaceAdapter;
 import edu.eci.arsw.umlcolaborativo.util.JedisUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,13 +33,24 @@ import org.springframework.stereotype.Service;
  */
 //@Service
 public class InMemoryProjectsRedis implements PersistenciaProyectos{
+    Gson gson;
     
-    public InMemoryProjectsRedis(){
+    public InMemoryProjectsRedis() throws ProyectoExcepcion{
          Jedis jedis = JedisUtil.getPool().getResource();
-         Gson gson = new Gson();
+         GsonBuilder builder = new GsonBuilder();
+         builder.registerTypeAdapter(Diagrama.class, new InterfaceAdapter<Diagrama>());
+         builder.registerTypeAdapter(Elemento.class, new InterfaceAdapter<Elemento>());
+         gson = builder.create();
          Map<String, Proyecto> proyectos = new HashMap<>();
          Map<String, List<String>> usuarios = new HashMap<>();
          usuarios.put("1", new ArrayList<>());
+         Proyecto p = new Proyecto("Proyecto1","DEsc");
+         DiagramaClases d = new DiagramaClases("Diagrama1","eDEs");
+         Elemento e = new Clase("Clase",3,3);
+         d.agregarElemento(e);
+         p.agregarDiagrama(d);
+         proyectos.put(p.getNombre(), p);
+         usuarios.get("1").add(p.getNombre());
          jedis.hset("Usuarios", "todosU", gson.toJson(usuarios));
          jedis.hset("Proyectos", "todosP", gson.toJson(proyectos));
          jedis.close();
@@ -42,7 +59,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public Map<String, Proyecto> consultarProyectosUsuario(String usuario) throws ProyectoExcepcion {
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         Map<String,Proyecto> proyectos = new HashMap<>();
         validarUsuario(usuario);
@@ -62,7 +79,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public Map<String, Map<String, Proyecto>> consultarProyectos() {
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         Map<String,Map<String,Proyecto>> todos = new HashMap<>();
         JsonParser jsonParser = new JsonParser();
         String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
@@ -82,7 +99,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public Proyecto consultarProyectoUsuario(String usuario, String proyecto) throws ProyectoExcepcion {
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         validarUsuario(usuario);
         String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
@@ -102,7 +119,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public void agregarProyecto(String usuario, Proyecto proyecto) throws ProyectoExcepcion {
          Jedis jedis = JedisUtil.getPool().getResource();
-         Gson gson = new Gson();
+         //Gson gson = new Gson();
          JsonParser jsonParser = new JsonParser();
          validarUsuario(usuario);
          String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
@@ -124,7 +141,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public void actualizarProyecto(String usuario, Proyecto proyecto) throws ProyectoExcepcion {
          Jedis jedis = JedisUtil.getPool().getResource();
-         Gson gson = new Gson();
+         //Gson gson = new Gson();
          JsonParser jsonParser = new JsonParser();
          validarUsuario(usuario);
          String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
@@ -144,7 +161,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public void agregarUsuario(String usuario) throws ProyectoExcepcion {
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
         JsonElement json = jsonParser.parse(cadenaUsuarios);
@@ -160,7 +177,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     @Override
     public void vaciar() {
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
         JsonElement json = jsonParser.parse(cadenaUsuarios);
@@ -177,7 +194,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
     
     private void validarUsuario(String usuario) throws ProyectoExcepcion{
         Jedis jedis = JedisUtil.getPool().getResource();
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         String cadenaUsuarios = jedis.hget("Usuarios", "todosU");
         JsonElement json = jsonParser.parse(cadenaUsuarios);

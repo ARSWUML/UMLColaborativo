@@ -17,10 +17,6 @@ import java.util.Map;
 public class DiagramaClases extends DiagramaEstructural{
     private Map<String,Elemento> elementos;
     
-    public DiagramaClases(){
-        elementos=new HashMap<>();
-    }
-    
     
     public DiagramaClases(String titulo,String descripcion,Date dateCreacion) throws ProyectoExcepcion{
         super(titulo,descripcion,dateCreacion);
@@ -28,6 +24,10 @@ public class DiagramaClases extends DiagramaEstructural{
     }
     public DiagramaClases(String titulo,String descripcion) throws ProyectoExcepcion{
         super(titulo,descripcion);
+        elementos=new HashMap<>();
+    }
+    
+    public DiagramaClases(){
         elementos=new HashMap<>();
     }
  

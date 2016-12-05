@@ -27,11 +27,7 @@ public abstract class Diagrama{
     protected Date fechaCreacion;
     protected Date fechaUltimaModificacion;
     
-     /**
-    * Crear diagrama 
-    */
-    public Diagrama(){
-    }
+   
    /**
     * Crear diagrama con el titulo que lo identifica, la  descripcion fecha de creacion que sera la misma para fecha de modificacion
     * @param titulo
@@ -67,6 +63,11 @@ public abstract class Diagrama{
        this.descripcion=descripcion;
        this.fechaCreacion=new Timestamp(new Date().getTime());
        this.fechaUltimaModificacion=new Timestamp(new Date().getTime());
+    }
+    /**
+    * Crear diagrama 
+    */
+    public Diagrama(){
     }
    /**
     * Consultar el titulo 
