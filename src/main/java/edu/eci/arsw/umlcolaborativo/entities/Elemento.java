@@ -28,12 +28,6 @@ public abstract class Elemento {
      * Crear el elemento con el nombre especificado
      *
      * @param nombre
-     */
-
-    /**
-     * Crear el elemento con el nombre especificado
-     *
-     * @param nombre
      * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
     public Elemento(String nombre) throws ProyectoExcepcion {

@@ -27,14 +27,6 @@ public abstract class Diagrama{
     protected Date fechaCreacion;
     protected Date fechaUltimaModificacion;
     
-   
-   /**
-    * Crear diagrama con el titulo que lo identifica, la  descripcion fecha de creacion que sera la misma para fecha de modificacion
-    * @param titulo
-     * @param descripcion
-     * @param dateCreacion
-    */
-    
     /**
      * Crear diagrama con el titulo que lo identifica, la  descripcion fecha de creacion que sera la misma para fecha de modificacion
      * @param titulo
