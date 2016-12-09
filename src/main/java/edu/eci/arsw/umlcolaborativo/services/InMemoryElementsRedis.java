@@ -45,13 +45,10 @@ public class InMemoryElementsRedis implements PersistenciaElementos{
 
     @Override
     public Map<String, Elemento> getElementos() {
-        System.out.println("Entro a getElementos()");
         Jedis jedis = JedisUtil.getPool().getResource();
         String cadenaElementos = jedis.hget("Elementos", "todosE");
         json = jsonParser.parse(cadenaElementos);
-        System.out.println("No se ha muerto"+ json);
-        Map<String,Elemento> elementos = (Map<String,Elemento>) gson.fromJson(json,new TypeToken<Map<String,Elemento>>() {}.getType());
-        System.out.println("Ya sirve");
+        Map<String,Elemento> elementos = (Map<String,Elemento>) gson.fromJson(json,new TypeToken<Map<String,Elemento>>() {}.getType());;
         jedis.close();
         return elementos;
     }

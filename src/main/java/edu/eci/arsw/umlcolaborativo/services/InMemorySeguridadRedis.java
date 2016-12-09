@@ -19,7 +19,7 @@ import redis.clients.jedis.Jedis;
  *
  * @author ger9410
  */
-@Service
+//@Service
 public class InMemorySeguridadRedis implements PersistenciaSeguridad{
     
     Gson gson;
