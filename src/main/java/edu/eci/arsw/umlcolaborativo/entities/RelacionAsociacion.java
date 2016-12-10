@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class RelacionAsociacion extends Relacion{
     
-    private HashMap<Clase,int[]> multiplicidad;
+    private HashMap<String,int[]> multiplicidad;
     private String atributoB;
     private String atributoA;
     
@@ -46,8 +46,8 @@ public class RelacionAsociacion extends Relacion{
      public RelacionAsociacion(Clase A, Clase B, String nombre, int[] multA, int[] multB, String atributoA,String atributoB) throws ProyectoExcepcion{
         super(A,B,nombre);
         multiplicidad=new HashMap<>();
-        multiplicidad.put(A, multA);
-        multiplicidad.put(B, multB);
+        multiplicidad.put(A.getNombre(), multA);
+        multiplicidad.put(B.getNombre(), multB);
         isbidireccional=true;   
         this.atributoB = atributoB;
         this.atributoA = atributoA;
@@ -56,14 +56,14 @@ public class RelacionAsociacion extends Relacion{
       * Consultar la multiplicidad de la relacion
       * @return 
       */
-    public HashMap<Clase,int[]> getMultiplicidad() {
+    public HashMap<String,int[]> getMultiplicidad() {
         return multiplicidad;
     }
      /**
       * Enviar multiplicidad
       * @param multiplicidad
       */
-    public void setMultiplicidad(HashMap<Clase,int[]> multiplicidad) {
+    public void setMultiplicidad(HashMap<String,int[]> multiplicidad) {
         this.multiplicidad = multiplicidad;
     }
      /**

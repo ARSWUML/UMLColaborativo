@@ -18,6 +18,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Relacion;
+import edu.eci.arsw.umlcolaborativo.entities.RelacionDependencia;
 import edu.eci.arsw.umlcolaborativo.util.InterfaceAdapter;
 import edu.eci.arsw.umlcolaborativo.util.JedisUtil;
 import java.util.ArrayList;
@@ -49,7 +50,10 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
          Proyecto p = new Proyecto("Proyecto1","DEsc");
          DiagramaClases d = new DiagramaClases("Diagrama1","eDEs");
          Elemento e = new Clase("Clase",3,3);
-         d.agregarElemento(e);
+         Elemento e1 = new Clase("Clase1",2,2);
+         Relacion r = new RelacionDependencia(e,e1,"Relacion1");
+         d.agregarElemento(e); d.agregarElemento(e1);
+         d.agregarRelacion(r);
          p.agregarDiagrama(d);
          proyectos.put(p.getNombre(), p);
          usuarios.get("1").add(p.getNombre());
@@ -70,6 +74,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
         Map<String,List<String>> usuarios = (Map<String,List<String>>) gson.fromJson(json,new TypeToken<Map<String,List<String>>>() {}.getType());
         String cadenaProyectos = jedis.hget("Proyectos", "todosP");
         json = jsonParser.parse(cadenaProyectos);
+        
         Map<String,Proyecto> proyectoUsuario = (Map<String,Proyecto>) gson.fromJson(json,new TypeToken<Map<String,Proyecto>>() {}.getType());
         for(String proc : usuarios.get(usuario)){
             proyectos.put(proc, proyectoUsuario.get(proc));
