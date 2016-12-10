@@ -89,4 +89,10 @@ public abstract class Relacion {
     public void setIsbidireccional(boolean isbidireccional) {
         this.isbidireccional = isbidireccional;
     }
+    
+    @Override
+    public boolean equals(Object o){
+        Relacion o2 = (Relacion)o;
+        return o2.getElementoA().equals(elementoA) && o2.getElementoB().equals(elementoB) && o2.nombreRelacion.equals(nombreRelacion);
+    }
 }
