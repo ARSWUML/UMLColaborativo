@@ -10,9 +10,10 @@ package edu.eci.arsw.umlcolaborativo.entities;
  * @author Daniela Sepulveda
  */
 public abstract class Relacion {
-    private String elementoA;
-    private String elementoB;
-    private String nombreRelacion;
+    protected Elemento elementoA;
+    protected Elemento elementoB;
+    protected String nombreRelacion;
+    protected boolean isbidireccional;
     
     /**
      * Crea un relacion
@@ -26,8 +27,8 @@ public abstract class Relacion {
      * @param nombre
      * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
      */
-    public Relacion(String A, String B, String nombre) throws ProyectoExcepcion{
-        if (A.equals("") || B.equals("")) throw new ProyectoExcepcion("Favor colocar colocar nombre a los elementos de la relacion");
+    public Relacion(Elemento A, Elemento B, String nombre) throws ProyectoExcepcion{
+        if (A==null || B==null) throw new ProyectoExcepcion("Por favo, verifique los elementos. No es posible asignar la relacion");
         elementoA=A;
         elementoB=B;
         nombreRelacion=nombre;
@@ -36,28 +37,28 @@ public abstract class Relacion {
      * Nombre del elementoA de la relacion
      * @return elementoA
      */
-    public String getElementoA() {
+    public Elemento getElementoA() {
         return elementoA;
     }
     /**
      * Enviar nombre del elementoA de la relacion
      * @param elementoA
      */
-    public void setElementoA(String elementoA) {
+    public void setElementoA(Elemento elementoA) {
         this.elementoA = elementoA;
     }
     /**
      * Nombre del elementoB de la relacion
      * @return elementoB
      */
-    public String getElementoB() {
+    public Elemento getElementoB() {
         return elementoB;
     }
     /**
      * Enviar nombre del elementoB de la relacion
      * @param elementoB
      */
-    public void setElementoB(String elementoB) {
+    public void setElementoB(Elemento elementoB) {
         this.elementoB = elementoB;
     }
     /**
@@ -74,4 +75,18 @@ public abstract class Relacion {
     public void setNombreRelacion(String nombreRelacion) {
         this.nombreRelacion = nombreRelacion;
     }    
+    /**
+     * Consultar direccion
+     * @return isbidireccional
+     */
+    public boolean isIsbidireccional() {
+        return isbidireccional;
+    }
+     /**
+     * Enviar direccion
+     * @param isbidireccional 
+     */
+    public void setIsbidireccional(boolean isbidireccional) {
+        this.isbidireccional = isbidireccional;
+    }
 }
