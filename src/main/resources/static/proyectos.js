@@ -29,7 +29,7 @@ function agregarProyecto() {
     $("#newP").hide();
     proyecto = new Proyecto($("#nomP").val(), $("#descP").val());
     postProyecto(proyecto);
-   
+
 };
 
 function agregarProyectoVista(proy) {

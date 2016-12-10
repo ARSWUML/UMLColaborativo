@@ -34,7 +34,7 @@ function connect() {
                 diagrama.agregarElemento(objeto);
                 if (typeof elementosUsados[texto] == "undefined") {
                     elementosUsados[texto] = [];
-                 
+
                 }
                 elementosUsados[texto].push(objeto);
                 agregarElementoDiagrama(objeto.x, objeto.y, objeto.nombre);
@@ -147,8 +147,27 @@ function canvasDroppable() {
     });
 }
 
+function validar() {
+    if (sessionStorage.name == null || sessionStorage.name.length == 0) {
+        signOut();
+    } else if (sessionStorage.nameDiagram == null || sessionStorage.nameDiagram.length == 0 || sessionStorage.nameDiagram==='undefined') {
+        volver();
+    }
+}
+function signOut(){
+    sessionStorage.nameDiagram="";
+    sessionStorage.nameProject="";
+    window.location.href = 'index.html';
+}
+
+function volver(){
+    sessionStorage.nameDiagram="";
+    window.location.href = 'diagramas.html';
+}
+
 $(document).ready(
         function () {
+            validar();
             connect();
             hideMessage();
             inicio();

@@ -116,7 +116,7 @@ function disconnect() {
 function validar() {
     if (sessionStorage.name == null || sessionStorage.name.length == 0) {
         signOut();
-    } else if (sessionStorage.nameProject == null || sessionStorage.nameProject.length == 0) {
+    } else if (sessionStorage.nameProject == null || sessionStorage.nameProject.length == 0 || sessionStorage.nameProject === 'undefined') {
         volver();
     }
 }
