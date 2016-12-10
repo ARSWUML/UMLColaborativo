@@ -21,6 +21,10 @@ public class RelacionAsociacion extends Relacion{
      * Creacion relacion asociacion
     */
     public RelacionAsociacion(){
+          multiplicidad=new HashMap<>();
+          isbidireccional=true; 
+          atributoB = "";
+          atributoA = "";
     }
     /**
      * Creacion de la clase Asociacion 
