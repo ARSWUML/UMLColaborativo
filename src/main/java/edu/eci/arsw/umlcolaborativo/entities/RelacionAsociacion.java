@@ -26,6 +26,12 @@ public class RelacionAsociacion extends Relacion{
           atributoB = "";
           atributoA = "";
     }
+    
+    public RelacionAsociacion(String nombre){
+        super(nombre);
+        multiplicidad=new HashMap<>();
+        isbidireccional=true; 
+    }
     /**
      * Creacion de la clase Asociacion 
      * @param A

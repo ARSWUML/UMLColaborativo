@@ -17,6 +17,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Clase;
 import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
+import edu.eci.arsw.umlcolaborativo.entities.Relacion;
 import edu.eci.arsw.umlcolaborativo.util.InterfaceAdapter;
 import edu.eci.arsw.umlcolaborativo.util.JedisUtil;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
          GsonBuilder builder = new GsonBuilder();
          builder.registerTypeAdapter(Diagrama.class, new InterfaceAdapter<Diagrama>());
          builder.registerTypeAdapter(Elemento.class, new InterfaceAdapter<Elemento>());
+         builder.registerTypeAdapter(Relacion.class, new InterfaceAdapter<Relacion>());
          gson = builder.create();
          Map<String, Proyecto> proyectos = new HashMap<>();
          Map<String, List<String>> usuarios = new HashMap<>();

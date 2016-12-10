@@ -22,6 +22,12 @@ public class RelacionDependencia extends Relacion{
          multiplicidad=new HashMap<>();
          isbidireccional=false; 
     }
+    
+    public RelacionDependencia(String nombre){
+        super(nombre);
+        multiplicidad=new HashMap<>();
+        isbidireccional=false;
+    }
      /**
      * Creacion de la clase Relacion dependencia 
      * @param A

@@ -33,6 +33,10 @@ public abstract class Relacion {
         elementoB=B;
         nombreRelacion=nombre;
     }
+    
+    public Relacion(String nombre){
+        nombreRelacion=nombre;
+    }
     /**
      * Nombre del elementoA de la relacion
      * @return elementoA

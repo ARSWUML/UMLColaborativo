@@ -23,7 +23,7 @@ public class PruebaManejadorElementosTest {
     
     //Clase equivalencia 1, Deberia poder agregar elementos
     @Test
-    public void CE1deberiaConsultarElementos() throws Exception {
+    public void CE1deberiaAgregarElementos() throws Exception {
        ManejadorElementos mn=new ManejadorElementos(new InMemoryElements());
         String intername="A";
         String intername1="AAA";
