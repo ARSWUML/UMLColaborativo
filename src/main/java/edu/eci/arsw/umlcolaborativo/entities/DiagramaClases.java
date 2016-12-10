@@ -94,4 +94,12 @@ public class DiagramaClases extends DiagramaEstructural{
     public void agregarRelacion(Relacion a){
         relaciones.add(a);
     }
+    
+    /**
+     * Retorn la lista de relaciones 
+     * @return relaciones
+     */
+    public List<Relacion> getRelaciones(){
+        return relaciones;
+    }
 }
