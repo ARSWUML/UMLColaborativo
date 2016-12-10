@@ -10,11 +10,13 @@ import edu.eci.arsw.umlcolaborativo.entities.RelacionAsociacion;
 import edu.eci.arsw.umlcolaborativo.entities.RelacionDependencia;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author ger9410
  */
+@Service
 public class InMemoryRelations implements PersistenciaRelaciones{
     
     Map<String,Relacion> relaciones;
