@@ -50,7 +50,9 @@ function Asociacion(elementoA,elementoB,nombre,multA,multB,atributoA,atributoB){
     this.elementoA=elementoA;
     this.elementoB=elementoB;
     this.nombreRelacion=nombre;
-    this.multiplicidad={this.elementoA.nombre:multA,this.elementoB.nombre:multB};
+    this.multiplicidad={};
+    this.multiplicidad[this.elementoA.nombre]=multA;
+    this.multiplicidad[this.elementoB.nombre]=multB;
     this.isbidireccional=true;
     this.atributoA=atributoA;
     this.atributoB=atributoB;
@@ -60,7 +62,9 @@ function Dependencia(elementoA,elementoB,nombre){
     this.elementoA=elementoA;
     this.elementoB=elementoB;
     this.nombreRelacion=nombre;
-    this.multiplicidad={this.elementoA.nombre:1,this.elementoB.nombre:1};
+    this.multiplicidad={};
+    this.multiplicidad[this.elementoA.nombre]=1;
+    this.multiplicidad[this.elementoB.nombre]=1;
     this.isbidireccional=false;
 };
 
