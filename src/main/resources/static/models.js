@@ -58,6 +58,17 @@ function Asociacion(elementoA,elementoB,nombre,multA,multB,atributoA,atributoB){
     this.atributoB=atributoB;
 };
 
+Asociacion.prototype.dibujar = function(canvasName){
+    $('#'+canvasName).drawLine({
+        strokeStyle: '#000',
+        strokeWidth: 2,
+        arrowRadius: 15,
+        arrowAngle: 90,
+        x1: elementoA.x, y1: elementoA.y,
+        x2: elementoB.x, y2: elementoB.y
+    });
+}
+
 function Dependencia(elementoA,elementoB,nombre){
     this.elementoA=elementoA;
     this.elementoB=elementoB;
@@ -67,6 +78,21 @@ function Dependencia(elementoA,elementoB,nombre){
     this.multiplicidad[this.elementoB.nombre]=1;
     this.isbidireccional=false;
 };
+
+Dependencia.prototype.dibujar = function(canvasName){
+    $('#'+canvasName).drawLine({
+        strokeStyle: '#000',
+        strokeWidth: 2,
+        rounded: true,
+        endArrow: true,
+        strokeDash: [4],
+        strokeDashOffset: 0,
+        arrowRadius: 15,
+        arrowAngle: 90,
+        x1: elementoA.x, y1: elementoA.y,
+        x2: elementoB.x, y2: elementoB.y
+    });
+}
 
 $(document).ready(
         function () {
