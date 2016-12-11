@@ -64,9 +64,44 @@ Asociacion.prototype.dibujar = function(canvasName){
         strokeWidth: 2,
         arrowRadius: 15,
         arrowAngle: 90,
-        x1: elementoA.x, y1: elementoA.y,
-        x2: elementoB.x, y2: elementoB.y
+        x1: this.elementoA.x+50, y1: this.elementoA.y,
+        x2: this.elementoB.x-50, y2: this.elementoB.y
     });
+}
+
+Asociacion.prototype.campos= function(){
+    var relacion;
+    $('#formulario').empty();
+    $('#formulario').append('\
+        <div class="mui-textfield mui-textfield--float-label">\
+        Nombre de la relacion: <input type="text" id="nombreR">\
+        Elemento 1: <input type="text" id="elA">\
+        Elemento 2: <input type="text" id="elB">\
+        Multiplicidad de 1 a 2 de <input type="number" id="elAmul1"> a <input type="number" id="elAmul2">\
+        Multiplicidad de 2 a 1 de <input type="number" id="elBmul1"> a <input type="number" id="elBmul2">\
+        Nombre de 2 en 1: <input type="text" id="atribA">\
+        Nombre de 1 en 2: <input type="text" id="atribB">\
+        </div>\
+        <button id="send" class="mui-btn mui-btn--raised">Crear</button>');
+    $('#send').click(function(){
+        var elA=solicitarElemento($("#elA").val());
+        console.log(elA);
+        if(elA!='NO'){
+            var elB=solicitarElemento($("#elB").val());
+            console.log(elB);
+            if($("#elAmul1").val()>0 && $("#elAmul2").val()>0 && $("#elBmul1").val()>0 && $("#elBmul2").val()>0){
+                var multA=[$("#elAmul1").val(),$("#elAmul2").val()];
+                var multB=[$("#elBmul1").val(),$("#elBmul2").val()];
+                var nomA=$("#atribA").val()
+                var nomB=$("#atribB").val()
+                relacion= new Asociacion(elA,elB,$('#nombreR'),multA,multB,nomA,nomB);
+                console.log(relacion);
+                relacion.dibujar('lienzo');
+                $('#formulario').hide();
+            }
+        }
+    });
+    $('#formulario').show();
 }
 
 function Dependencia(elementoA,elementoB,nombre){
@@ -89,9 +124,34 @@ Dependencia.prototype.dibujar = function(canvasName){
         strokeDashOffset: 0,
         arrowRadius: 15,
         arrowAngle: 90,
-        x1: elementoA.x, y1: elementoA.y,
-        x2: elementoB.x, y2: elementoB.y
+        x1: this.elementoA.x+50, y1: this.elementoA.y,
+        x2: this.elementoB.x-50, y2: this.elementoB.y
     });
+}
+
+Dependencia.prototype.campos= function(){
+    var relacion;
+    $('#formulario').empty();
+    $('#formulario').append('\
+        <div class="mui-textfield mui-textfield--float-label">\
+        Nombre de la relacion: <input type="text" id="nombreR">\
+        Elemento 1: <input type="text" id="elA">\
+        Elemento 2: <input type="text" id="elB">\
+        </div>\
+        <button id="send" class="mui-btn mui-btn--raised">Crear</button>');
+    $('#send').click(function(){
+        var elA=solicitarElemento($("#elA").val());
+        console.log(elA);
+        if(elA!='NO'){
+            var elB=solicitarElemento($("#elB").val());
+            console.log(elB);
+                relacion= new Dependencia(elA,elB,$('#nombreR'));
+                console.log(relacion);
+                relacion.dibujar('lienzo');
+                $('#formulario').hide();
+        }
+    });
+    $('#formulario').show();
 }
 
 $(document).ready(

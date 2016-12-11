@@ -36,50 +36,8 @@ h2{
   background-color: #55acee;
   margin-bottom: 15px;
 }
-/* text fields */
-input:not([type="button"]) {
-  width: 300px;
-  height: 50px;
-  border-radius: 6px;
-  border: 1px solid #acacac;
-  margin-bottom: 15px;
-  text-align: center;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s;
-  font-size: 25px;
-}
 
-input:not([type="button"]):focus {
-  color: #55acee;
-  width: 370px;
-  border: 1px solid #55acee;
-  outline: none;
-  font-size: 32px;
-}
 
-/* submit button */
-input[type="button"] {
-  font-size: 32px;
-  color: #fff;
-  background-color: #55acee;
-  box-shadow: 0 5px 0 0 #3C93D5;
-  border: none;
-  padding: 10px;
-  width: 400px;
-  display: inline-block;
-  position: relative;
-  outline: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-input[type="button"]:active {
-  box-shadow: 0 1px 0 0 #3C93D5;
-  -webkit-transform: translate(0,5px);
-  -moz-transform: translate(0,5px);
-  transform: translate(0,5px);
-}
 /* Message alert */
 .alert-danger {
     color: #a94442;
@@ -120,24 +78,24 @@ hr{
     padding: 0px;
     margin: auto;
     display: block;
-    
+
 }
 #cabecera {
     background-color: #55acee;
     width: 100%;
     height:78px;
-   
+
 }
 #menu {
   float: left;
-  width: 18%;
+  width: 20%;
 }
 
 #contenido {
   float: left;
   width: 80%;
 }
-#contenido #principal {
+#contenido #principal{
   float: left;
   width: 80%;
 }

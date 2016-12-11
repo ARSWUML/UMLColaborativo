@@ -62,9 +62,11 @@ guardarDiagrama = function () {
 function hideMessage() {
     $("#mensaje").hide();
 }
+
 function showMessage() {
     $("#mensaje").show();
 }
+
 agregarElementoDiagrama = function (coX, coY, texto) {
     $('#lienzo').drawRect({
         fillStyle: '#afb4b7',
@@ -82,6 +84,7 @@ agregarElementoDiagrama = function (coX, coY, texto) {
     });
 
 };
+
 function getProyecto() {
     return $.get("/projects/users/" + sessionStorage.name + "/" + sessionStorage.nameProject).then(function (proyectoG) {
         proyecto = proyectoG;
@@ -94,16 +97,19 @@ function getProyecto() {
     });
 }
 ;
+
 /**
  * Actualiza el listado de los elementos
  */
 actualizarElementos = function () {
     obtenerElementos().then(actualizarVistaElementos);
 };
+
 /**
  * Consultar los platos disponibles
  * @returns {unresolved}
  */
+
 obtenerElementos = function () {
     elementos = [];
     return $.get("/elements", function (retorno) {
@@ -112,6 +118,7 @@ obtenerElementos = function () {
         }
     });
 };
+
 /**
  * Actualiza la vista de  los elementos que se pueden arrastrar para realizar el diagrama.
  * panel conceptos
@@ -122,6 +129,7 @@ actualizarVistaElementos = function () {
         $("li").draggable({helper: 'clone'});
     }
 };
+
 inicio = function () {
     $("#infousuario").html("<h2><strong>Usuario:</strong>" + sessionStorage.name + "<br><strong>Proyecto:</strong>" + sessionStorage.nameProject + "</h2>");
     $("#tituloDiagrama").html(sessionStorage.nameDiagram);
@@ -154,6 +162,7 @@ function validar() {
         volver();
     }
 }
+
 function signOut(){
     sessionStorage.nameDiagram="";
     sessionStorage.nameProject="";
@@ -165,6 +174,39 @@ function volver(){
     window.location.href = 'diagramas.html';
 }
 
+function funcion(cadena){console.log(cadena)}
+
+function obtenerRelaciones(){
+    relaciones=[]
+    nombres=[]
+    return $.get("/relations",function(data){
+        for (var i in data) {
+            var nombre=i.split(' ')[1];
+            console.log(data[i]);
+            console.log(nombres);
+            nombres.push(nombre);
+            $('#relaciones').append('<button id="'+nombre+'" class="mui-btn mui-btn--raised" >'+i+'</button>')
+            $('#'+nombre).click(function(){
+                console.log(this.id);
+                var className=this.id;
+                console.log(window[className].prototype);
+                window[className].prototype.campos.call();
+                console.log(window[className].prototype.constructor.length);
+                console.log(window[className].prototype.constructor.prototype);
+            });
+            relaciones[i]=data[i];
+        }
+    });
+}
+function solicitarElemento(name){
+    for(var i in elementosUsados){
+        for(var j=0;j<elementosUsados[i].length;j++){
+            if(elementosUsados[i][j].nombre==name)
+                return elementosUsados[i][j];
+        }
+    }
+    return "NO";
+}
 $(document).ready(
         function () {
             validar();
@@ -174,5 +216,6 @@ $(document).ready(
             actualizarElementos();
             getProyecto();
             canvasDroppable();
+            obtenerRelaciones();
         }
 );
