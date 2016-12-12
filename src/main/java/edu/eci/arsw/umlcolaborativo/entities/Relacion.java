@@ -5,10 +5,18 @@
  */
 package edu.eci.arsw.umlcolaborativo.entities;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 /**
  *Clase realacion, donde elementoA es el elemento enviado para crear una relacion con el elementoB con un determinado nombre
  * @author Daniela Sepulveda
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = RelacionAsociacion.class, name = "Asociacion"),
+    @JsonSubTypes.Type(value = RelacionDependencia.class, name = "Dependencia"),
+})
 public abstract class Relacion {
     protected Elemento elementoA;
     protected Elemento elementoB;

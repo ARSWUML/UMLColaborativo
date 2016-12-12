@@ -39,6 +39,17 @@ function connect() {
                 elementosUsados[texto].push(objeto);
                 agregarElementoDiagrama(objeto.x, objeto.y, objeto.nombre);
             });
+            stompClient.subscribe('/topic/newrelationship.' + sessionStorage.nameProject + "." + sessionStorage.nameDiagram, function (data) {
+                  var obj = JSON.parse(data.body);
+                  var rel;
+                  if(obj.type=='Asociacion'){
+                      rel= new Asociacion(obj.elementoA,obj.elementoB,obj.nombreRelacion,obj.multiplicidad[obj.elementoA.nombre],obj.multiplicidad[obj.elementoB.nombre],obj.atributoA,obj.atributoB);
+                  }else{
+                      rel = new Dependencia(obj.elementoA,obj.elementoB,obj.nombreRelacion);
+                  }
+                  rel.dibujar("lienzo");
+                  diagrama.agregarRelacion(rel);
+            });
         });
 
     }
@@ -47,6 +58,10 @@ function connect() {
 
 sendElemento = function (objeto) {
     stompClient.send('/app/newelement.' + sessionStorage.nameProject + "." + sessionStorage.nameDiagram, {}, JSON.stringify(objeto));
+};
+
+sendRelacion = function (objeto) {
+    stompClient.send('/app/newrelationship.' + sessionStorage.nameProject + "." + sessionStorage.nameDiagram, {}, JSON.stringify(objeto));
 };
 
 guardarDiagrama = function () {
@@ -174,18 +189,16 @@ function volver(){
     window.location.href = 'diagramas.html';
 }
 
-function funcion(cadena){console.log(cadena)}
-
 function obtenerRelaciones(){
-    relaciones=[]
-    nombres=[]
+    relaciones=[];
+    nombres=[];
     return $.get("/relations",function(data){
         for (var i in data) {
             var nombre=i.split(' ')[1];
             console.log(data[i]);
             console.log(nombres);
             nombres.push(nombre);
-            $('#relaciones').append('<button id="'+nombre+'" class="mui-btn mui-btn--raised" >'+i+'</button>')
+            $('#relaciones').append('<button id="'+nombre+'" class="mui-btn mui-btn--raised" >'+i+'</button>');
             $('#'+nombre).click(function(){
                 console.log(this.id);
                 var className=this.id;
@@ -197,7 +210,7 @@ function obtenerRelaciones(){
             relaciones[i]=data[i];
         }
     });
-}
+};
 function solicitarElemento(name){
     for(var i in elementosUsados){
         for(var j=0;j<elementosUsados[i].length;j++){
@@ -206,7 +219,7 @@ function solicitarElemento(name){
         }
     }
     return "NO";
-}
+};
 $(document).ready(
         function () {
             validar();

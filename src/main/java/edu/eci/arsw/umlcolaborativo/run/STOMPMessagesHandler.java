@@ -9,6 +9,7 @@ import edu.eci.arsw.umlcolaborativo.entities.Diagrama;
 import edu.eci.arsw.umlcolaborativo.entities.DiagramaClases;
 import edu.eci.arsw.umlcolaborativo.entities.Elemento;
 import edu.eci.arsw.umlcolaborativo.entities.Proyecto;
+import edu.eci.arsw.umlcolaborativo.entities.Relacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 @Controller
 public class STOMPMessagesHandler {
@@ -35,7 +36,17 @@ public class STOMPMessagesHandler {
         System.out.println("Nuevo elemento recibido en el servidor! :"+e.getNombre());
         msgt.convertAndSend("/topic/newelement."+proyecto+"."+diagrama, e);
     }
-    
+      /**
+     * Recibe una relacion de /app/newrelationship y lo publica en /topic/newrelationship
+     * @param r
+     * @param proyecto
+     * @param diagrama
+     */
+    @MessageMapping("/newrelationship.{proyecto}.{diagrama}")
+    public void getRelationship(Relacion r, @DestinationVariable String proyecto, @DestinationVariable String diagrama){
+        System.out.println("Nueva relacion recibida en el servidor! :"+r.getNombreRelacion());
+        msgt.convertAndSend("/topic/newrelationship."+proyecto+"."+diagrama, r);
+    }
     /**
      * Recibe en /app/newproject.{usrId} el nuevo proyecto de un usuario y lo publica en /topic/newproject.{usrId}
      * @param p proyecto a publicar

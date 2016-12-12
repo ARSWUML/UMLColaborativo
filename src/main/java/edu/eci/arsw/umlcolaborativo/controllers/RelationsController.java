@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 @RestController
 @RequestMapping(value = "/relations")
@@ -27,13 +27,20 @@ public class RelationsController {
     
     @Autowired
     ManejadorRelaciones mR;
-    
+    /**
+     * Lista todas las relaciones
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> listaRelaciones(){
         Map<String,Relacion> relacionesDisp= mR.getRelaciones();
         return new ResponseEntity<>(relacionesDisp,HttpStatus.ACCEPTED);           
     }
-    
+    /**
+     * Obtiene una relacion con con id especificado
+     * @param relationid
+     * @return 
+     */
     @RequestMapping(path="/{relationid}" ,method = RequestMethod.GET)
     public ResponseEntity<?> obtenerRelacion(@PathVariable String relationid){
         Relacion relacion=mR.consultarRelacion(relationid);
