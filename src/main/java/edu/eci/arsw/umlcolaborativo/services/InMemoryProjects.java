@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Julian Devia
  */
-@Service
+//@Service
 public class InMemoryProjects implements PersistenciaProyectos {
 
     private Map<String, List<String>> usuarios;

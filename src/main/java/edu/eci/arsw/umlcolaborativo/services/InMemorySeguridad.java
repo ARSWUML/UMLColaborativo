@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Daniela Sepulveda
  */
-@Service
+//@Service
 public class InMemorySeguridad implements PersistenciaSeguridad{
     
     private Map<String, String> usuarios;

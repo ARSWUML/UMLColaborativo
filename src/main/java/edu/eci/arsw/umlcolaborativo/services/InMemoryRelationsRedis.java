@@ -17,12 +17,14 @@ import edu.eci.arsw.umlcolaborativo.util.InterfaceAdapter;
 import edu.eci.arsw.umlcolaborativo.util.JedisUtil;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 /**
  *
  * @author ger9410
  */
+//@Service
 public class InMemoryRelationsRedis implements PersistenciaRelaciones{
     
     Gson gson;
