@@ -17,7 +17,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 @Service
 public class InMemorySeguridadRedis implements PersistenciaSeguridad{
@@ -25,7 +25,9 @@ public class InMemorySeguridadRedis implements PersistenciaSeguridad{
     Gson gson;
     JsonParser jsonParser;
     JsonElement json;
-    
+    /**
+     * Constructor de la seguridad en redis
+     */
     public InMemorySeguridadRedis(){
         jsonParser = new JsonParser();
         gson = new Gson();
@@ -46,7 +48,9 @@ public class InMemorySeguridadRedis implements PersistenciaSeguridad{
     public boolean registrarUsuario(String name, String passw) {
         return false;
     }
-    
+    /**
+     * Poblar la seguridad 
+     */
     public void cargarSeguridad(){
         Jedis jedis = JedisUtil.getPool().getResource();
         Map<String,String> usuarios = new HashMap<>();

@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")
 @JsonSubTypes({

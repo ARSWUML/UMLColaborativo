@@ -14,14 +14,16 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author ger9410
+ * @author 
  */
 @Service
 public class InMemoryRelations implements PersistenciaRelaciones{
     
     Map<String,Relacion> relaciones;
     
-    
+    /**
+     * Constructor de memoria de las relaciones
+     */
     public InMemoryRelations(){
         relaciones = new HashMap<>();
         cargarRelaciones();
@@ -41,7 +43,9 @@ public class InMemoryRelations implements PersistenciaRelaciones{
     public Relacion consultarRelacion(String nombre) {
         return relaciones.get(nombre);
     }
-    
+    /**
+     * Cargar documentos de prueba
+     */
     public void cargarRelaciones(){
         Relacion relacionAsociacion = new RelacionAsociacion("Relacion Asociacion");
         Relacion relacionDependencia = new RelacionDependencia("Relacion Dependencia");

@@ -143,7 +143,10 @@ public class InMemoryProjects implements PersistenciaProyectos {
             throw new ProyectoExcepcion("El usuario " + usuario + " no se encuentra registrado");
         }
     }
-
+    /**
+     * Cargar los elementos de proyectos
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
     public void cargarProyectos() throws ProyectoExcepcion {
         List<String> nomProyectos1 = new ArrayList<>();
         List<String> nomProyectos2 = new ArrayList<>();

@@ -22,7 +22,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 //@Service
 public class InMemoryRelationsRedis implements PersistenciaRelaciones{
@@ -30,7 +30,9 @@ public class InMemoryRelationsRedis implements PersistenciaRelaciones{
     Gson gson;
     JsonParser jsonParser;
     JsonElement json;
-    
+    /**
+     * Constructor de las memoria de relaciones de redis
+     */
     public InMemoryRelationsRedis(){
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeHierarchyAdapter(Relacion.class, new InterfaceAdapter<Relacion>());
@@ -65,7 +67,9 @@ public class InMemoryRelationsRedis implements PersistenciaRelaciones{
         jedis.close();
         return relaciones.get(nombre);
     }
-    
+    /**
+     * Cargar los elementos de prueba de las relaciones
+     */
     public void cargarRelaciones(){
         Jedis jedis = JedisUtil.getPool().getResource();
         Map<String,Relacion> relaciones = new HashMap<>();

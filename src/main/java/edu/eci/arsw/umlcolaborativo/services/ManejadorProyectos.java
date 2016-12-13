@@ -101,7 +101,9 @@ public class ManejadorProyectos {
     public void agregarUsuario(String usuario) throws ProyectoExcepcion{
         getPersistencia().agregarUsuario(usuario);
     }
-    
+    /**
+     * Eliminar elementos de la persistencia
+    */
     public void vaciar(){
         persistencia.vaciar();
     }

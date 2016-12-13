@@ -31,12 +31,14 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author ger9410
+ * @author 
  */
 @Service
 public class InMemoryProjectsRedis implements PersistenciaProyectos{
     Gson gson;
-    
+    /**
+     * Constructor de los proyectos de redis
+     */
     public InMemoryProjectsRedis() throws ProyectoExcepcion{
          Jedis jedis = JedisUtil.getPool().getResource();
          GsonBuilder builder = new GsonBuilder();
@@ -198,7 +200,9 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
         jedis.hset("Proyectos", "todosP", gson.toJson(proyectoUsuario));
         jedis.close();
     }
-    
+    /**
+     * Validar usuario existente
+     */
     private void validarUsuario(String usuario) throws ProyectoExcepcion{
         Jedis jedis = JedisUtil.getPool().getResource();
         //Gson gson = new Gson();

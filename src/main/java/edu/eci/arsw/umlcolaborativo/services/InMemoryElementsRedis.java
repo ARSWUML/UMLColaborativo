@@ -24,7 +24,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  *
- * @author ger9410
+ * @author 
  */
 //@Service
 public class InMemoryElementsRedis implements PersistenciaElementos{
@@ -32,7 +32,10 @@ public class InMemoryElementsRedis implements PersistenciaElementos{
     Gson gson;
     JsonParser jsonParser;
     JsonElement json;
-    
+    /**
+     * Constructor de elementos de redis
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
     public InMemoryElementsRedis() throws ProyectoExcepcion{
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeHierarchyAdapter(Elemento.class, new InterfaceAdapter<Elemento>());
@@ -69,7 +72,9 @@ public class InMemoryElementsRedis implements PersistenciaElementos{
         Elemento e = elementos.get(nombre);
         return e;
     }
-    
+    /**
+     * Cargar elementos de prueba
+     */
     public void cargarElementos() throws ProyectoExcepcion{
         Jedis jedis = JedisUtil.getPool().getResource();
         Map<String, Elemento> elementos = new HashMap<>();

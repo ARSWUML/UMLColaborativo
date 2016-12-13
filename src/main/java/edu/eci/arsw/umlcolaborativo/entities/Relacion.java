@@ -41,7 +41,10 @@ public abstract class Relacion {
         elementoB=B;
         nombreRelacion=nombre;
     }
-    
+    /**
+     * Constructor clase Relacion
+     * @param nombre
+     */
     public Relacion(String nombre){
         nombreRelacion=nombre;
     }

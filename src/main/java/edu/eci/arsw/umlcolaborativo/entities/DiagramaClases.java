@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 public class DiagramaClases extends DiagramaEstructural{
     private Map<String,Elemento> elementos;

@@ -73,24 +73,39 @@ public abstract class Elemento {
      * Enviar un nombre al elemento
      *
      * @param nombre
-    *
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    /**
+     * Consultar posicion x
+     *
+     * @return 
+     */
     public int getX() {
         return x;
     }
-
+    /**
+     * Enviar posicion x
+     *
+     * @param x 
+     */
     public void setX(int x) {
         this.x = x;
     }
-
+     /**
+     * Consultar posicion y
+     *
+     * @return 
+     */
     public int getY() {
         return y;
     }
-
+    /**
+     * Enviar posicion x
+     * 
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }

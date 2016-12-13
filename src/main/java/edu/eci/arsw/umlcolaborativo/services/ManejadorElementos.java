@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author amoto
+ * @author Julian Devia
  */
 @Service
 public class ManejadorElementos {
@@ -26,9 +26,15 @@ public class ManejadorElementos {
     public void setElementosM(PersistenciaElementos elementosM) {
         this.elementosM = elementosM;
     }
+    /**
+     * Constructor manejador
+     */
     public ManejadorElementos(){
     }
-    
+    /**
+     * Constructor manejador 
+     * @param persistencia
+     */
     public ManejadorElementos(PersistenciaElementos persistencia){
         this.elementosM=persistencia;
     }
@@ -54,7 +60,4 @@ public class ManejadorElementos {
     public Elemento consultarElemento(String nombre){
         return elementosM.consultarElemento(nombre);
     }
-    
-    
-    
 }

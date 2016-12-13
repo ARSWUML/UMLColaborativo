@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 @Service
 public final class InMemoryElements implements PersistenciaElementos{
@@ -56,7 +56,10 @@ public final class InMemoryElements implements PersistenciaElementos{
         return elementos.get(nombre);
     }
     
-    
+    /**
+     * Cargar elementos de prueba
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
     public void cargarElementos() throws ProyectoExcepcion{
         Elemento claseAsbtracta = new ClaseAbstracta("Abstract Class");
         Elemento interfaz = new Interface("Interface");

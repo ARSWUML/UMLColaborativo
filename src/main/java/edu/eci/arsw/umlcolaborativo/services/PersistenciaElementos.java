@@ -10,13 +10,23 @@ import java.util.Map;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 public interface PersistenciaElementos {
-    
+    /**
+     * Consultar los elementos
+     * @return 
+     */
     public abstract Map<String,Elemento> getElementos();
-    
+    /**
+     * Enviar los elementos
+     * @param elementos
+     */
     public abstract void setElementos(Map<String,Elemento> elementos);
-    
+    /**
+     * Consultar los elementos
+     * @param nombre
+     * @return 
+     */
     public abstract Elemento consultarElemento(String nombre);
 }

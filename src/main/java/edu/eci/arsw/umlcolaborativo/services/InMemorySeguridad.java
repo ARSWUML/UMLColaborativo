@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 public class InMemorySeguridad implements PersistenciaSeguridad{
     
     private Map<String, String> usuarios;
-    
+    /**
+     * Constructor de la memoria de seguridad
+    */
     public InMemorySeguridad(){
         usuarios=new HashMap<>();
         agregarUsuarios();

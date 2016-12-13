@@ -7,13 +7,19 @@ package edu.eci.arsw.umlcolaborativo.entities;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 public class ProyectoExcepcion extends Exception{
+    /**
+     * @param message
+     * @param cause
+     */
     public ProyectoExcepcion(String message, Throwable cause) {
         super(message, cause);
     }
-
+    /**
+     * @param cause
+     */
     public ProyectoExcepcion(String cause) {
         super(cause);
     }

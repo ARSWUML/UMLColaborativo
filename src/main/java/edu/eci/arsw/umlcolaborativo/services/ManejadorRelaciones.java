@@ -19,21 +19,37 @@ public class ManejadorRelaciones{
     
     @Autowired
     private PersistenciaRelaciones relacionesM;
-    
-    public ManejadorRelaciones(){}
-    
+    /**
+     * Constructor de manejador de relaciones
+     */
+    public ManejadorRelaciones(){
+    }
+    /**
+     * Constructor de manejador de relaciones
+     * @param pR
+     */
     public ManejadorRelaciones(PersistenciaRelaciones pR){
         relacionesM = pR;
     }
-    
+    /**
+     * Consultar las relaciones 
+     * @return 
+     */
     public Map<String, Relacion> getRelaciones() {
         return getRelacionesM().getRelaciones();
     }
-
+    /**
+     * Enviar relaciones
+     * @param relaciones
+     */
     public void setRealciones(Map<String, Relacion> relaciones) {
         getRelacionesM().setRealciones(relaciones);
     }
-
+    /**
+     * Consultar la relacion
+     * @param nombre
+     * @return 
+     */
     public Relacion consultarRelacion(String nombre) {
        return getRelacionesM().consultarRelacion(nombre);
     }

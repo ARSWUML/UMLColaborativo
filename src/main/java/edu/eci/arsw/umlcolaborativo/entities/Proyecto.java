@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  *
- * @author amoto
+ * @author Julian Devia
  */
 public class Proyecto {
     private String nombre;
@@ -20,7 +20,12 @@ public class Proyecto {
     private Date fechaCreacion;
     private Date fechaUltimaModificacion;
     private Map<String,Diagrama> diagramas;
-    
+    /**
+     * Constructor del proyecto
+     * @param name
+     * @param description
+     * @throws edu.eci.arsw.umlcolaborativo.entities.ProyectoExcepcion
+     */
     public Proyecto(String name, String description) throws ProyectoExcepcion{
         if(name.equals("")) throw new ProyectoExcepcion("Por favor colocar un nombre al proyecto");
         if(description.equals("")) throw new ProyectoExcepcion("Por favor agregar una descripcion al proyectos");
@@ -30,7 +35,9 @@ public class Proyecto {
         fechaUltimaModificacion=new Timestamp(new Date().getTime());
         diagramas= new HashMap<>();
     }
-    
+    /**
+     * Constructor del proyecto
+     */
     public Proyecto(){
     }
     

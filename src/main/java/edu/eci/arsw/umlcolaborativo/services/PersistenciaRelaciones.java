@@ -10,14 +10,24 @@ import java.util.Map;
 
 /**
  *
- * @author ger9410
+ * @author German Lopez
  */
 public interface PersistenciaRelaciones {
-    
+    /**
+     * Consultar las relaciones
+     * @return 
+     */
     public abstract Map<String,Relacion> getRelaciones();
-    
+    /**
+     * Enviar las relaciones
+     * @param relaciones
+     */
     public abstract void setRealciones(Map<String,Relacion> relaciones);
-    
+    /**
+     * Consultar relacion
+     * @param nombre
+     * @return 
+     */
     public abstract Relacion consultarRelacion(String nombre);
     
 }
