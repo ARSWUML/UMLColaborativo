@@ -159,6 +159,7 @@ public class InMemoryProjectsRedis implements PersistenciaProyectos{
          }
          String cadenaProyectos = jedis.hget("Proyectos", "todosP");
          json = jsonParser.parse(cadenaProyectos);
+         System.out.println("Cadena json Actualizada: "+ json);
          Map<String,Proyecto> proyectoUsuario = (Map<String,Proyecto>) gson.fromJson(json,new TypeToken<Map<String,Proyecto>>() {}.getType());
          proyectoUsuario.put(proyecto.getNombre(), proyecto);
          jedis.hset("Proyectos", "todosP", gson.toJson(proyectoUsuario));
