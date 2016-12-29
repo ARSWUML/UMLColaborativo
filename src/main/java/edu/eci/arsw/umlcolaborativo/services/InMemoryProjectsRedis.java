@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
  *
  * @author 
  */
-@Service
+//@Service
 public class InMemoryProjectsRedis implements PersistenciaProyectos{
     Gson gson;
     /**
